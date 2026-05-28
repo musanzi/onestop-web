@@ -1,9 +1,17 @@
 {
-  "name": "@web-apps/source",
+  "private": true,
+  "name": "@onestop/web-apps",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
-  "private": true,
+  "scripts": {
+    "nx": "nx",
+    "dev:client": "pnpm nx serve client",
+    "dev:admin": "pnpm nx serve admin",
+    "build:client": "pnpm nx build client",
+    "build:admin": "pnpm nx build admin",
+    "ssr:client": "node dist/apps/client/server/server.mjs",
+    "ssr:admin": "node dist/apps/admin/server/server.mjs"
+  },
   "dependencies": {
     "@angular-devkit/build-angular": "^21.2.0",
     "@angular/animations": "^21.0.0",
