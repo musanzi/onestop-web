@@ -15,7 +15,7 @@ export const programsRoutes: Routes = [
     loadComponent: () => import('./pages/detail-programs/detail-programs').then((c) => c.DetailPrograms)
   },
   {
-    path: ':slug/:slug',
+    path: ':programSlug/:subprogramSlug',
     title: 'Sous-programme',
     data: { seo: SEO_PUBLIC.ourPrograms },
     loadComponent: () => import('./pages/list-sub-programs/list-sub-programs').then((c) => c.ListSubPrograms)
