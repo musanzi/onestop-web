@@ -1,26 +1,19 @@
 import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
-  ArrowLeft,
-  Calendar1,
-  FileText,
+  AlertTriangle,
   FolderOpenDot,
+  Layers3,
   LucideAngularModule,
-  MessageCircleMore,
   MoveRight,
-  MoveUpRight,
-  NotepadText,
-  Tag,
-  ThumbsUp,
-  UserPlus
+  Tag
 } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
-import { SubprogramCardSkeleton } from '../../component/subprogram-card-skeleton/subprogram-card-skeleton';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent } from '@shared/ui';
+import { PublicButton, PublicCard, PublicContainer, PublicSection } from '@shared/public';
 
 @Component({
   selector: 'app-detail-programs',
@@ -28,9 +21,10 @@ import { ButtonComponent } from '@shared/ui';
   imports: [
     LucideAngularModule,
     CommonModule,
-    RouterLink,
-    SubprogramCardSkeleton,
-    ButtonComponent,
+    PublicButton,
+    PublicCard,
+    PublicContainer,
+    PublicSection,
     ApiImgPipe,
     NgOptimizedImage,
     TranslateModule
@@ -40,18 +34,11 @@ import { ButtonComponent } from '@shared/ui';
 })
 export class DetailPrograms implements OnInit, OnDestroy {
   icons = {
-    moveLeft: ArrowLeft,
-    fileText: FileText,
-    notepadText: NotepadText,
-    userPlus: UserPlus,
     tag: Tag,
-    comment: MessageCircleMore,
-    like: ThumbsUp,
-    calendar: Calendar1,
-    moveUp: MoveUpRight,
-    thumbsUp: ThumbsUp,
     program: FolderOpenDot,
-    arrow: MoveRight
+    layers: Layers3,
+    arrow: MoveRight,
+    alertTriangle: AlertTriangle
   };
   #route = inject(ActivatedRoute);
   store = inject(ProgramStore);
