@@ -200,13 +200,16 @@ export class MentorApply implements OnInit {
     }
 
     const experiences: CreateExperienceDto[] = ((formValue.experiences as ExperienceFormValue[]) || [])
-      .filter((exp) => exp.company_name && exp.job_title && exp.start_date) // Filtrer les expériences valides
-      .map((exp: ExperienceFormValue) => {
+      .filter(
+        (exp): exp is ExperienceFormValue & { start_date: string } =>
+          Boolean(exp.company_name && exp.job_title && exp.start_date)
+      ) // Filtrer les expériences valides
+      .map((exp) => {
         const experience: CreateExperienceDto = {
           company_name: exp.company_name.trim(),
           job_title: exp.job_title.trim(),
           is_current: exp.is_current || false,
-          start_date: new Date(exp.start_date!).toISOString(),
+          start_date: new Date(exp.start_date).toISOString(),
           end_date: exp.is_current || !exp.end_date ? null : new Date(exp.end_date).toISOString()
         };
         return experience;

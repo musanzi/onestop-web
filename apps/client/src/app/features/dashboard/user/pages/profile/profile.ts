@@ -171,12 +171,13 @@ export class ProfilePage {
   }
 
   saveProfile(): void {
-    if (this.profileForm.invalid || !this.user() || this.isSaving()) {
+    const user = this.user();
+
+    if (this.profileForm.invalid || !user || this.isSaving()) {
       this.profileForm.markAllAsTouched();
       return;
     }
 
-    const user = this.user()!;
     const formValue = this.profileForm.getRawValue();
 
     const payload: UpdateInfoDto = {

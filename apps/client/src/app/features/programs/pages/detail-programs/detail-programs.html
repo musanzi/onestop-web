@@ -1,88 +1,125 @@
-<body class="flex flex-col min-h-screen">
-  <main class="flex-1 flex flex-col">
-    <section
-      class="flex flex-col lg:flex-row flex-1 gap-8 lg:gap-10 px-8 py-40 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto w-full bg-grid">
-      @if (store.isLoading()) { @for (i of [1]; track i) {
-      <div class="transition-all duration-300">
-        <app-subprogram-card-skeleton />
-      </div>
-      } } @if (store.program(); as program) {
-      <div class="w-full lg:w-1/3 lg:sticky top-28 lg:self-start space-y-8 lg:space-y-10 mb-10 lg:mb-0">
-        <div class="space-y-6">
-          <div class="flex flex-col gap-6 rounded-lg bg-white/60 backdrop-blur-md border border-gray-100 shadow-xl p-6">
-            <h3 class="font-black flex font-satoshi mb-2 text-2xl md:text-3xl lg:text-4xl items-center gap-4 lg:gap-6">
-              <div
-                class="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-primary-100 shadow-sm">
-                <img
-                  [ngSrc]="program | apiIMG: 'program'"
-                  [alt]="'programs.logo_alt' | translate:{name: program.name}"
-                  class="relative object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                  fill />
-              </div>
-              <span class="text-gray-900">{{ program.name | titlecase }}</span>
-            </h3>
-            <p class="text-gray-700 text-base hyphens-none leading-relaxed">{{ program.description }}</p>
+<app-public-section variant="muted" className="min-h-full bg-grid">
+  <app-public-container className="pt-28 pb-16 lg:pt-32 lg:pb-24">
+    @if (store.isLoading()) {
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] lg:gap-10">
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
+        <div class="flex animate-pulse items-center gap-4">
+          <div class="size-16 rounded-2xl bg-gray-200"></div>
+          <div class="space-y-3">
+            <div class="h-5 w-40 rounded bg-gray-200"></div>
+            <div class="h-4 w-28 rounded bg-gray-100"></div>
           </div>
+        </div>
+        <div class="mt-6 animate-pulse space-y-3">
+          <div class="h-3 rounded bg-gray-100"></div>
+          <div class="h-3 w-5/6 rounded bg-gray-100"></div>
+          <div class="h-3 w-2/3 rounded bg-gray-100"></div>
         </div>
       </div>
 
-      <div class="w-full lg:w-2/3 lg:mt-0">
-        <h3
-          class="text-3xl sm:text-4xl lg:text-5xl font-black font-satoshi mb-8 lg:mb-12 tracking-tight leading-tight text-gray-900">
-          {{ 'programs.projects_title' | translate:{name: program.name} }}
-        </h3>
+      <div class="space-y-6">
+        <div class="h-10 w-72 animate-pulse rounded bg-gray-200"></div>
+        <div class="grid gap-5 sm:grid-cols-2">
+          @for (i of [1, 2, 3, 4]; track i) {
+          <div class="h-52 animate-pulse rounded-2xl border border-gray-200 bg-white"></div>
+          }
+        </div>
+      </div>
+    </div>
+    } @else if (store.program(); as program) {
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] lg:gap-10">
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <app-public-card className="space-y-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="relative flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-brand-100 bg-brand-50">
+              <img
+                [ngSrc]="program | apiIMG: 'program'"
+                [alt]="'programs.logo_alt' | translate: { name: program.name }"
+                class="object-contain p-2"
+                loading="lazy"
+                fill />
+            </div>
+            <div class="min-w-0">
+              <div class="public-section-badge mb-3">
+                <i-lucide [name]="icons.program" class="size-4" />
+                {{ 'sub_programs.programs' | translate }}
+              </div>
+              <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                {{ program.name | titlecase }}
+              </h1>
+            </div>
+          </div>
+
+          <p class="text-base leading-relaxed text-gray-600 sm:text-lg">{{ program.description }}</p>
+        </app-public-card>
+      </aside>
+
+      <section class="min-w-0">
+        <div class="mb-8 flex flex-col gap-3 sm:mb-10">
+          <div class="public-section-badge">
+            <i-lucide [name]="icons.layers" class="size-4" />
+            {{ 'programs.title_highlight' | translate }}
+          </div>
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            {{ 'programs.projects_title' | translate: { name: program.name } }}
+          </h2>
+        </div>
 
         @if (program.subprograms.length > 0) {
-        <div class="grid sm:grid-cols-2 gap-6">
+        <div class="grid gap-5 sm:grid-cols-2">
           @for (sub of program.subprograms; track sub.slug || sub.id) {
-          <div
-            class="space-y-4 p-5 bg-white/60 backdrop-blur-md border border-gray-100 shadow-md rounded-lg hover:shadow-xl transition-all duration-300">
-            <h3 class="font-semibold text-gray-900 flex items-center gap-3">
+          <app-public-card variant="interactive" className="flex h-full flex-col gap-4">
+            <div class="flex items-start gap-4">
               <div
-                class="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-primary-100 shadow-sm">
+                class="relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
                 <img
-                  [src]="sub | apiIMG: 'subprogram'"
-                  alt="logo du sous programme {{ sub.name }}"
-                  class="relative object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                  [ngSrc]="sub | apiIMG: 'subprogram'"
+                  [alt]="'programs.logo_alt' | translate: { name: sub.name }"
+                  class="object-contain p-2"
                   loading="lazy"
                   fill />
               </div>
-              <span>{{ sub.name }}</span>
-            </h3>
-            <p class="text-gray-700 text-base line-clamp-3 leading-relaxed">{{ sub.description }}</p>
-            <a [routerLink]="sub.slug">
-              <ui-button variant="secondary" size="sm">
-                <span class="flex items-center gap-2 group px-4">
-                  {{ 'programs.learn_more' | translate }}
-                  <i-lucide
-                    class="size-4 group-hover:translate-x-0.5 transition-transform duration-300"
-                    [name]="icons.arrow" />
-                </span>
-              </ui-button>
-            </a>
-          </div>
+              <div class="min-w-0">
+                <h3 class="text-xl font-bold leading-snug text-gray-900">{{ sub.name | titlecase }}</h3>
+                <div class="mt-2 h-0.5 w-12 rounded-full bg-brand-500"></div>
+              </div>
+            </div>
+
+            <p class="line-clamp-4 text-sm leading-relaxed text-gray-600 sm:text-[15px]">{{ sub.description }}</p>
+
+            <app-public-button
+              variant="secondary"
+              [routerLink]="['/our-programs', program.slug, sub.slug]"
+              className="mt-auto self-start">
+              <span>{{ 'programs.learn_more' | translate }}</span>
+              <i-lucide
+                class="size-4 transition-transform duration-200"
+                [name]="icons.arrow"
+                aria-hidden="true" />
+            </app-public-button>
+          </app-public-card>
           }
         </div>
         } @else {
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="space-y-4 p-5 bg-white/60 backdrop-blur-md border border-gray-100 shadow-md rounded-lg">
-            <h3 class="font-semibold text-gray-900 flex items-center gap-3">
-              <i-lucide [name]="icons.tag" class="size-5 text-primary-500" />
-              {{ 'programs.no_subprogram' | translate }}
-            </h3>
-          </div>
+        <div
+          class="flex min-h-52 flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-gray-300 bg-white px-8 py-14 text-center">
+          <i-lucide [name]="icons.tag" class="size-12 text-gray-400" />
+          <h3 class="text-2xl font-semibold text-gray-900">{{ 'programs.no_subprogram' | translate }}</h3>
         </div>
         }
-      </div>
-      } @if (!store.isLoading() && !store.program()) {
-      <div class="w-full flex flex-col justify-center items-center px-4">
-        <app-subprogram-card-skeleton />
-        <h2 class="text-2xl sm:text-4xl font-black font-satoshi text-gray-700 mt-8">
-          {{ 'programs.bad_path' | translate }}
-        </h2>
-      </div>
-      }
-    </section>
-  </main>
-</body>
+      </section>
+    </div>
+    } @else {
+    <div class="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center gap-6 px-4 py-20 text-center">
+      <i-lucide [name]="icons.alertTriangle" class="size-14 text-primary-600" />
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        {{ 'programs.bad_path' | translate }}
+      </h2>
+      <app-public-button variant="secondary" [routerLink]="['/our-programs']">
+        {{ 'sub_programs.back_to_programs' | translate }}
+      </app-public-button>
+    </div>
+    }
+  </app-public-container>
+</app-public-section>

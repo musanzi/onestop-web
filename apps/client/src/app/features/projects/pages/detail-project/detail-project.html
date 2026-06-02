@@ -1,18 +1,19 @@
-<section class="bg-grid">
-  <div class="px-8 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl mx-auto bg-white pt-24 pb-20">
+<app-public-section variant="default" className="bg-grid">
+  <app-public-container className="pb-16 pt-28 lg:pt-32">
+    <div class="mx-auto max-w-screen-xl">
     @if (store.project(); as project) {
-    <div class="space-y-16">
+    <div class="space-y-12 lg:space-y-16">
       <app-project-detail-header
         [project]="project"
         [projectStatus]="projectStatus()"
         [isProjectOpen]="isProjectOpen()"
         (apply)="applyToProject()" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-        <aside class="md:sticky md:top-28 2xl:top-36 self-start z-10">
+      <div class="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:gap-12">
+        <aside class="self-start lg:sticky lg:top-28 2xl:top-36">
           <app-project-detail-gallery [project]="project" />
         </aside>
-        <div class="flex flex-col gap-10">
+        <div class="flex flex-col gap-6">
           <app-project-detail-collapsible
             titleKey="project_detail.detail.description"
             [content]="project.description"
@@ -63,18 +64,19 @@
     <app-project-detail-error />
     }
 
-    <div class="overflow-hidden mt-10">
-      @if (participationsStore.totalCount() > 0) {
+    @if (participationsStore.totalCount() > 0) {
+    <div class="mt-12 overflow-hidden lg:mt-16">
       <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
+        <div class="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center">
           <i-lucide [name]="icons.thumbsUp" class="size-5 stroke-[1.5]"></i-lucide>
         </div>
         <h2 class="text-lg font-bold text-gray-900">{{ 'project_detail.detail.participations_title' | translate }}</h2>
       </div>
-      }
       <app-participation-cards [project]="store.project()" (authRequired)="showAuthModal.set(true)" />
     </div>
-  </div>
+    }
+    </div>
+  </app-public-container>
 
   <app-auth-required-modal [isOpen]="showAuthModal()" [returnUrl]="returnUrl()" (closed)="closeAuthModal()" />
-</section>
+</app-public-section>

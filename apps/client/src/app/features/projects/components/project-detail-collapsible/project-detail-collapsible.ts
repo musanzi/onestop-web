@@ -46,9 +46,9 @@ export class ProjectDetailCollapsibleComponent {
     const expanded = this.expanded();
     if (expanded) {
       if (t === 'amber')
-        return `${base} max-h-[500px] opacity-100 bg-amber-50/20 rounded-md p-3 border border-amber-100`;
-      if (t === 'blue') return `${base} max-h-[500px] opacity-100 bg-blue-50/20 rounded-md p-3 border border-blue-100`;
-      return `${base} max-h-[500px] opacity-100 bg-primary-50/20 rounded-md p-3 border border-primary-100`;
+        return `${base} max-h-[500px] opacity-100 bg-amber-50/20 rounded-xl p-3 border border-amber-100`;
+      if (t === 'blue') return `${base} max-h-[500px] opacity-100 bg-blue-50/20 rounded-xl p-3 border border-blue-100`;
+      return `${base} max-h-[500px] opacity-100 bg-primary-50/20 rounded-xl p-3 border border-primary-100`;
     }
     return `${base} max-h-[3.5em] opacity-90 line-clamp-2`;
   }

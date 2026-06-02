@@ -21,6 +21,7 @@ import { ProjectDetailCategoriesComponent } from '../../components/project-detai
 import { ProjectDetailQuickActionsComponent } from '../../components/project-detail-quick-actions/project-detail-quick-actions';
 import { ProjectDetailErrorComponent } from '../../components/project-detail-error/project-detail-error';
 import { SeoService } from '@core/services/seo';
+import { PublicContainer, PublicSection } from '@shared/public';
 
 @Component({
   selector: 'app-project-detail',
@@ -40,7 +41,9 @@ import { SeoService } from '@core/services/seo';
     ProjectDetailDatesComponent,
     ProjectDetailCategoriesComponent,
     ProjectDetailQuickActionsComponent,
-    ProjectDetailErrorComponent
+    ProjectDetailErrorComponent,
+    PublicSection,
+    PublicContainer
   ],
   templateUrl: './detail-project.html',
   changeDetection: ChangeDetectionStrategy.OnPush

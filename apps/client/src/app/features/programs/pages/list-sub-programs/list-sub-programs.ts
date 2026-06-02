@@ -57,7 +57,7 @@ export class ListSubPrograms implements OnInit {
   store = inject(SubprogramsStore);
 
   ngOnInit(): void {
-    const slug = this.#route.snapshot.params['slug'];
+    const slug = this.#route.snapshot.params['subprogramSlug'] ?? this.#route.snapshot.params['slug'];
     this.store.loadSubprogram(slug);
   }
 
