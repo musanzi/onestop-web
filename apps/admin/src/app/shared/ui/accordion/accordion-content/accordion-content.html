@@ -1,5 +1,8 @@
-<div class="accordion-content" [class.is-open]="panel?.isActive()">
-  <div class="accordion-content__inner">
+<div
+  class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-200 ease-in-out"
+  [class.grid-rows-[1fr]]="panel?.isActive()"
+  [class.opacity-100]="panel?.isActive()">
+  <div class="overflow-hidden">
     <div class="px-6 pt-3 pb-6">
       <ng-content />
     </div>

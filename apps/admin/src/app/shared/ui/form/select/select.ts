@@ -167,13 +167,6 @@ export class UiSelect implements ControlValueAccessor {
     this.onTouched();
   }
 
-  selectClasses(): string {
-    const baseClasses = 'ui-select';
-    const invalidClass = this.invalid() ? 'ui-select-invalid' : '';
-    const disabledClass = this.isDisabled() ? 'ui-select-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
-
   isSelected(optionValue: unknown): boolean {
     return String(this.value()) === String(optionValue);
   }

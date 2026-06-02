@@ -6,16 +6,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-ui-input',
   templateUrl: './input.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiInput), multi: true }]
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiInput), multi: true }],
 })
 export class UiInput implements ControlValueAccessor {
   readonly #cdr = inject(ChangeDetectorRef);
+  label = input<string>('');
   type = input<string>('text');
   placeholder = input<string>('');
   name = input<string>('');
   disabled = input<boolean>(false);
   id = input<string>('');
-  label = input<string>('');
   invalid = input<boolean>(false);
   required = input<boolean>(false);
   value = '';
@@ -48,12 +48,5 @@ export class UiInput implements ControlValueAccessor {
     const target = event.target as HTMLInputElement;
     this.value = target.value;
     this.onChange(this.value);
-  }
-
-  inputClasses(): string {
-    const baseClasses = 'ui-input';
-    const invalidClass = this.invalid() ? 'ui-input-invalid' : '';
-    const disabledClass = this.isDisabled() ? 'ui-input-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
   }
 }

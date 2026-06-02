@@ -1,25 +1,28 @@
 @if (totalPages() > 1) {
-  <nav class="pagination" role="navigation">
+  <nav class="flex flex-wrap items-center justify-center gap-3 py-4 tabular-nums" role="navigation">
     <button
       type="button"
-      class="pagination-nav pagination-prev"
+      class="inline-flex size-10 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 transition-all duration-200 hover:border-gray-300 hover:bg-gray-300 active:scale-[0.98] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40"
       [disabled]="currentPage() === 1"
       (click)="previousPage()"
       aria-label="Page précédente">
       <i-lucide [name]="icons.ChevronLeft" class="size-4" aria-hidden="true" />
     </button>
-    <ul class="pagination-pages" role="list">
+    <ul class="m-0 flex list-none items-center gap-1 p-0" role="list">
       @for (item of visibleItems(); track trackPaginationItem($index, item)) {
         @if (item === 'ellipsis') {
-          <li class="pagination-ellipsis" aria-hidden="true">
-            <span class="pagination-ellipsis-dot">…</span>
+          <li aria-hidden="true">
+            <span class="text-sm font-medium text-gray-400 select-none">…</span>
           </li>
         } @else {
           <li>
             <button
               type="button"
-              class="pagination-page"
-              [class.pagination-page-active]="currentPage() === item"
+              class="size-10 rounded-full border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98]"
+              [class.border-primary-500]="currentPage() === item"
+              [class.bg-primary-500]="currentPage() === item"
+              [class.text-white]="currentPage() === item"
+              [class.pointer-events-none]="currentPage() === item"
               (click)="goToPage(item)">
               {{ item }}
             </button>
@@ -29,15 +32,15 @@
     </ul>
     <button
       type="button"
-      class="pagination-nav pagination-next"
+      class="inline-flex size-10 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 transition-all duration-200 hover:border-gray-300 hover:bg-gray-300 active:scale-[0.98] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40"
       [disabled]="currentPage() === totalPages()"
       (click)="nextPage()"
       aria-label="Page suivante">
       <i-lucide [name]="icons.ChevronRight" class="size-4" aria-hidden="true" />
     </button>
-    <div class="pagination-info" aria-live="polite">
-      <span class="pagination-page-count"> {{ currentPage() }} / {{ totalPages() }} </span>
-      <span class="pagination-item-count"> {{ startItem() }} - {{ endItem() }} sur {{ totalItems() }} </span>
+    <div class="flex h-10 items-center gap-3 border-l border-gray-200 pl-4" aria-live="polite">
+      <span class="text-sm font-semibold text-gray-900"> {{ currentPage() }} / {{ totalPages() }} </span>
+      <span class="text-xs text-gray-500"> {{ startItem() }} - {{ endItem() }} sur {{ totalItems() }} </span>
     </div>
   </nav>
 }

@@ -4,7 +4,11 @@
 <div class="dashboard-main-content">
   <div class="flex flex-col md:flex-row gap-4 md:justify-between md:items-center mb-4">
     <app-ui-badge [label]="projectCount.toString() + ' Projets'" />
-    <a class="ui-button ui-button-small ui-button-primary" [routerLink]="'/projects/add'"> Nouveau projet </a>
+    <a
+      class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-primary-600 bg-primary-600 px-3.5 py-2 text-sm leading-6 font-medium text-white shadow-sm"
+      [routerLink]="'/projects/add'">
+      Nouveau projet
+    </a>
   </div>
   <form [formGroup]="searchForm" class="search-input-wrapper">
     <div class="search-input-group">
@@ -79,7 +83,7 @@
                   <div class="flex items-center gap-2">
                     <button
                       [routerLink]="['/projects', project.slug]"
-                      class="ui-button ui-button-small ui-button-primary ui-button-outlined ui-button-text">
+                      class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-transparent bg-transparent px-3.5 py-2 text-sm leading-6 font-medium text-primary-700 shadow-none hover:bg-primary-50">
                       <i-lucide [name]="icons.Eye" class="size-4" />
                       Détails
                     </button>

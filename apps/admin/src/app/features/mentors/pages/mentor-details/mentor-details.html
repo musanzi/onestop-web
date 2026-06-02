@@ -90,7 +90,7 @@
             </div>
             <a
               [routerLink]="['/mentors/update', mentor.id]"
-              class="ui-button ui-button-small ui-button-primary ui-button-outlined">
+              class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-primary-400 bg-white px-3.5 py-2 text-sm leading-6 font-medium text-primary-700 shadow-sm">
               Modifier
             </a>
           </div>
@@ -151,11 +151,15 @@
       </div>
       @if (mentor.status === 'pending') {
         <div class="flex items-center gap-2">
-          <button (click)="onApprove()" class="ui-button ui-button-small ui-button-primary">
+          <button
+            (click)="onApprove()"
+            class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-primary-600 bg-primary-600 px-3.5 py-2 text-sm leading-6 font-medium text-white shadow-sm">
             <i-lucide [name]="icons.CircleCheckBig" class="size-4" />
             Approuver
           </button>
-          <button (click)="onReject()" class="ui-button ui-button-small ui-button-danger">
+          <button
+            (click)="onReject()"
+            class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-red-600 bg-red-600 px-3.5 py-2 text-sm leading-6 font-medium text-white shadow-sm">
             <i-lucide [name]="icons.CircleX" class="size-4" />
             Rejeter
           </button>

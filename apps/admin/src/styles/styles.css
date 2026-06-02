@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import './ui/main.css';
 
 @theme {
   --font-mona: 'Mona Sans', sans-serif;

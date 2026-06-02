@@ -57,10 +57,4 @@ export class UiTextarea implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  textareaClasses() {
-    const baseClasses = 'ui-textarea';
-    const invalidClass = this.invalid() ? 'ui-textarea-invalid' : '';
-    const disabledClass = this.isDisabled() ? 'ui-textarea-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
 }

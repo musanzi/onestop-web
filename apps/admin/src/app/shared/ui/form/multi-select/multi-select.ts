@@ -161,13 +161,6 @@ export class UiMultiSelect implements ControlValueAccessor {
     this.onTouched();
   }
 
-  selectClasses() {
-    const baseClasses = 'ui-select';
-    const invalidClass = this.invalid() ? 'ui-select-invalid' : '';
-    const disabledClass = this.disabled() ? 'ui-select-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
-
   getCheckboxId(optionValue: unknown): string {
     return `${this.id()}-option-${String(optionValue)}`;
   }

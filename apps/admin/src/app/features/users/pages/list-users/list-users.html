@@ -43,7 +43,11 @@
         <i-lucide [name]="icons.Trash" class="size-4" />
         Supprimer invalides
       </app-ui-button>
-      <a [routerLink]="'/users/add'" class="ui-button ui-button-small ui-button-primary"> Nouvel utilisateur </a>
+      <a
+        [routerLink]="'/users/add'"
+        class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-primary-600 bg-primary-600 px-3.5 py-2 text-sm leading-6 font-medium text-white shadow-sm">
+        Nouvel utilisateur
+      </a>
     </div>
   </div>
   <form [formGroup]="searchForm" class="search-input-wrapper">
@@ -100,7 +104,7 @@
                   <div class="flex items-center gap-1.5">
                     <a
                       [routerLink]="['/users/update', user.email]"
-                      class="ui-button ui-button-small ui-button-primary ui-button-outlined ui-button-text">
+                      class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-transparent bg-transparent px-3.5 py-2 text-sm leading-6 font-medium text-primary-700 shadow-none hover:bg-primary-50">
                       <i-lucide [name]="icons.Pencil" class="size-4" />
                       Modifier
                     </a>

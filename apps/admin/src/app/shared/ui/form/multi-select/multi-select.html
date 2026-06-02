@@ -1,34 +1,43 @@
-<div class="ui-select-wrapper" [class.ui-select-disabled]="disabled()">
+<div class="group/multi-select relative inline-flex w-full flex-col">
   @if (label()) {
-    <p class="ui-select-label">
+    <p class="mb-2 block text-sm leading-5 font-semibold text-slate-700 transition-colors duration-200">
       {{ label() }}
       @if (required()) {
         <span class="text-red-500">*</span>
       }
     </p>
   }
-  <div class="ui-select-container">
+  <div class="relative w-full">
     <div
-      [class]="selectClasses()"
-      class="ui-select ui-multi-select-trigger"
+      class="relative flex min-h-[42px] w-full cursor-pointer items-center justify-between rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 pr-12 text-[15px] leading-6 text-slate-900 shadow-sm transition-colors duration-200 hover:border-slate-400/90 hover:shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none"
+      [class.cursor-not-allowed]="disabled()"
+      [class.border-slate-200]="disabled()"
+      [class.bg-slate-50]="disabled()"
+      [class.opacity-60]="disabled()"
+      [class.shadow-none]="disabled()"
+      [class.border-red-500]="invalid()"
+      [class.bg-red-50]="invalid()"
+      [class.focus:border-red-600]="invalid()"
+      [class.focus:ring-red-200]="invalid()"
       (click)="toggleDropdown()"
       (keyup.enter)="toggleDropdown()"
       (keyup.space)="toggleDropdown()"
       [id]="id()"
       [tabindex]="disabled() ? -1 : 0">
       @if (value().length === 0) {
-        <span class="ui-multi-select-placeholder">{{ placeholder() }}</span>
+        <span class="text-slate-400">{{ placeholder() }}</span>
       } @else {
         @if (display() === 'comma') {
-          <span class="ui-multi-select-value-comma">{{ displayText() }}</span>
+          <span class="text-[15px] text-slate-900">{{ displayText() }}</span>
         } @else {
-          <div class="ui-multi-select-chips">
+          <div class="flex flex-wrap gap-1.5">
             @for (label of selectedLabels(); track label) {
-              <span class="ui-multi-select-chip">
-                <span class="ui-multi-select-chip-text">{{ label }}</span>
+              <span
+                class="inline-flex items-center gap-1.5 rounded-full border border-blue-500/15 bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700 shadow-sm transition-all duration-200 hover:bg-primary-100">
+                <span class="leading-none">{{ label }}</span>
                 <button
                   type="button"
-                  class="ui-multi-select-chip-remove"
+                  class="ml-0.5 flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-0 text-primary-600 transition-all duration-150 hover:scale-110 hover:bg-primary-200/70 hover:text-primary-800"
                   (click)="removeItem(normalizedOptions()[selectedLabels().indexOf(label)].value, $event)"
                   [attr.aria-label]="'Remove ' + label">
                   <svg
@@ -50,18 +59,24 @@
           </div>
         }
       }
-      <div class="ui-select-icon">
+      <div
+        class="pointer-events-none absolute top-1/2 right-3.5 z-10 flex size-5 -translate-y-1/2 items-center justify-center text-slate-400 transition-all duration-300 group-hover/multi-select:text-slate-600 group-focus-within/multi-select:text-primary-600">
         <i-lucide [img]="icons.ChevronDown" class="size-4.5" [class.rotate-180]="isOpen()" />
       </div>
     </div>
 
     @if (isOpen()) {
-      <div class="ui-multi-select-panel" [id]="id() + '-listbox'" role="listbox">
+      <div
+        class="absolute z-50 mt-2 max-h-60 w-full overflow-auto rounded-xl border border-slate-200/80 bg-white shadow-2xl backdrop-blur-sm"
+        [id]="id() + '-listbox'"
+        role="listbox">
         @for (option of normalizedOptions(); track option.value) {
           <div
-            class="ui-multi-select-option"
-            [class.ui-multi-select-option-selected]="isSelected(option.value)"
-            [class.ui-multi-select-option-disabled]="option.disabled"
+            class="flex cursor-pointer items-center gap-3 border-b border-slate-50 px-3 py-2.5 transition-all duration-200 last:border-b-0 hover:bg-slate-50"
+            [class.bg-primary-50]="isSelected(option.value)"
+            [class.hover:bg-primary-100]="isSelected(option.value)"
+            [class.cursor-not-allowed]="option.disabled"
+            [class.opacity-50]="option.disabled"
             (click)="!option.disabled && toggleOption(option.value)"
             (keyup.enter)="!option.disabled && toggleOption(option.value)"
             (keyup.space)="!option.disabled && toggleOption(option.value)"
@@ -74,18 +89,18 @@
               [disabled]="option.disabled || disabled()"
               (ngModelChange)="onCheckboxChange(option.value, $event)"
               (click)="$event.stopPropagation()" />
-            <span class="ui-multi-select-option-label">{{ option.label }}</span>
+            <span class="text-[15px] text-slate-900 select-none">{{ option.label }}</span>
           </div>
         }
         @if (options().length === 0) {
-          <div class="ui-multi-select-empty">No options available</div>
+          <div class="px-3 py-4 text-center text-sm text-slate-500">No options available</div>
         }
         @if (allowCreate()) {
-          <div class="ui-multi-select-create-wrapper">
+          <div class="sticky bottom-0 grid grid-cols-[1fr_auto] gap-2 border-t border-slate-200 bg-white p-2">
             <input
               [id]="id() + '-create-option-input'"
               type="text"
-              class="ui-multi-select-create-input"
+              class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 transition-all duration-200 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
               [value]="createValue()"
               [placeholder]="createPlaceholder()"
               [disabled]="createDisabled()"
@@ -93,7 +108,7 @@
               (keydown)="onCreateKeydown($event)" />
             <button
               type="button"
-              class="ui-multi-select-create-button"
+              class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-primary-600 bg-primary-600 px-3 py-2 text-sm font-semibold text-white transition-all duration-200 hover:not-disabled:border-primary-700 hover:not-disabled:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-50"
               [disabled]="!canCreate()"
               (click)="onCreateOption()">
               <i-lucide [img]="icons.Plus" class="size-4" />

@@ -1,16 +1,18 @@
-<div class="ui-checkbox-wrapper flex items-center gap-3">
-  <div class="ui-checkbox-container relative">
+<div class="flex items-center gap-3">
+  <div class="relative inline-flex items-center justify-center">
     <input
       type="checkbox"
       [id]="id()"
       [name]="name()"
       [checked]="value"
       [disabled]="isDisabled()"
-      [class]="checkboxClasses()"
       (change)="onCheckboxChange($event)"
-      class="ui-checkbox-input" />
+      class="relative size-5 cursor-pointer appearance-none rounded-md border-2 border-slate-300 bg-white transition-all duration-200 ease-in-out hover:not-disabled:border-primary-400 hover:not-disabled:bg-primary-50/30 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none checked:border-primary-600 checked:bg-primary-600 checked:hover:not-disabled:border-primary-700 checked:hover:not-disabled:bg-primary-700 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:opacity-50"
+      [class.border-red-400]="invalid()"
+      [class.focus:border-red-500]="invalid()"
+      [class.focus:ring-red-200]="invalid()" />
     @if (value) {
-      <div class="ui-checkbox-checkmark">
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-center text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -27,7 +29,12 @@
     }
   </div>
   @if (label()) {
-    <label [for]="id()" class="ui-checkbox-label" [class.ui-checkbox-label-disabled]="isDisabled()">
+    <label
+      [for]="id()"
+      class="cursor-pointer text-sm leading-6 font-medium text-slate-700 transition-colors duration-200 select-none hover:text-slate-900"
+      [class.cursor-not-allowed]="isDisabled()"
+      [class.text-slate-400]="isDisabled()"
+      [class.opacity-60]="isDisabled()">
       {{ label() }}
       @if (required()) {
         <span class="text-red-500">*</span>

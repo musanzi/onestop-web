@@ -28,16 +28,6 @@ export class UiButton {
     }
   }
 
-  buttonClasses(): string {
-    const baseClasses = 'ui-button w-full';
-    const variantClass = `ui-button-${this.variant()}`;
-    const sizeClass = `ui-button-${this.size()}`;
-    const outlinedClass = this.outlined() ? 'ui-button-outlined' : '';
-    const textClass = this.text() ? 'ui-button-text' : '';
-    const disabledClass = this.disabled() ? 'ui-button-disabled' : '';
-    return [baseClasses, variantClass, sizeClass, outlinedClass, textClass, disabledClass].filter(Boolean).join(' ');
-  }
-
   spinnerSize(): number {
     switch (this.size()) {
       case 'small':
@@ -49,40 +39,4 @@ export class UiButton {
     }
   }
 
-  sizePadding(): string {
-    switch (this.size()) {
-      case 'small':
-        return '0.5rem 0.875rem';
-      case 'large':
-        return '0.75rem 1.5rem';
-      default:
-        return '0.625rem 1.25rem';
-    }
-  }
-
-  sizeFontSize(): string {
-    switch (this.size()) {
-      case 'small':
-        return '0.875rem';
-      case 'large':
-        return '1rem';
-      default:
-        return '0.9375rem';
-    }
-  }
-
-  sizeMinHeight(): string {
-    switch (this.size()) {
-      case 'small':
-        return '2rem';
-      case 'large':
-        return '3rem';
-      default:
-        return '2.5rem';
-    }
-  }
-
-  sizeLineHeight(): string {
-    return '1.5rem';
-  }
 }

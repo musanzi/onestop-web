@@ -1,9 +1,17 @@
-<div [class]="wrapperClasses()">
-  <div [class]="toolbarClasses()">
-    <div class="ui-text-editor-toolbar-group">
+<div
+  class="overflow-hidden rounded-lg border border-gray-300 bg-white"
+  [class.border-gray-200]="isDisabled()"
+  [class.bg-gray-50]="isDisabled()"
+  [class.shadow-none]="isDisabled()"
+  [class.border-red-500]="invalid()">
+  <div
+    class="flex flex-wrap items-center gap-1 border-b border-gray-200 bg-gray-50 px-3 py-2"
+    [class.border-gray-200]="isDisabled()"
+    [class.bg-gray-100]="isDisabled()">
+    <div class="flex items-center gap-1">
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="formatBold()"
         title="Bold (Ctrl+B)"
         [disabled]="isDisabled()">
@@ -11,7 +19,7 @@
       </button>
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="formatItalic()"
         title="Italic (Ctrl+I)"
         [disabled]="isDisabled()">
@@ -19,7 +27,7 @@
       </button>
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="formatUnderline()"
         title="Underline (Ctrl+U)"
         [disabled]="isDisabled()">
@@ -27,12 +35,12 @@
       </button>
     </div>
 
-    <div class="ui-text-editor-toolbar-divider"></div>
+    <div class="mx-1 h-6 w-px bg-gray-300"></div>
 
-    <div class="ui-text-editor-toolbar-group">
+    <div class="flex items-center gap-1">
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="insertBulletList()"
         title="Bullet List"
         [disabled]="isDisabled()">
@@ -40,7 +48,7 @@
       </button>
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="insertOrderedList()"
         title="Numbered List"
         [disabled]="isDisabled()">
@@ -48,12 +56,12 @@
       </button>
     </div>
 
-    <div class="ui-text-editor-toolbar-divider"></div>
+    <div class="mx-1 h-6 w-px bg-gray-300"></div>
 
-    <div class="ui-text-editor-toolbar-group">
+    <div class="flex items-center gap-1">
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="alignLeft()"
         title="Align Left"
         [disabled]="isDisabled()">
@@ -61,7 +69,7 @@
       </button>
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="alignCenter()"
         title="Align Center"
         [disabled]="isDisabled()">
@@ -69,7 +77,7 @@
       </button>
       <button
         type="button"
-        [class]="buttonClasses()"
+        class="flex size-8 items-center justify-center rounded text-gray-700 transition-colors hover:not-disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 disabled:opacity-50"
         (click)="alignRight()"
         title="Align Right"
         [disabled]="isDisabled()">
@@ -80,7 +88,13 @@
 
   <div
     #editor
-    [class]="editorClasses()"
+    class="max-h-[600px] min-h-[300px] overflow-y-auto px-4 py-3 outline-none empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] [&_a]:text-primary-600 [&_a]:underline [&_blockquote]:my-3 [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:text-gray-600 [&_blockquote]:italic [&_code]:rounded [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:text-gray-800 [&_h1]:mb-3 [&_h1]:text-3xl [&_h1]:font-bold [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-bold [&_img]:my-3 [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-lg [&_li]:mb-1 [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-3 [&_pre]:my-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-gray-900 [&_pre]:p-4 [&_pre]:text-gray-100 [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-6"
+    [class.ring-2]="isFocused()"
+    [class.ring-primary-500/50]="isFocused()"
+    [class.border-red-500]="invalid()"
+    [class.cursor-not-allowed]="isDisabled()"
+    [class.bg-gray-100]="isDisabled()"
+    [class.text-gray-500]="isDisabled()"
     [attr.contenteditable]="!isDisabled()"
     [id]="id()"
     [style.min-height]="minHeight()"

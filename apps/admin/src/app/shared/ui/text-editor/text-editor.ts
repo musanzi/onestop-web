@@ -160,31 +160,4 @@ export class UiTextEditor implements ControlValueAccessor, AfterViewInit {
     this.execCommand('formatBlock', 'pre');
   }
 
-  wrapperClasses(): string {
-    const baseClasses = 'ui-text-editor';
-    const disabledClass = this.isDisabled() ? 'ui-text-editor-shell-disabled' : '';
-    const invalidClass = this.invalid() ? 'ui-text-editor-shell-invalid' : '';
-    return [baseClasses, disabledClass, invalidClass].filter(Boolean).join(' ');
-  }
-
-  editorClasses(): string {
-    const baseClasses = 'ui-text-editor-content';
-    const focusedClass = this.isFocused() ? 'ui-text-editor-focused' : '';
-    const invalidClass = this.invalid() ? 'ui-text-editor-invalid' : '';
-    const disabledClass = this.isDisabled() ? 'ui-text-editor-disabled' : '';
-    return [baseClasses, focusedClass, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
-
-  toolbarClasses(): string {
-    const baseClasses = 'ui-text-editor-toolbar';
-    const disabledClass = this.isDisabled() ? 'ui-text-editor-toolbar-disabled' : '';
-    return [baseClasses, disabledClass].filter(Boolean).join(' ');
-  }
-
-  buttonClasses(isActive = false): string {
-    const baseClasses = 'ui-text-editor-button';
-    const activeClass = isActive ? 'ui-text-editor-button-active' : '';
-    const disabledClass = this.isDisabled() ? 'ui-text-editor-button-disabled' : '';
-    return [baseClasses, activeClass, disabledClass].filter(Boolean).join(' ');
-  }
 }
