@@ -283,9 +283,11 @@
       </div>
       <button
         (click)="onTogglePublish()"
-        class="ui-button ui-button-small"
-        [class.ui-button-primary]="!venture.is_published"
-        [class.ui-button-secondary]="venture.is_published">
+        class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border px-3.5 py-2 text-sm leading-6 font-medium text-white shadow-sm"
+        [class.border-primary-600]="!venture.is_published"
+        [class.bg-primary-600]="!venture.is_published"
+        [class.border-gray-300]="venture.is_published"
+        [class.bg-gray-400]="venture.is_published">
         <i-lucide [name]="venture.is_published ? icons.ToggleRight : icons.ToggleLeft" class="size-4" />
         {{ venture.is_published ? 'Dépublier' : 'Publier' }}
       </button>

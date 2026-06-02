@@ -1,6 +1,6 @@
 @if (confirmation(); as config) {
   <div
-    class="ui-confirm-overlay"
+    class="fixed inset-0 z-9999 flex items-center justify-center bg-gray-900/50 p-4 backdrop-blur-sm max-sm:p-2"
     (click)="onReject()"
     (keyup.enter)="onReject()"
     (keyup.escape)="onReject()"
@@ -8,27 +8,35 @@
     role="button"
     [attr.aria-label]="'Close dialog'">
     <div
-      class="ui-confirm-dialog"
+      class="w-full max-w-md cursor-default overflow-hidden rounded-xl bg-white shadow-2xl max-sm:m-2 max-sm:max-w-full"
       (click)="$event.stopPropagation()"
       (keyup.enter)="$event.stopPropagation()"
       tabindex="0">
       @if (config.header) {
-        <div class="ui-confirm-header">
-          <h2 id="confirm-dialog-title" class="ui-confirm-title">{{ config.header }}</h2>
-          <button class="ui-confirm-close" (click)="onReject()" type="button" aria-label="Fermer">
+        <div class="flex items-center justify-between border-b border-gray-200 px-6 pt-6 pb-4 max-sm:px-5 max-sm:pt-5 max-sm:pb-3">
+          <h2 id="confirm-dialog-title" class="m-0 text-xl font-semibold text-gray-900 max-sm:text-lg">
+            {{ config.header }}
+          </h2>
+          <button
+            class="-mr-2 flex items-center justify-center rounded-md border-none bg-transparent p-2 text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            (click)="onReject()"
+            type="button"
+            aria-label="Fermer">
             <i-lucide [img]="icons.X" [size]="20" />
           </button>
         </div>
       }
-      <div class="ui-confirm-content">
-        <div class="ui-confirm-icon-wrapper">
-          <div class="ui-confirm-icon">
+      <div class="flex flex-col items-center gap-4 px-6 py-6 text-center max-sm:px-5 max-sm:py-5">
+        <div class="flex items-center justify-center">
+          <div
+            class="flex size-14 items-center justify-center rounded-full bg-linear-to-br from-red-100 to-red-200 text-red-600">
             <i-lucide [img]="icons.CircleAlert" [size]="24" />
           </div>
         </div>
-        <p class="ui-confirm-message">{{ config.message }}</p>
+        <p class="m-0 max-w-sm text-[15px] leading-relaxed text-gray-600 max-sm:text-sm">{{ config.message }}</p>
       </div>
-      <div class="ui-confirm-footer">
+      <div
+        class="flex justify-end gap-3 border-t border-gray-200 bg-gray-50 px-6 pt-4 pb-6 max-sm:flex-col-reverse max-sm:px-5 max-sm:pt-3 max-sm:pb-5">
         <app-ui-button [variant]="'secondary'" [outlined]="true" (clicked)="onReject()" [size]="'small'">
           {{ config.rejectLabel || 'Annuler' }}
         </app-ui-button>

@@ -48,13 +48,6 @@ export class UiCheckbox implements ControlValueAccessor {
     this.onTouched();
   }
 
-  checkboxClasses(): string {
-    const baseClasses = 'ui-checkbox-input';
-    const invalidClasses = this.invalid() ? 'ui-checkbox-invalid' : '';
-    const disabledClasses = this.isDisabled() ? 'ui-checkbox-disabled' : '';
-    return [baseClasses, invalidClasses, disabledClasses].filter(Boolean).join(' ');
-  }
-
   isDisabled(): boolean {
     return this.disabled() || this.isControlDisabled();
   }

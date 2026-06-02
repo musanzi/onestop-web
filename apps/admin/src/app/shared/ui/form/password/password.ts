@@ -51,10 +51,4 @@ export class UiPassword implements ControlValueAccessor {
     this.isMasked.update((masked) => !masked);
   }
 
-  inputClasses(): string {
-    const baseClasses = 'ui-input ui-password';
-    const invalidClass = this.invalid() ? 'ui-input-invalid' : '';
-    const disabledClass = this.disabled() ? 'ui-input-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
 }

@@ -321,13 +321,6 @@ export class UiDatepicker implements ControlValueAccessor {
       .replace('dd', day.toString().padStart(2, '0'));
   }
 
-  inputClasses(): string {
-    const baseClasses = 'ui-datepicker';
-    const invalidClass = this.invalid() ? 'ui-datepicker-invalid' : '';
-    const disabledClass = this.disabled() ? 'ui-datepicker-disabled' : '';
-    return [baseClasses, invalidClass, disabledClass].filter(Boolean).join(' ');
-  }
-
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const element = target.closest('.ui-datepicker-wrapper');
