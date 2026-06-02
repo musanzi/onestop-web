@@ -6,3 +6,12 @@ allowBuilds:
   lmdb: true
   msgpackr-extract: true
   nx: true
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+  - less
+  - lmdb
+  - msgpackr-extract
+  - nx
