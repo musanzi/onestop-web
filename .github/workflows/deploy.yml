@@ -19,7 +19,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -eu
+            set -e
 
             cd "${{ secrets.PROJECT_PATH }}"
 
