@@ -8,7 +8,7 @@ import {
   input,
   OnDestroy,
   output,
-  signal
+  signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
@@ -35,8 +35,8 @@ import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
     UiSelect,
     UiTextarea,
     UiTableSkeleton,
-    ApiImgPipe
-  ]
+    ApiImgPipe,
+  ],
 })
 export class ProjectParticipationDetails implements OnDestroy {
   icons = PROJECT_PARTICIPATION_DETAILS_ICONS;
@@ -49,7 +49,7 @@ export class ProjectParticipationDetails implements OnDestroy {
     phaseId: ['', Validators.required],
     score: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
     message: [''],
-    notifyParticipant: [false]
+    notifyParticipant: [false],
   });
   participation = computed<IProjectParticipation | null>(() => this.store.participation());
   isLoading = computed(() => this.store.isDetailLoading());
@@ -97,7 +97,7 @@ export class ProjectParticipationDetails implements OnDestroy {
           phaseId: selectedReview.phase.id,
           score: String(selectedReview.score),
           message: selectedReview.message ?? '',
-          notifyParticipant: false
+          notifyParticipant: false,
         });
         return;
       }
@@ -164,7 +164,7 @@ export class ProjectParticipationDetails implements OnDestroy {
       phaseId: this.latestPhase()?.id ?? '',
       score: '',
       message: '',
-      notifyParticipant: false
+      notifyParticipant: false,
     });
   }
 
@@ -184,17 +184,17 @@ export class ProjectParticipationDetails implements OnDestroy {
       participationId,
       dto: this.selectedReviewId()
         ? {
-            reviewId: this.selectedReviewId()!,
+            reviewId: this.selectedReviewId() ?? '',
             score: Number(value.score),
             message: message || undefined,
-            notifyParticipant: !!value.notifyParticipant
+            notifyParticipant: !!value.notifyParticipant,
           }
         : {
-            phaseId: value.phaseId!,
+            phaseId: value.phaseId ?? '',
             score: Number(value.score),
             message: message || undefined,
-            notifyParticipant: !!value.notifyParticipant
-          }
+            notifyParticipant: !!value.notifyParticipant,
+          },
     });
   }
 }

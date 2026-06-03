@@ -2,7 +2,6 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { ICategory } from '@shared/models';
 import { FilterProgramCategoriesInterface } from '../interfaces/filter-program-categories.interface';
 import { ProgramCategoryInterface } from '../interfaces/program-category.interface';
 import { ProgramCategoriesStoreInterface } from '../interfaces/program-categories-store.interface';

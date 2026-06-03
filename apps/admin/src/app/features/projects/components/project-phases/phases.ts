@@ -11,7 +11,7 @@ import {
   UiMultiSelect,
   UiTextarea,
   UiConfirmDialog,
-  UiBadge
+  UiBadge,
 } from '@shared/ui';
 import { ConfirmationService } from '@shared/services/confirmation';
 import { IPhase } from '@shared/models';
@@ -36,8 +36,8 @@ import { PhaseSkeleton } from '@features/projects/ui/phase-skeleton/phase-skelet
     UiConfirmDialog,
     LucideAngularModule,
     UiBadge,
-    PhaseSkeleton
-  ]
+    PhaseSkeleton,
+  ],
 })
 export class Phases implements OnInit {
   icons = PHASES_ICONS;
@@ -51,11 +51,11 @@ export class Phases implements OnInit {
   mentorOptions = computed<SelectOption[]>(() =>
     this.phasesStore.mentors().map((mentor) => ({
       label: mentor.owner.name.toUpperCase(),
-      value: mentor.id
-    }))
+      value: mentor.id,
+    })),
   );
   mentorNameById = computed<Map<string, string>>(
-    () => new Map(this.phasesStore.mentors().map((mentor) => [mentor.id, mentor.owner.name]))
+    () => new Map(this.phasesStore.mentors().map((mentor) => [mentor.id, mentor.owner.name])),
   );
 
   ngOnInit(): void {
@@ -71,14 +71,14 @@ export class Phases implements OnInit {
       started_at: [null, Validators.required],
       ended_at: [null, Validators.required],
       mentors: [[]],
-      deliverables: this.fb.array([])
+      deliverables: this.fb.array([]),
     });
   }
 
   private buildDeliverableForm(deliverable?: DeliverableInterface): FormGroup {
     return this.fb.group({
       title: [deliverable?.title ?? '', [Validators.required, Validators.minLength(2)]],
-      description: [deliverable?.description ?? undefined]
+      description: [deliverable?.description ?? undefined],
     });
   }
 
@@ -127,7 +127,7 @@ export class Phases implements OnInit {
       ...phase,
       mentors,
       started_at: parseDate(phase.started_at),
-      ended_at: parseDate(phase.ended_at)
+      ended_at: parseDate(phase.ended_at),
     });
     this.setDeliverables((phase.deliverables ?? []).map((d) => ({ title: d.title, description: d.description })));
   }
@@ -142,14 +142,14 @@ export class Phases implements OnInit {
     const payload = this.buildPayload();
     if (this.phaseId()) {
       this.phasesStore.update({
-        dto: { ...payload, id: this.phaseId()! },
-        onSuccess: () => this.onCancelForm()
+        dto: { ...payload, id: this.phaseId() ?? '' },
+        onSuccess: () => this.onCancelForm(),
       });
     } else {
       this.phasesStore.create({
         projectId: this.projectId(),
         dto: payload,
-        onSuccess: () => this.onCancelForm()
+        onSuccess: () => this.onCancelForm(),
       });
     }
   }
@@ -160,7 +160,7 @@ export class Phases implements OnInit {
       message: `Êtes-vous sûr de vouloir supprimer la phase « ${phase.name} » ?`,
       acceptLabel: 'Supprimer',
       rejectLabel: 'Annuler',
-      accept: () => this.phasesStore.delete(phase.id)
+      accept: () => this.phasesStore.delete(phase.id),
     });
   }
 

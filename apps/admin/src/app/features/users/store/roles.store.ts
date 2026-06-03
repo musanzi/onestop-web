@@ -2,7 +2,6 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { IRole } from '@shared/models';
 import { FilterRolesInterface } from '../interfaces/filter-roles.interface';
 import { RoleInterface } from '../interfaces/role.interface';
 import { RolesStoreInterface } from '../interfaces/roles-store.interface';

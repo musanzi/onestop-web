@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { FilterUsersInterface } from '../interfaces/filter-users.interface';
-import { IUser } from '@shared/models';
 import { UserInterface } from '../interfaces/user.interface';
 import { UsersStoreInterface } from '../interfaces/users-store.interface';
 import { UsersService } from '../services/users.service';

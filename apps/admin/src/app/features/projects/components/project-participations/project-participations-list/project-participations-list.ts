@@ -9,7 +9,7 @@ import {
   input,
   output,
   signal,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -41,8 +41,8 @@ import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
     UiPagination,
     UiSelect,
     UiTableSkeleton,
-    ApiImgPipe
-  ]
+    ApiImgPipe,
+  ],
 })
 export class ProjectParticipationsList {
   icons = PROJECT_PARTICIPATIONS_LIST_ICONS;
@@ -56,10 +56,10 @@ export class ProjectParticipationsList {
   queryParams = signal<FilterParticipationsInterface>({ page: null, phaseId: null });
   selectedIds = signal<string[]>([]);
   filtersForm = this.fb.group({
-    phaseId: ['']
+    phaseId: [''],
   });
   batchForm = this.fb.group({
-    phaseId: ['', Validators.required]
+    phaseId: ['', Validators.required],
   });
   itemsPerPage = 20;
   currentPage = computed(() => this.queryParams().page || 1);
@@ -79,7 +79,7 @@ export class ProjectParticipationsList {
     effect(() => {
       this.store.loadAll({
         projectId: this.project().id,
-        filters: this.queryParams()
+        filters: this.queryParams(),
       });
     });
 
@@ -101,7 +101,7 @@ export class ProjectParticipationsList {
         this.queryParams.update((query) => ({
           ...query,
           phaseId: phaseId || null,
-          page: null
+          page: null,
         }));
       });
   }
@@ -133,14 +133,14 @@ export class ProjectParticipationsList {
       onSuccess: () => {
         this.reloadCurrentData();
         this.projectStore.loadOne(this.project().slug);
-      }
+      },
     });
   }
 
   onPageChange(page: number): void {
     this.queryParams.update((query) => ({
       ...query,
-      page: Number(toPageQueryValue(page) ?? 1)
+      page: Number(toPageQueryValue(page) ?? 1),
     }));
   }
 
@@ -173,7 +173,7 @@ export class ProjectParticipationsList {
       this.batchForm.markAllAsTouched();
       return;
     }
-    const phaseId = this.batchForm.getRawValue().phaseId!;
+    const phaseId = this.batchForm.getRawValue().phaseId ?? '';
     const action = mode === 'move' ? this.store.moveToPhase : this.store.removeFromPhase;
     action({ ids: this.selectedIds(), phaseId });
   }
@@ -181,7 +181,7 @@ export class ProjectParticipationsList {
   reloadCurrentData(): void {
     this.store.loadAll({
       projectId: this.project().id,
-      filters: this.queryParams()
+      filters: this.queryParams(),
     });
   }
 

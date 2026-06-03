@@ -12,15 +12,15 @@ export const PhasesStore = signalStore(
     isMentorsLoading: false,
     phases: [],
     phase: null,
-    mentors: []
+    mentors: [],
   }),
   withComputed(({ phases }) => ({
     sortedPhases: computed(() =>
-      phases().sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime())
-    )
+      phases().sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime()),
+    ),
   })),
   withProps(() => ({
-    _phasesService: inject(PhasesService)
+    _phasesService: inject(PhasesService),
   })),
   withMethods(({ _phasesService, ...store }) => ({
     loadAll: rxMethod<string>(
@@ -29,16 +29,16 @@ export const PhasesStore = signalStore(
         switchMap((id) =>
           _phasesService.getAll(id).pipe(
             tap({
-              next: (phases) => patchState(store, { isLoading: false, phases })
+              next: (phases) => patchState(store, { isLoading: false, phases }),
             }),
             catchError(() => {
               patchState(store, { phases: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     loadMentors: rxMethod<void>(
       pipe(
@@ -46,16 +46,16 @@ export const PhasesStore = signalStore(
         switchMap(() =>
           _phasesService.getMentors().pipe(
             tap({
-              next: (mentors) => patchState(store, { isMentorsLoading: false, mentors })
+              next: (mentors) => patchState(store, { isMentorsLoading: false, mentors }),
             }),
             catchError(() => {
               patchState(store, { mentors: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isMentorsLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isMentorsLoading: false })),
+          ),
+        ),
+      ),
     ),
     create: rxMethod<{ projectId: string; dto: PhaseInterface; onSuccess: () => void }>(
       pipe(
@@ -67,13 +67,13 @@ export const PhasesStore = signalStore(
                 const phases = [...store.phases(), data];
                 patchState(store, { isLoading: false, phases, phase: data });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     update: rxMethod<{ dto: PhaseInterface & { id: string }; onSuccess: () => void }>(
       pipe(
@@ -85,13 +85,13 @@ export const PhasesStore = signalStore(
                 const phases = store.phases().map((p) => (p.id === data.id ? data : p));
                 patchState(store, { isLoading: false, phases });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     delete: rxMethod<string>(
       pipe(
@@ -102,13 +102,13 @@ export const PhasesStore = signalStore(
               next: () => {
                 const phases = store.phases().filter((p) => p.id !== id);
                 patchState(store, { isLoading: false, phases, phase: null });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );
