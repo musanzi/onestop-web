@@ -1,84 +1,80 @@
 name: Deploy OneStop Web Apps
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: 22
+  PNPM_VERSION: 11.5.0
+  NX_DAEMON: false
+  CI: true
+
 jobs:
-  lint:
-    name: Run Lint
+  ci:
+    name: Lint and build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v6
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 11.5.0
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run lint client
-        run: pnpm lint:client
+      - name: Lint apps
+        run: pnpm nx run-many --target=lint --projects=client,admin --parallel=2 --output-style=static
 
-      - name: Run lint admin
-        run: pnpm lint:admin
-
-  build:
-    name: Build apps
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build client
-        run: pnpm build:client
-
-      - name: Build admin
-        run: pnpm build:admin
+      - name: Build apps
+        run: pnpm nx run-many --target=build --projects=client,admin --configuration=production --parallel=2 --output-style=static
 
   deploy:
     name: Deploy to VPS
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci
+    timeout-minutes: 20
+    environment: production
 
     steps:
-      - name: Deploy through SSH
-        uses: appleboy/ssh-action@v1
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ${{ secrets.PROJECT_PATH }}
-            git pull
-            pnpm install --frozen-lockfile 
-            pnpm build:client
-            pnpm build:admin
-            pm2 restart client
-            pm2 restart admin
+            set -eu
+
+            cd "${{ secrets.PROJECT_PATH }}"
+            git fetch --prune origin main
+            git reset --hard "${{ github.sha }}"
+
+            pnpm install --frozen-lockfile
+            pnpm nx run-many --target=build --projects=client,admin --configuration=production --parallel=2 --output-style=static
+
+            pm2 restart client --update-env
+            pm2 restart admin --update-env
             pm2 save
