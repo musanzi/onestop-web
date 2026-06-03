@@ -7,6 +7,8 @@
     "nx": "nx",
     "dev:client": "pnpm nx serve client",
     "dev:admin": "pnpm nx serve admin",
+    "lint:client": "pnpm nx lint client",
+    "lint:admin": "pnpm nx lint admin",
     "build:client": "pnpm nx build client",
     "build:admin": "pnpm nx build admin",
     "ssr:client": "node dist/apps/client/server/server.mjs",
