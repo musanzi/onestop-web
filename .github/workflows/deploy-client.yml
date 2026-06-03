@@ -1,7 +1,6 @@
 name: Deploy OneStop Client
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - client
@@ -60,7 +59,8 @@ jobs:
             set -eu
 
             cd "${{ secrets.PROJECT_PATH }}"
-            git pull origin main
+            git checkout client
+            git pull origin client
 
             pnpm install --frozen-lockfile
             pnpm build:client
