@@ -52,7 +52,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --prod --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build client
         run: pnpm build:client
@@ -76,7 +76,7 @@ jobs:
           script: |
             cd ${{ secrets.PROJECT_PATH }}
             git pull
-            pnpm install --prod --frozen-lockfile 
+            pnpm install --frozen-lockfile 
             pnpm build:client
             pnpm build:admin
             pm2 restart client
