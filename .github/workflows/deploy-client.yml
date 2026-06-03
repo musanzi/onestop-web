@@ -1,0 +1,69 @@
+name: Deploy OneStop Client
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - client
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 22
+  PNPM_VERSION: 11.5.0
+
+jobs:
+  ci:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint apps
+        run: pnpm lint:client
+
+      - name: Build apps
+        run: pnpm build:client
+
+  cd:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    needs: ci
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -eu
+
+            cd "${{ secrets.PROJECT_PATH }}"
+            git pull origin main
+
+            pnpm install --frozen-lockfile
+            pnpm build:client
+
+            pm2 restart client
+            pm2 save

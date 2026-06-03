@@ -1,10 +1,9 @@
-name: Deploy OneStop Web Apps
+name: Deploy OneStop Admin
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
+      - admin
 
 permissions:
   contents: read
@@ -17,7 +16,6 @@ jobs:
   ci:
     name: Lint and build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -32,16 +30,15 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Lint apps
-        run: pnpm lint
+        run: pnpm lint:admin
 
       - name: Build apps
-        run: pnpm build
+        run: pnpm build:admin
 
   cd:
     name: Deploy to VPS
@@ -64,8 +61,7 @@ jobs:
             git pull origin main
 
             pnpm install --frozen-lockfile
-            pnpm build
+            pnpm build:admin
 
-            pm2 restart client
             pm2 restart admin 
             pm2 save
