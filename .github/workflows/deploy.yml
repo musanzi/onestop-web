@@ -59,12 +59,14 @@ jobs:
 
     steps:
       - name: Deploy over SSH
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
+          port: ${{ secrets.SSH_PORT || '22' }}
           key: ${{ secrets.SSH_KEY }}
+          timeout: 30s
+          command_timeout: 30m
           script: |
             set -eu
 
@@ -75,5 +77,5 @@ jobs:
             pnpm build
 
             pm2 restart client
-            pm2 restart admin --update-env
+            pm2 restart admin 
             pm2 save
