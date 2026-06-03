@@ -5,12 +5,10 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
+    "lint": "pnpm nx run-many --target=lint --projects=client,admin --parallel=2 --output-style=static",
+    "build": "pnpm nx run-many --target=build --projects=client,admin --configuration=production --parallel=2 --output-style=static",
     "dev:client": "pnpm nx serve client",
     "dev:admin": "pnpm nx serve admin",
-    "lint:client": "pnpm nx lint client",
-    "lint:admin": "pnpm nx lint admin",
-    "build:client": "pnpm nx build client",
-    "build:admin": "pnpm nx build admin",
     "ssr:client": "node dist/apps/client/server/server.mjs",
     "ssr:admin": "node dist/apps/admin/server/server.mjs"
   },
