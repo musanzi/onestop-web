@@ -4,31 +4,31 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { ICategory } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterEventCategoriesDto } from '../dto/categories/filter-categories.dto';
-import { EventCategoryDto } from '../dto/events/event-category.dto';
+import { FilterEventCategoriesInterface } from '../interfaces/filter-event-categories.interface';
+import { EventCategoryPayloadInterface } from '../interfaces/event-category.interface';
 
 @Injectable({ providedIn: 'root' })
 export class EventCategoriesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterEventCategoriesDto): Observable<[ICategory[], number]> {
+  getAll(filters: FilterEventCategoriesInterface): Observable<[ICategory[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [ICategory[], number] }>('event-categories/paginated', { params }).pipe(
       map(({ data }) => data),
-      catchError(() => of())
+      catchError(() => of()),
     );
   }
 
   getAllUnpaginated(): Observable<ICategory[]> {
     return this.http.get<{ data: ICategory[] }>('event-categories').pipe(
       map(({ data }) => data),
-      catchError(() => of())
+      catchError(() => of()),
     );
   }
 
-  create(payload: EventCategoryDto): Observable<ICategory> {
+  create(payload: EventCategoryPayloadInterface): Observable<ICategory> {
     return this.http.post<{ data: ICategory }>('event-categories', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Catégorie ajoutée avec succès');
@@ -38,7 +38,7 @@ export class EventCategoriesService {
         const message = extractApiErrorMessage(error, "Échec de l'ajout de la catégorie");
         this.toast.showError(message);
         return throwError(() => message);
-      })
+      }),
     );
   }
 
@@ -52,7 +52,7 @@ export class EventCategoriesService {
         const message = extractApiErrorMessage(error, 'Échec de la mise à jour');
         this.toast.showError(message);
         return throwError(() => message);
-      })
+      }),
     );
   }
 
@@ -65,7 +65,7 @@ export class EventCategoriesService {
         const message = extractApiErrorMessage(error, 'Échec de la suppression de la catégorie');
         this.toast.showError(message);
         return throwError(() => message);
-      })
+      }),
     );
   }
 }

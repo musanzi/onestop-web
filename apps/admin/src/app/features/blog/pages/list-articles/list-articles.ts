@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FilterArticleDto } from '../../dto/filter-article.dto';
+import { FilterArticleInterface } from '../../interfaces/filter-article.interface';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_ARTICLES_ICONS } from '@shared/data';
@@ -41,10 +41,10 @@ export class ListArticles {
   private readonly destroyRef = inject(DestroyRef);
   store = inject(ArticlesStore);
   itemsPerPage = 20;
-  queryParams = signal<FilterArticleDto>({
+  queryParams = signal<FilterArticleInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
-    filter: (this.route.snapshot.queryParamMap.get('filter') as FilterArticleDto['filter']) || 'all'
+    filter: (this.route.snapshot.queryParamMap.get('filter') as FilterArticleInterface['filter']) || 'all'
   });
   activeTab = computed(() => this.queryParams().filter || 'all');
   currentPage = computed(() => Number(this.queryParams().page) || 1);
@@ -66,7 +66,7 @@ export class ListArticles {
   }
 
   onTabChange(tabName: string): void {
-    const filter = tabName as FilterArticleDto['filter'];
+    const filter = tabName as FilterArticleInterface['filter'];
     this.queryParams.update((qp) => ({ ...qp, filter, page: null }));
   }
 

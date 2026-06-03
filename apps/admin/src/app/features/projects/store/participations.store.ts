@@ -2,24 +2,14 @@ import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { IProjectParticipation } from '@shared/models';
-import { FilterParticipationsDto } from '../dto/phases/filter-participations.dto';
-import { MoveParticipationsDto } from '../dto/phases/move-participations.dto';
-import { ReviewParticipationDto } from '../dto/participations/review-participation.dto';
+import { FilterParticipationsInterface } from '../interfaces/filter-participations.interface';
+import { MoveParticipationsInterface } from '../interfaces/move-participations.interface';
+import { ReviewParticipationInterface } from '../interfaces/review-participation.interface';
+import { ParticipationsStoreInterface } from '../interfaces/participations-store.interface';
 import { ParticipationsService } from '../services/participations.service';
 
-interface ParticipationsStoreState {
-  isLoading: boolean;
-  isDetailLoading: boolean;
-  isSaving: boolean;
-  participations: IProjectParticipation[];
-  total: number;
-  participation: IProjectParticipation | null;
-  error: string | null;
-}
-
 export const ParticipationsStore = signalStore(
-  withState<ParticipationsStoreState>({
+  withState<ParticipationsStoreInterface>({
     isLoading: false,
     isDetailLoading: false,
     isSaving: false,
@@ -37,7 +27,7 @@ export const ParticipationsStore = signalStore(
     _participationsService: inject(ParticipationsService)
   })),
   withMethods(({ _participationsService, ...store }) => ({
-    loadAll: rxMethod<{ projectId: string; filters: FilterParticipationsDto }>(
+    loadAll: rxMethod<{ projectId: string; filters: FilterParticipationsInterface }>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(({ projectId, filters }) =>
@@ -93,7 +83,7 @@ export const ParticipationsStore = signalStore(
       )
     ),
 
-    moveToPhase: rxMethod<MoveParticipationsDto>(
+    moveToPhase: rxMethod<MoveParticipationsInterface>(
       pipe(
         tap(() => patchState(store, { isSaving: true, error: null })),
         switchMap((dto) =>
@@ -113,7 +103,7 @@ export const ParticipationsStore = signalStore(
       )
     ),
 
-    removeFromPhase: rxMethod<MoveParticipationsDto>(
+    removeFromPhase: rxMethod<MoveParticipationsInterface>(
       pipe(
         tap(() => patchState(store, { isSaving: true, error: null })),
         switchMap((dto) =>
@@ -133,7 +123,7 @@ export const ParticipationsStore = signalStore(
       )
     ),
 
-    review: rxMethod<{ participationId: string; dto: ReviewParticipationDto }>(
+    review: rxMethod<{ participationId: string; dto: ReviewParticipationInterface }>(
       pipe(
         tap(() => patchState(store, { isSaving: true, error: null })),
         switchMap(({ participationId, dto }) =>

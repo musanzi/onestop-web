@@ -4,7 +4,7 @@ import { LIST_PROJECTS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProjectsStore } from '../../store/projects.store';
-import { FilterProjectsDto } from '../../dto/projects/filter-projects.dto';
+import { FilterProjectsInterface } from '../../interfaces/filter-projects.interface';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { UiAvatar, UiButton, UiConfirmDialog, UiTabs, UiPagination, UiBadge } from '@shared/ui';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
@@ -39,7 +39,7 @@ export class ListProjects {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   store = inject(ProjectsStore);
-  queryParams = signal<FilterProjectsDto>({
+  queryParams = signal<FilterProjectsInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
     filter: this.route.snapshot.queryParamMap.get('filter')

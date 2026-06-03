@@ -6,7 +6,7 @@ import { AuthStore } from '@core/auth/auth.store';
 import { extractApiErrorMessage } from '@shared/helpers';
 import { IUser } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { SignInDto } from '../dto/sign-in.dto';
+import { SigninPayloadInterface } from '../interfaces/sign-in.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SignInService {
@@ -15,7 +15,7 @@ export class SignInService {
   private readonly router = inject(Router);
   private readonly authStore = inject(AuthStore);
 
-  signIn(payload: SignInDto, redirectPath: string): Observable<IUser> {
+  signIn(payload: SigninPayloadInterface, redirectPath: string): Observable<IUser> {
     return this.http.post<{ data: IUser }>('auth/signin', payload).pipe(
       map(({ data }) => {
         this.authStore.setUser(data);
@@ -27,7 +27,7 @@ export class SignInService {
         const message = extractApiErrorMessage(error, 'Erreur de connexion');
         this.toast.showError(message);
         return throwError(() => message);
-      })
+      }),
     );
   }
 }

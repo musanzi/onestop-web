@@ -4,7 +4,7 @@ import { ARTICLE_TAGS_ICONS } from '@shared/data';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TagsStore } from '../../store/tags.store';
 import { ActivatedRoute } from '@angular/router';
-import { FilterArticlesTagsDto } from '../../dto/filter-tags.dto';
+import { FilterArticlesTagsInterface } from '../../interfaces/filter-tags.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UiButton, UiConfirmDialog, UiInput, UiPagination, UiBadge } from '@shared/ui';
@@ -36,7 +36,7 @@ export class ArticleTags {
   private readonly destroyRef = inject(DestroyRef);
   store = inject(TagsStore);
   itemsPerPage = 10;
-  queryParams = signal<FilterArticlesTagsDto>({
+  queryParams = signal<FilterArticlesTagsInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

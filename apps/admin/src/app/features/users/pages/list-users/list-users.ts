@@ -15,7 +15,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UsersStore } from '../../store/users.store';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
-import { FilterUsersDto } from '../../dto/users/filter-users.dto';
+import { FilterUsersInterface } from '../../interfaces/filter-users.interface';
 import { UiAvatar, UiButton, UiConfirmDialog, UiPagination, UiBadge } from '@shared/ui';
 import { ConfirmationService } from '@shared/services/confirmation';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
@@ -51,7 +51,7 @@ export class ListUsers {
   store = inject(UsersStore);
   itemsPerPage = 50;
   csvFileInput = viewChild<ElementRef<HTMLInputElement>>('csvFileInput');
-  queryParams = signal<FilterUsersDto>({
+  queryParams = signal<FilterUsersInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

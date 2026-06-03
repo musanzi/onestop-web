@@ -2,19 +2,13 @@ import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { IOpportunity } from '@shared/models';
-import { CreateOpportunityDto } from '../dto/create-opportunity.dto';
-import { FilterOpportunitiesDto } from '../dto/filter-opportunities.dto';
+import { CreateOpportunityInterface } from '../interfaces/create-opportunity.interface';
+import { FilterOpportunitiesInterface } from '../interfaces/filter-opportunities.interface';
+import { OpportunitiesStoreInterface } from '../interfaces/opportunities-store.interface';
 import { OpportunitiesService, UpdateOpportunityPayload } from '../services/opportunities.service';
 
-interface OpportunitiesState {
-  isLoading: boolean;
-  opportunities: IOpportunity[];
-  opportunity: IOpportunity | null;
-}
-
 export const OpportunitiesStore = signalStore(
-  withState<OpportunitiesState>({
+  withState<OpportunitiesStoreInterface>({
     isLoading: false,
     opportunities: [],
     opportunity: null
@@ -23,7 +17,7 @@ export const OpportunitiesStore = signalStore(
     _opportunitiesService: inject(OpportunitiesService)
   })),
   withMethods(({ _opportunitiesService, ...store }) => ({
-    loadAll: rxMethod<FilterOpportunitiesDto>(
+    loadAll: rxMethod<FilterOpportunitiesInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((filters) =>
@@ -57,7 +51,7 @@ export const OpportunitiesStore = signalStore(
         )
       )
     ),
-    create: rxMethod<CreateOpportunityDto>(
+    create: rxMethod<CreateOpportunityInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) =>

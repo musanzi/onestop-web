@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { ADD_PROGRAM_PAGE_ICONS } from '@shared/data';
 import { ProgramsStore } from '../../store/programs.store';
-import { ProgramDto } from '../../dto/programs/program.dto';
+import { ProgramInterface } from '../../interfaces/program.interface';
 import { CategoriesStore } from '@features/projects/store/project-categories.store';
 import { ProgramSectorsStore } from '../../store/program-sectors.store';
 import { UiButton, UiInput, UiSelect, UiTextarea } from '@shared/ui';
@@ -30,7 +30,7 @@ export class AddProgramPage {
 
   onSubmit(): void {
     if (this.form.invalid) return;
-    this.store.create(this.form.value as ProgramDto);
+    this.store.create(this.form.value as ProgramInterface);
   }
 
   onCreateSector(name: string): void {

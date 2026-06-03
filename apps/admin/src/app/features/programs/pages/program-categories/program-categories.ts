@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProgramCategoriesStore } from '../../store/program-categories.store';
 import { ICategory } from '@shared/models';
-import { FilterProgramCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { FilterProgramCategoriesInterface } from '../../interfaces/filter-program-categories.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UiButton, UiConfirmDialog, UiPagination, UiBadge } from '@shared/ui';
@@ -38,7 +38,7 @@ export class ProgramCategories {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroyRef = inject(DestroyRef);
   store = inject(ProgramCategoriesStore);
-  queryParams = signal<FilterProgramCategoriesDto>({
+  queryParams = signal<FilterProgramCategoriesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

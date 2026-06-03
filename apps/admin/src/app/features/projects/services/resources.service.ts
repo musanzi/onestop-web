@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IResource } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { CreateResourceDto, UpdateResourceDto } from '../dto/resources/create-resource.dto';
-import { FilterResourcesDto } from '../dto/resources/filter-resources.dto';
+import { CreateResourceInterface, UpdateResourceInterface } from '../interfaces/create-resource.interface';
+import { FilterResourcesInterface } from '../interfaces/filter-resources.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ResourcesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(projectId: string, filters: FilterResourcesDto): Observable<[IResource[], number]> {
+  getAll(projectId: string, filters: FilterResourcesInterface): Observable<[IResource[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IResource[], number] }>(`resources/project/${projectId}`, { params }).pipe(
@@ -21,7 +21,7 @@ export class ResourcesService {
     );
   }
 
-  create(dto: CreateResourceDto, file: File): Observable<IResource> {
+  create(dto: CreateResourceInterface, file: File): Observable<IResource> {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('title', dto.title);
@@ -43,7 +43,7 @@ export class ResourcesService {
     );
   }
 
-  update(id: string, dto: UpdateResourceDto): Observable<IResource> {
+  update(id: string, dto: UpdateResourceInterface): Observable<IResource> {
     return this.http.patch<{ data: IResource }>(`resources/id/${id}`, dto).pipe(
       map(({ data }) => {
         this.toast.showSuccess('La ressource a été mise à jour');

@@ -4,7 +4,7 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { extractApiErrorMessage } from '@shared/helpers';
 import { ISubprogram } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { SubprogramDto } from '../dto/subprograms/subprogram.dto';
+import { SubprogramInterface } from '../interfaces/subprogram.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SubprogramsService {
@@ -25,7 +25,7 @@ export class SubprogramsService {
     );
   }
 
-  create(payload: SubprogramDto): Observable<ISubprogram> {
+  create(payload: SubprogramInterface): Observable<ISubprogram> {
     return this.http.post<{ data: ISubprogram }>('subprograms', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Sous programme ajouté');
@@ -39,7 +39,7 @@ export class SubprogramsService {
     );
   }
 
-  update(payload: SubprogramDto): Observable<ISubprogram> {
+  update(payload: SubprogramInterface): Observable<ISubprogram> {
     return this.http.patch<{ data: ISubprogram }>(`subprograms/id/${payload.id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Sous programme mis à jour');

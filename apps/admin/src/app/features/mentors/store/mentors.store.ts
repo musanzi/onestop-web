@@ -2,56 +2,46 @@ import { patchState, signalStore, withComputed, withMethods, withProps, withStat
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, debounceTime, distinctUntilChanged, EMPTY, finalize, map, of, pipe, switchMap, tap } from 'rxjs';
-import { IMentorProfile } from '@shared/models';
-import { FilterMentorsProfileDto } from '../dto/mentors/filter-mentors-profiles.dto';
-import { CreateMentorDto } from '../dto/mentors/create-mentor.dto';
+import { FilterMentorsProfileInterface } from '../interfaces/filter-mentors-profiles.interface';
+import { CreateMentorInterface } from '../interfaces/create-mentor.interface';
+import { MentorsStoreInterface } from '../interfaces/mentors-store.interface';
 import { MentorsService } from '../services/mentors.service';
 
-interface IMentorsStore {
-  isLoading: boolean;
-  isSaving: boolean;
-  isSearchingUsers: boolean;
-  userSearchTerm: string;
-  searchedUsers: { email: string; name: string }[];
-  mentors: [IMentorProfile[], number];
-  mentor: IMentorProfile | null;
-}
-
 export const MentorsStore = signalStore(
-  withState<IMentorsStore>({
+  withState<MentorsStoreInterface>({
     isLoading: false,
     isSaving: false,
     isSearchingUsers: false,
     userSearchTerm: '',
     searchedUsers: [],
     mentors: [[], 0],
-    mentor: null
+    mentor: null,
   }),
   withComputed(({ searchedUsers }) => ({
     userSearchOptions: computed(() =>
-      searchedUsers().map((user) => ({ label: `${user.name} (${user.email})`, value: user.email }))
-    )
+      searchedUsers().map((user) => ({ label: `${user.name} (${user.email})`, value: user.email })),
+    ),
   })),
   withProps(() => ({
-    _mentorsService: inject(MentorsService)
+    _mentorsService: inject(MentorsService),
   })),
   withMethods(({ _mentorsService, ...store }) => ({
-    loadAll: rxMethod<FilterMentorsProfileDto>(
+    loadAll: rxMethod<FilterMentorsProfileInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((filters) =>
           _mentorsService.getAll(filters).pipe(
             tap({
-              next: (mentors) => patchState(store, { isLoading: false, mentors })
+              next: (mentors) => patchState(store, { isLoading: false, mentors }),
             }),
             catchError(() => {
               patchState(store, { mentors: [[], 0] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     loadOne: rxMethod<string>(
       pipe(
@@ -59,13 +49,13 @@ export const MentorsStore = signalStore(
         switchMap((id) =>
           _mentorsService.getOne(id).pipe(
             tap({
-              next: (mentor) => patchState(store, { isLoading: false, mentor })
+              next: (mentor) => patchState(store, { isLoading: false, mentor }),
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     searchUsers: rxMethod<string>(
       pipe(
@@ -82,16 +72,16 @@ export const MentorsStore = signalStore(
           patchState(store, { isSearchingUsers: true });
           return _mentorsService.searchUsers(term).pipe(
             tap({
-              next: (searchedUsers) => patchState(store, { isSearchingUsers: false, searchedUsers })
+              next: (searchedUsers) => patchState(store, { isSearchingUsers: false, searchedUsers }),
             }),
             catchError(() => {
               patchState(store, { searchedUsers: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isSearchingUsers: false }))
+            finalize(() => patchState(store, { isSearchingUsers: false })),
           );
-        })
-      )
+        }),
+      ),
     ),
     approve: rxMethod<string>(
       pipe(
@@ -103,13 +93,13 @@ export const MentorsStore = signalStore(
                 const [list, count] = store.mentors();
                 const updated = list.map((m) => (m.id === data.id ? data : m));
                 patchState(store, { isLoading: false, mentors: [updated, count], mentor: data });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     reject: rxMethod<string>(
       pipe(
@@ -121,15 +111,15 @@ export const MentorsStore = signalStore(
                 const [list, count] = store.mentors();
                 const updated = list.map((m) => (m.id === data.id ? data : m));
                 patchState(store, { isLoading: false, mentors: [updated, count], mentor: data });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
-    create: rxMethod<CreateMentorDto>(
+    create: rxMethod<CreateMentorInterface>(
       pipe(
         tap(() => patchState(store, { isSaving: true })),
         switchMap((dto) =>
@@ -137,15 +127,15 @@ export const MentorsStore = signalStore(
             tap({
               next: (data) => {
                 patchState(store, { isSaving: false, mentor: data });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isSaving: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isSaving: false })),
+          ),
+        ),
+      ),
     ),
-    update: rxMethod<{ id: string; dto: CreateMentorDto }>(
+    update: rxMethod<{ id: string; dto: CreateMentorInterface }>(
       pipe(
         tap(() => patchState(store, { isSaving: true })),
         switchMap(({ id, dto }) =>
@@ -155,13 +145,13 @@ export const MentorsStore = signalStore(
                 const [list, count] = store.mentors();
                 const updated = list.map((mentor) => (mentor.id === data.id ? data : mentor));
                 patchState(store, { isSaving: false, mentors: [updated, count], mentor: data });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isSaving: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isSaving: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );

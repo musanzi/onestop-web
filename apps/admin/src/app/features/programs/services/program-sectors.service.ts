@@ -4,7 +4,7 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { extractApiErrorMessage } from '@shared/helpers';
 import { ISector } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { ProgramSectorDto } from '../dto/sectors/program-sector.dto';
+import { ProgramSectorInterface } from '../interfaces/program-sector.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProgramSectorsService {
@@ -18,7 +18,7 @@ export class ProgramSectorsService {
     );
   }
 
-  create(payload: ProgramSectorDto): Observable<ISector> {
+  create(payload: ProgramSectorInterface): Observable<ISector> {
     return this.http.post<{ data: ISector }>('program-sectors', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Secteur ajouté avec succès');
@@ -32,7 +32,7 @@ export class ProgramSectorsService {
     );
   }
 
-  update(id: string, payload: ProgramSectorDto): Observable<ISector> {
+  update(id: string, payload: ProgramSectorInterface): Observable<ISector> {
     return this.http.patch<{ data: ISector }>(`program-sectors/id/${id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Secteur mis à jour');

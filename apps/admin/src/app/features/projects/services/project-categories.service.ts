@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { ICategory } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterProjectCategoriesDto } from '../dto/categories/filter-categories.dto';
-import { ProjectCategoryDto } from '../dto/categories/project-category.dto';
+import { FilterProjectCategoriesInterface } from '../interfaces/filter-project-categories.interface';
+import { ProjectCategoryInterface } from '../interfaces/project-category.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectCategoriesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterProjectCategoriesDto): Observable<[ICategory[], number]> {
+  getAll(filters: FilterProjectCategoriesInterface): Observable<[ICategory[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [ICategory[], number] }>('project-categories/paginated', { params }).pipe(
@@ -28,7 +28,7 @@ export class ProjectCategoriesService {
     );
   }
 
-  create(payload: ProjectCategoryDto): Observable<ICategory> {
+  create(payload: ProjectCategoryInterface): Observable<ICategory> {
     return this.http.post<{ data: ICategory }>('project-categories', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Catégorie ajoutée avec succès');

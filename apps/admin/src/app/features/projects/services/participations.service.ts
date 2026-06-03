@@ -4,13 +4,13 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IProjectParticipation, IProjectParticipationReview } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterParticipationsDto } from '../dto/phases/filter-participations.dto';
-import { MoveParticipationsDto } from '../dto/phases/move-participations.dto';
+import { FilterParticipationsInterface } from '../interfaces/filter-participations.interface';
+import { MoveParticipationsInterface } from '../interfaces/move-participations.interface';
 import {
-  CreateParticipationReviewDto,
-  ReviewParticipationDto,
-  UpdateParticipationReviewDto
-} from '../dto/participations/review-participation.dto';
+  CreateParticipationReviewInterface,
+  ReviewParticipationInterface,
+  UpdateParticipationReviewInterface
+} from '../interfaces/review-participation.interface';
 
 interface ParticipationsResponse {
   participations: IProjectParticipation[];
@@ -22,7 +22,7 @@ export class ParticipationsService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(projectId: string, filters: FilterParticipationsDto): Observable<ParticipationsResponse> {
+  getAll(projectId: string, filters: FilterParticipationsInterface): Observable<ParticipationsResponse> {
     const params = buildQueryParams(filters);
     return this.http
       .get<{ data: [IProjectParticipation[], number] }>(`projects/id/${projectId}/participations`, { params })
@@ -39,7 +39,7 @@ export class ParticipationsService {
     );
   }
 
-  moveToPhase(dto: MoveParticipationsDto): Observable<void> {
+  moveToPhase(dto: MoveParticipationsInterface): Observable<void> {
     return this.http.post<void>('projects/participants/move', dto).pipe(
       map(() => {
         this.toast.showSuccess('Les participants ont été ajoutés à la phase');
@@ -52,7 +52,7 @@ export class ParticipationsService {
     );
   }
 
-  removeFromPhase(dto: MoveParticipationsDto): Observable<void> {
+  removeFromPhase(dto: MoveParticipationsInterface): Observable<void> {
     return this.http.post<void>('projects/participants/remove', dto).pipe(
       map(() => {
         this.toast.showSuccess('Les participants ont été retirés de la phase');
@@ -65,16 +65,16 @@ export class ParticipationsService {
     );
   }
 
-  review(participationId: string, dto: ReviewParticipationDto): Observable<IProjectParticipationReview> {
+  review(participationId: string, dto: ReviewParticipationInterface): Observable<IProjectParticipationReview> {
     if ('reviewId' in dto && dto.reviewId) {
-      return this.updateReview(participationId, dto as UpdateParticipationReviewDto);
+      return this.updateReview(participationId, dto as UpdateParticipationReviewInterface);
     }
-    return this.createReview(participationId, dto as CreateParticipationReviewDto);
+    return this.createReview(participationId, dto as CreateParticipationReviewInterface);
   }
 
   private createReview(
     participationId: string,
-    dto: CreateParticipationReviewDto
+    dto: CreateParticipationReviewInterface
   ): Observable<IProjectParticipationReview> {
     return this.http
       .post<{ data: IProjectParticipationReview }>(`projects/participations/${participationId}/review`, dto)
@@ -97,7 +97,7 @@ export class ParticipationsService {
 
   private updateReview(
     participationId: string,
-    dto: UpdateParticipationReviewDto
+    dto: UpdateParticipationReviewInterface
   ): Observable<IProjectParticipationReview> {
     const { reviewId, ...payload } = dto;
     return this.http

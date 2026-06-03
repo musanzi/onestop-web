@@ -5,8 +5,8 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IArticle, IImage } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { ArticleDto } from '../dto/article.dto';
-import { FilterArticlesTagsDto } from '../dto/filter-tags.dto';
+import { ArticleInterface } from '../interfaces/article.interface';
+import { FilterArticlesTagsInterface } from '../interfaces/filter-tags.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
@@ -14,7 +14,7 @@ export class ArticlesService {
   private readonly router = inject(Router);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterArticlesTagsDto): Observable<[IArticle[], number]> {
+  getAll(filters: FilterArticlesTagsInterface): Observable<[IArticle[], number]> {
     const params = buildQueryParams(filters);
     return this.http.get<{ data: [IArticle[], number] }>('articles', { params }).pipe(
       map(({ data }) => data),
@@ -31,7 +31,7 @@ export class ArticlesService {
     );
   }
 
-  create(payload: ArticleDto): Observable<IArticle> {
+  create(payload: ArticleInterface): Observable<IArticle> {
     return this.http.post<{ data: IArticle }>('articles', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess("L'article a été ajouté avec succès");
@@ -46,7 +46,7 @@ export class ArticlesService {
     );
   }
 
-  update(payload: ArticleDto): Observable<IArticle> {
+  update(payload: ArticleInterface): Observable<IArticle> {
     return this.http.patch<{ data: IArticle }>(`articles/id/${payload.id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess("L'article a été mis à jour avec succès");

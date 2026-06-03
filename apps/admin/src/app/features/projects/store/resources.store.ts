@@ -4,18 +4,13 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { computed } from '@angular/core';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { IResource } from '@shared/models';
-import { CreateResourceDto, UpdateResourceDto } from '../dto/resources/create-resource.dto';
-import { FilterResourcesDto } from '../dto/resources/filter-resources.dto';
+import { CreateResourceInterface, UpdateResourceInterface } from '../interfaces/create-resource.interface';
+import { FilterResourcesInterface } from '../interfaces/filter-resources.interface';
+import { ResourcesStoreInterface } from '../interfaces/resources-store.interface';
 import { ResourcesService } from '../services/resources.service';
 
-interface ResourcesStoreState {
-  isLoading: boolean;
-  isSaving: boolean;
-  resources: [IResource[], number];
-}
-
 export const ResourcesStore = signalStore(
-  withState<ResourcesStoreState>({
+  withState<ResourcesStoreInterface>({
     isLoading: false,
     isSaving: false,
     resources: [[], 0]
@@ -39,7 +34,7 @@ export const ResourcesStore = signalStore(
       });
     };
     return {
-      loadAll: rxMethod<{ projectId: string; filters: FilterResourcesDto }>(
+      loadAll: rxMethod<{ projectId: string; filters: FilterResourcesInterface }>(
         pipe(
           tap(() => patchState(store, { isLoading: true })),
           switchMap(({ projectId, filters }) =>
@@ -56,7 +51,7 @@ export const ResourcesStore = signalStore(
           )
         )
       ),
-      create: rxMethod<{ dto: CreateResourceDto; file: File; onSuccess?: () => void }>(
+      create: rxMethod<{ dto: CreateResourceInterface; file: File; onSuccess?: () => void }>(
         pipe(
           tap(() => patchState(store, { isSaving: true })),
           switchMap(({ dto, file, onSuccess }) =>
@@ -74,7 +69,7 @@ export const ResourcesStore = signalStore(
           )
         )
       ),
-      update: rxMethod<{ id: string; dto: UpdateResourceDto; onSuccess?: () => void }>(
+      update: rxMethod<{ id: string; dto: UpdateResourceInterface; onSuccess?: () => void }>(
         pipe(
           tap(() => patchState(store, { isSaving: true })),
           switchMap(({ id, dto, onSuccess }) =>

@@ -5,8 +5,8 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IMentorProfile } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterMentorsProfileDto } from '../dto/mentors/filter-mentors-profiles.dto';
-import { CreateMentorDto } from '../dto/mentors/create-mentor.dto';
+import { FilterMentorsProfileInterface } from '../interfaces/filter-mentors-profiles.interface';
+import { CreateMentorInterface } from '../interfaces/create-mentor.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MentorsService {
@@ -14,7 +14,7 @@ export class MentorsService {
   private readonly toast = inject(ToastrService);
   private readonly router = inject(Router);
 
-  getAll(filters: FilterMentorsProfileDto): Observable<[IMentorProfile[], number]> {
+  getAll(filters: FilterMentorsProfileInterface): Observable<[IMentorProfile[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IMentorProfile[], number] }>('mentors/paginated', { params }).pipe(
@@ -69,7 +69,7 @@ export class MentorsService {
     );
   }
 
-  create(dto: CreateMentorDto): Observable<IMentorProfile> {
+  create(dto: CreateMentorInterface): Observable<IMentorProfile> {
     return this.http.post<{ data: IMentorProfile }>('mentors', dto).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Mentor créé avec succès');
@@ -84,7 +84,7 @@ export class MentorsService {
     );
   }
 
-  update(id: string, dto: CreateMentorDto): Observable<IMentorProfile> {
+  update(id: string, dto: CreateMentorInterface): Observable<IMentorProfile> {
     return this.http.patch<{ data: IMentorProfile }>(`mentors/applications/${id}`, dto).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Mentor mis à jour avec succès');

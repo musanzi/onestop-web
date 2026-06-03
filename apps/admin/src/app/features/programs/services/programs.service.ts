@@ -5,8 +5,8 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { Program } from '@shared/models';
 import { ToastrService } from '@shared/services/toast';
-import { FilterProgramsDto } from '../dto/programs/filter-programs.dto';
-import { ProgramDto } from '../dto/programs/program.dto';
+import { FilterProgramsInterface } from '../interfaces/filter-programs.interface';
+import { ProgramInterface } from '../interfaces/program.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProgramsService {
@@ -14,7 +14,7 @@ export class ProgramsService {
   private readonly router = inject(Router);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterProgramsDto): Observable<[Program[], number]> {
+  getAll(filters: FilterProgramsInterface): Observable<[Program[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [Program[], number] }>('programs/paginated', { params }).pipe(
@@ -37,7 +37,7 @@ export class ProgramsService {
     );
   }
 
-  create(payload: ProgramDto): Observable<void> {
+  create(payload: ProgramInterface): Observable<void> {
     return this.http.post('programs', payload).pipe(
       map(() => {
         this.router.navigate(['/programs']);
@@ -51,7 +51,7 @@ export class ProgramsService {
     );
   }
 
-  update(programId: string, payload: ProgramDto): Observable<Program> {
+  update(programId: string, payload: ProgramInterface): Observable<Program> {
     return this.http.patch<{ data: Program }>(`programs/id/${programId}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Programme mis à jour');

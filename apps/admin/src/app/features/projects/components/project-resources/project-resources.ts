@@ -17,8 +17,8 @@ import {
 } from '@shared/ui';
 import { LucideAngularModule } from 'lucide-angular';
 import { PROJECT_RESOURCES_ICONS } from '@shared/data';
-import { CreateResourceDto, UpdateResourceDto } from '../../dto/resources/create-resource.dto';
-import { FilterResourcesDto } from '../../dto/resources/filter-resources.dto';
+import { CreateResourceInterface, UpdateResourceInterface } from '../../interfaces/create-resource.interface';
+import { FilterResourcesInterface } from '../../interfaces/filter-resources.interface';
 import { ResourcesStore } from '../../store/resources.store';
 import { RESOURCE_CATEGORY_LABELS, RESOURCE_CATEGORY_OPTIONS } from '../../types/resources.types';
 
@@ -74,7 +74,7 @@ export class ProjectResources {
     { label: 'Choisir une phase', value: '' },
     ...this.phases().map((phase) => ({ label: phase.name, value: phase.id }))
   ]);
-  filters = computed<FilterResourcesDto>(() => ({
+  filters = computed<FilterResourcesInterface>(() => ({
     page: this.currentPage() > 1 ? this.currentPage() : null,
     category: this.selectedCategory()
   }));
@@ -148,7 +148,7 @@ export class ProjectResources {
     if (resourceId) {
       this.resourcesStore.update({
         id: resourceId,
-        dto: this.resourceForm.value as UpdateResourceDto,
+        dto: this.resourceForm.value as UpdateResourceInterface,
         onSuccess: () => this.onCancelForm()
       });
       return;
@@ -161,7 +161,7 @@ export class ProjectResources {
       ...this.resourceForm.value,
       project_id: this.projectId(),
       phase_id: phaseId
-    } as CreateResourceDto;
+    } as CreateResourceInterface;
     if (scope === 'phase' && !phaseId) {
       this.resourceForm.get('phase_id')?.markAsTouched();
       this.resourceForm.get('phase_id')?.setErrors({ required: true });

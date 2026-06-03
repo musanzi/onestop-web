@@ -2,18 +2,13 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { IImage } from '@shared/models';
 import { EventGalleryService } from '../services/event-gallery.service';
-
-interface IGalleryStore {
-  isLoading: boolean;
-  gallery: IImage[];
-}
+import { GalleryStoreInterface } from '../interfaces/event-gallery-store.interface';
 
 export const GalleryStore = signalStore(
-  withState<IGalleryStore>({ isLoading: false, gallery: [] }),
+  withState<GalleryStoreInterface>({ isLoading: false, gallery: [] }),
   withProps(() => ({
-    _eventGalleryService: inject(EventGalleryService)
+    _eventGalleryService: inject(EventGalleryService),
   })),
   withMethods(({ _eventGalleryService, ...store }) => ({
     loadAll: rxMethod<string>(
@@ -22,16 +17,16 @@ export const GalleryStore = signalStore(
         switchMap((slug) =>
           _eventGalleryService.getAll(slug).pipe(
             tap({
-              next: (gallery) => patchState(store, { isLoading: false, gallery })
+              next: (gallery) => patchState(store, { isLoading: false, gallery }),
             }),
             catchError(() => {
               patchState(store, { gallery: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     delete: rxMethod<string>(
       pipe(
@@ -43,13 +38,13 @@ export const GalleryStore = signalStore(
                 const current = store.gallery();
                 const filtered = current.filter((img) => img.id !== id);
                 patchState(store, { isLoading: false, gallery: filtered });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );

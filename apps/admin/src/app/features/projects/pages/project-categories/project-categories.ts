@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoriesStore } from '../../store/project-categories.store';
 import { ICategory } from '@shared/models';
-import { FilterProjectCategoriesDto } from '../../dto/categories/filter-categories.dto';
+import { FilterProjectCategoriesInterface } from '../../interfaces/filter-project-categories.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UiButton, UiConfirmDialog, UiPagination, UiBadge } from '@shared/ui';
@@ -38,7 +38,7 @@ export class ProjectCategories {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroyRef = inject(DestroyRef);
   store = inject(CategoriesStore);
-  queryParams = signal<FilterProjectCategoriesDto>({
+  queryParams = signal<FilterProjectCategoriesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

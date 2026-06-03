@@ -3,38 +3,33 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { IRole } from '@shared/models';
-import { FilterRolesDto } from '../dto/roles/filter-roles.dto';
-import { RoleDto } from '../dto/roles/role.dto';
+import { FilterRolesInterface } from '../interfaces/filter-roles.interface';
+import { RoleInterface } from '../interfaces/role.interface';
+import { RolesStoreInterface } from '../interfaces/roles-store.interface';
 import { RolesService } from '../services/roles.service';
 
-interface IRolesStore {
-  isLoading: boolean;
-  roles: [IRole[], number];
-  allRoles: IRole[];
-}
-
 export const RolesStore = signalStore(
-  withState<IRolesStore>({ isLoading: false, roles: [[], 0], allRoles: [] }),
+  withState<RolesStoreInterface>({ isLoading: false, roles: [[], 0], allRoles: [] }),
   withProps(() => ({
-    _rolesService: inject(RolesService)
+    _rolesService: inject(RolesService),
   })),
   withMethods(({ _rolesService, ...store }) => ({
-    loadAll: rxMethod<FilterRolesDto>(
+    loadAll: rxMethod<FilterRolesInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((filters) =>
           _rolesService.getAll(filters).pipe(
             tap({
-              next: (roles) => patchState(store, { isLoading: false, roles })
+              next: (roles) => patchState(store, { isLoading: false, roles }),
             }),
             catchError(() => {
               patchState(store, { roles: [[], 0] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     loadUnpaginated: rxMethod<void>(
       pipe(
@@ -42,16 +37,16 @@ export const RolesStore = signalStore(
         switchMap(() =>
           _rolesService.getAllUnpaginated().pipe(
             tap({
-              next: (allRoles) => patchState(store, { isLoading: false, allRoles })
+              next: (allRoles) => patchState(store, { isLoading: false, allRoles }),
             }),
             catchError(() => {
               patchState(store, { allRoles: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     create: rxMethod<{ payload: { name: string }; onSuccess: () => void }>(
       pipe(
@@ -64,18 +59,18 @@ export const RolesStore = signalStore(
                 patchState(store, {
                   isLoading: false,
                   roles: [[data, ...roles], count + 1],
-                  allRoles: [data, ...store.allRoles()]
+                  allRoles: [data, ...store.allRoles()],
                 });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
-    update: rxMethod<{ id: string; payload: RoleDto; onSuccess: () => void }>(
+    update: rxMethod<{ id: string; payload: RoleInterface; onSuccess: () => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ id, payload, onSuccess }) =>
@@ -88,16 +83,16 @@ export const RolesStore = signalStore(
                 patchState(store, {
                   isLoading: false,
                   roles: [updated, count],
-                  allRoles: allUpdated
+                  allRoles: allUpdated,
                 });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     delete: rxMethod<string>(
       pipe(
@@ -112,15 +107,15 @@ export const RolesStore = signalStore(
                 patchState(store, {
                   isLoading: false,
                   roles: [filtered, Math.max(0, count - 1)],
-                  allRoles: allFiltered
+                  allRoles: allFiltered,
                 });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );

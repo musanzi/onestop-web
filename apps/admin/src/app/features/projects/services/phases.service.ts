@@ -4,7 +4,7 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { extractApiErrorMessage } from '@shared/helpers';
 import { IMentorProfile, IPhase } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { PhaseDto } from '../dto/phases/phase.dto';
+import { PhaseInterface } from '../interfaces/phase.interface';
 
 @Injectable({ providedIn: 'root' })
 export class PhasesService {
@@ -29,7 +29,7 @@ export class PhasesService {
     );
   }
 
-  create(projectId: string, dto: PhaseDto): Observable<IPhase> {
+  create(projectId: string, dto: PhaseInterface): Observable<IPhase> {
     const payload = { ...dto };
     delete payload.id;
 
@@ -46,7 +46,7 @@ export class PhasesService {
     );
   }
 
-  update(dto: PhaseDto & { id: string }): Observable<IPhase> {
+  update(dto: PhaseInterface & { id: string }): Observable<IPhase> {
     return this.http.patch<{ data: IPhase }>(`phases/id/${dto.id}`, dto).pipe(
       map(({ data }) => {
         this.toast.showSuccess('La phase a été mise à jour avec succès');

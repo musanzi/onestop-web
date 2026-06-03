@@ -4,7 +4,7 @@ import { LIST_VENTURES_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { VenturesStore } from '../../store/ventures.store';
-import { FilterVenturesDto } from '../../dto/filter-ventures.dto';
+import { FilterVenturesInterface } from '../../interfaces/filter-ventures.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UiButton, UiPagination, UiBadge, UiConfirmDialog } from '@shared/ui';
@@ -39,7 +39,7 @@ export class ListVentures {
   private readonly destroyRef = inject(DestroyRef);
   store = inject(VenturesStore);
   itemsPerPage = 20;
-  queryParams = signal<FilterVenturesDto>({
+  queryParams = signal<FilterVenturesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

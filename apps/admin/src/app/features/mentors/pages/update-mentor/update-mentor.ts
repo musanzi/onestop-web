@@ -18,7 +18,7 @@ import {
 import { MentorsStore } from '../../store/mentors.store';
 import { ExpertisesStore } from '../../store/expertises.store';
 import { MentorType } from '../../enums/mentor.enum';
-import { CreateExperienceDto, CreateMentorDto, MentorRequestDto } from '../../dto/mentors/create-mentor.dto';
+import { CreateExperienceInterface, CreateMentorInterface, MentorRequestInterface } from '../../interfaces/create-mentor.interface';
 import { UpdateMentorSkeleton } from '../../ui/update-mentor-skeleton/update-mentor-skeleton';
 
 @Component({
@@ -189,7 +189,7 @@ export class UpdateMentor implements OnInit {
     });
   }
 
-  private buildPayload(): CreateMentorDto {
+  private buildPayload(): CreateMentorInterface {
     const value = this.form.value;
 
     const experiences = this.experiences.controls.map((control) => {
@@ -204,10 +204,10 @@ export class UpdateMentor implements OnInit {
         is_current: isCurrent,
         start_date: startDate ?? '',
         end_date: isCurrent ? undefined : this.toOptionalApiDate(row['end_date'])
-      } satisfies CreateExperienceDto;
+      } satisfies CreateExperienceInterface;
     });
 
-    const mentor: MentorRequestDto = {
+    const mentor: MentorRequestInterface = {
       years_experience: Number(value['years_experience']),
       expertises: (value['expertises'] as string[]) ?? [],
       type: this.toMentorType(value['type']),

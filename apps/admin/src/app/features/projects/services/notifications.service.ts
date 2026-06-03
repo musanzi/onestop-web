@@ -4,10 +4,10 @@ import { catchError, concatMap, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { INotification, INotificationAttachment } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { NotifyParticipantsDto } from '../dto/notifications/notify-participants.dto';
+import { NotifyParticipantsInterface } from '../interfaces/notify-participants.interface';
 import { NotificationStatus } from '../types';
 
-export interface FilterProjectNotificationsDto {
+export interface FilterProjectNotificationsInterface {
   page?: number | null;
   phaseId?: string | null;
   status?: NotificationStatus | null;
@@ -18,7 +18,7 @@ export class NotificationsService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(projectId: string, filters: FilterProjectNotificationsDto): Observable<[INotification[], number]> {
+  getAll(projectId: string, filters: FilterProjectNotificationsInterface): Observable<[INotification[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [INotification[], number] }>(`notifications/project/${projectId}`, { params }).pipe(
@@ -27,7 +27,7 @@ export class NotificationsService {
     );
   }
 
-  create(projectId: string, dto: NotifyParticipantsDto, attachments: File[] = []): Observable<INotification> {
+  create(projectId: string, dto: NotifyParticipantsInterface, attachments: File[] = []): Observable<INotification> {
     return this.http.post<{ data: INotification }>(`projects/id/${projectId}/notifications`, dto).pipe(
       map(({ data }) => data),
       concatMap((notification) => this.uploadAttachments(notification, attachments)),
@@ -46,7 +46,7 @@ export class NotificationsService {
     );
   }
 
-  update(notificationId: string, dto: NotifyParticipantsDto, attachments: File[] = []): Observable<INotification> {
+  update(notificationId: string, dto: NotifyParticipantsInterface, attachments: File[] = []): Observable<INotification> {
     return this.http.patch<{ data: INotification }>(`notifications/id/${notificationId}`, dto).pipe(
       map(({ data }) => data),
       concatMap((notification) => this.uploadAttachments(notification, attachments)),

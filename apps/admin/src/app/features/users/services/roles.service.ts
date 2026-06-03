@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IRole } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterRolesDto } from '../dto/roles/filter-roles.dto';
-import { RoleDto } from '../dto/roles/role.dto';
+import { FilterRolesInterface } from '../interfaces/filter-roles.interface';
+import { RoleInterface } from '../interfaces/role.interface';
 
 @Injectable({ providedIn: 'root' })
 export class RolesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterRolesDto): Observable<[IRole[], number]> {
+  getAll(filters: FilterRolesInterface): Observable<[IRole[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IRole[], number] }>('roles/paginated', { params }).pipe(
@@ -42,7 +42,7 @@ export class RolesService {
     );
   }
 
-  update(id: string, payload: RoleDto): Observable<IRole> {
+  update(id: string, payload: RoleInterface): Observable<IRole> {
     return this.http.patch<{ data: IRole }>(`roles/id/${id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Rôle mis à jour avec succès');

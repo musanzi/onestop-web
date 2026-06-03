@@ -5,8 +5,8 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IProject } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterProjectsDto } from '../dto/projects/filter-projects.dto';
-import { ProjectDto } from '../dto/projects/project.dto';
+import { FilterProjectsInterface } from '../interfaces/filter-projects.interface';
+import { ProjectInterface } from '../interfaces/project.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
@@ -14,7 +14,7 @@ export class ProjectsService {
   private readonly router = inject(Router);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterProjectsDto): Observable<[IProject[], number]> {
+  getAll(filters: FilterProjectsInterface): Observable<[IProject[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IProject[], number] }>('projects', { params }).pipe(
@@ -30,7 +30,7 @@ export class ProjectsService {
     );
   }
 
-  create(project: ProjectDto): Observable<IProject> {
+  create(project: ProjectInterface): Observable<IProject> {
     return this.http.post<{ data: IProject }>('projects', project).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Le projet a été ajouté avec succès');
@@ -45,7 +45,7 @@ export class ProjectsService {
     );
   }
 
-  update(project: ProjectDto): Observable<IProject> {
+  update(project: ProjectInterface): Observable<IProject> {
     return this.http.patch<{ data: IProject }>(`projects/id/${project.id}`, project).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Le projet a été mis à jour avec succès');

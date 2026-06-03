@@ -6,7 +6,7 @@ import { SelectOption, UiButton, UiCheckbox, UiDatepicker, UiInput, UiMultiSelec
 import { MentorsStore } from '../../store/mentors.store';
 import { ExpertisesStore } from '../../store/expertises.store';
 import { MentorType } from '../../enums/mentor.enum';
-import { CreateExperienceDto, CreateMentorDto } from '../../dto/mentors/create-mentor.dto';
+import { CreateExperienceInterface, CreateMentorInterface } from '../../interfaces/create-mentor.interface';
 
 @Component({
   selector: 'app-add-mentor',
@@ -108,7 +108,7 @@ export class AddMentor {
     });
   }
 
-  private buildPayload(): CreateMentorDto {
+  private buildPayload(): CreateMentorInterface {
     const value = this.form.value;
     const toApiDate = (val: unknown): string | undefined => {
       if (!val) return undefined;
@@ -131,7 +131,7 @@ export class AddMentor {
         is_current: isCurrent,
         start_date: toApiDate(row['start_date']) || toApiDate(new Date()) || '',
         end_date: isCurrent ? undefined : toApiDate(row['end_date'])
-      } satisfies CreateExperienceDto;
+      } satisfies CreateExperienceInterface;
     });
 
     const mentorType = value['type'];

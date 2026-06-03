@@ -16,7 +16,7 @@ import {
 import { ConfirmationService } from '@shared/services/confirmation';
 import { IPhase } from '@shared/models';
 import { parseDate } from '@shared/helpers/form.helper';
-import { DeliverableDto, PhaseDto } from '../../dto/phases/phase.dto';
+import { DeliverableInterface, PhaseInterface } from '../../interfaces/phase.interface';
 import { PhasesStore } from '@features/projects/store/phases.store';
 import { PhaseSkeleton } from '@features/projects/ui/phase-skeleton/phase-skeleton';
 
@@ -75,7 +75,7 @@ export class Phases implements OnInit {
     });
   }
 
-  private buildDeliverableForm(deliverable?: DeliverableDto): FormGroup {
+  private buildDeliverableForm(deliverable?: DeliverableInterface): FormGroup {
     return this.fb.group({
       title: [deliverable?.title ?? '', [Validators.required, Validators.minLength(2)]],
       description: [deliverable?.description ?? undefined]
@@ -86,7 +86,7 @@ export class Phases implements OnInit {
     return this.form.get('deliverables') as FormArray;
   }
 
-  addDeliverable(deliverable?: DeliverableDto): void {
+  addDeliverable(deliverable?: DeliverableInterface): void {
     this.deliverables.push(this.buildDeliverableForm(deliverable));
   }
 
@@ -94,14 +94,14 @@ export class Phases implements OnInit {
     this.deliverables.removeAt(index);
   }
 
-  private setDeliverables(deliverables: DeliverableDto[]): void {
+  private setDeliverables(deliverables: DeliverableInterface[]): void {
     this.deliverables.clear();
     deliverables.forEach((deliverable) => this.deliverables.push(this.buildDeliverableForm(deliverable)));
   }
 
-  private buildPayload(): PhaseDto {
+  private buildPayload(): PhaseInterface {
     const formValue = this.form.getRawValue();
-    const deliverables = (formValue.deliverables as DeliverableDto[])
+    const deliverables = (formValue.deliverables as DeliverableInterface[])
       .filter((d) => d.title?.length)
       .map((d) => ({ title: d.title, description: d.description || undefined }));
     const mentors = (formValue.mentors as string[]).filter((m) => m?.length);

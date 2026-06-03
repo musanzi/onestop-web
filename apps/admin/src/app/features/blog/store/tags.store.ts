@@ -2,22 +2,16 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, exhaustMap, finalize, pipe, switchMap, tap } from 'rxjs';
-import { FilterArticlesTagsDto } from '../dto/filter-tags.dto';
+import { FilterArticlesTagsInterface } from '../interfaces/filter-tags.interface';
 import { ITag } from '@shared/models';
-import { ArticleTagDto } from '../dto/article-tag.dto';
+import { ArticleTagInterface } from '../interfaces/article-tag.interface';
+import { TagsStoreInterface } from '../interfaces/tags-store.interface';
 import { TagsService } from '../services/tags.service';
 
-interface ITagsStore {
-  isLoading: boolean;
-  tags: [ITag[], number];
-  allTags: ITag[];
-  lastQuery: FilterArticlesTagsDto | null;
-}
-
 export const TagsStore = signalStore(
-  withState<ITagsStore>({ isLoading: false, allTags: [], tags: [[], 0], lastQuery: null }),
+  withState<TagsStoreInterface>({ isLoading: false, allTags: [], tags: [[], 0], lastQuery: null }),
   withProps(() => ({
-    _tagsService: inject(TagsService)
+    _tagsService: inject(TagsService),
   })),
   withMethods(({ _tagsService, ...store }) => ({
     loadUpaginated: rxMethod<void>(
@@ -26,36 +20,36 @@ export const TagsStore = signalStore(
         exhaustMap(() =>
           _tagsService.getAllUnpaginated().pipe(
             tap({
-              next: (allTags) => patchState(store, { isLoading: false, allTags })
+              next: (allTags) => patchState(store, { isLoading: false, allTags }),
             }),
             catchError(() => {
               patchState(store, { allTags: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
-    loadAll: rxMethod<FilterArticlesTagsDto>(
+    loadAll: rxMethod<FilterArticlesTagsInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((queryParams) => {
           patchState(store, { lastQuery: queryParams });
           return _tagsService.getAll(queryParams).pipe(
             tap({
-              next: (tags) => patchState(store, { isLoading: false, tags })
+              next: (tags) => patchState(store, { isLoading: false, tags }),
             }),
             catchError(() => {
               patchState(store, { tags: [[], 0] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
+            finalize(() => patchState(store, { isLoading: false })),
           );
-        })
-      )
+        }),
+      ),
     ),
-    create: rxMethod<{ payload: ArticleTagDto; onSuccess: (tag: ITag) => void }>(
+    create: rxMethod<{ payload: ArticleTagInterface; onSuccess: (tag: ITag) => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) =>
@@ -67,17 +61,17 @@ export const TagsStore = signalStore(
                 const hasTag = allTags.some((tag) => tag.id === data.id);
                 patchState(store, {
                   tags: [[data, ...tags], count + 1],
-                  allTags: hasTag ? allTags : [data, ...allTags]
+                  allTags: hasTag ? allTags : [data, ...allTags],
                 });
                 patchState(store, { isLoading: false });
                 onSuccess(data);
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     update: rxMethod<{ id: string; payload: { name: string }; onSuccess: () => void }>(
       pipe(
@@ -91,13 +85,13 @@ export const TagsStore = signalStore(
                 patchState(store, { tags: [updated, count] });
                 patchState(store, { isLoading: false });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     delete: rxMethod<{ id: string }>(
       pipe(
@@ -110,13 +104,13 @@ export const TagsStore = signalStore(
                 const filtered = tags.filter((tag) => tag.id !== id);
                 patchState(store, { tags: [filtered, count - 1] });
                 patchState(store, { isLoading: false });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );

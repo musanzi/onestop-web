@@ -2,20 +2,17 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { UpdatePasswordDto } from '../dto/update-password.dto';
+import { UpdatePasswordInterface } from '../interfaces/update-password.interface';
+import { IUpdatePasswordStoreInterface } from '../interfaces/update-password-store.interface';
 import { AccountService } from '../services/account.service';
 
-interface IUpdatePasswordStore {
-  isLoading: boolean;
-}
-
 export const UpdatePasswordStore = signalStore(
-  withState<IUpdatePasswordStore>({ isLoading: false }),
+  withState<IUpdatePasswordStoreInterface>({ isLoading: false }),
   withProps(() => ({
     _accountService: inject(AccountService)
   })),
   withMethods(({ _accountService, ...store }) => ({
-    updatePassword: rxMethod<UpdatePasswordDto>(
+    updatePassword: rxMethod<UpdatePasswordInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) =>

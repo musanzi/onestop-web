@@ -5,8 +5,8 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IUser } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { UserDto } from '../dto/users/user.dto';
-import { FilterUsersDto } from '../dto/users/filter-users.dto';
+import { UserInterface } from '../interfaces/user.interface';
+import { FilterUsersInterface } from '../interfaces/filter-users.interface';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
@@ -14,7 +14,7 @@ export class UsersService {
   private readonly toast = inject(ToastrService);
   private readonly router = inject(Router);
 
-  getAll(filters: FilterUsersDto): Observable<[IUser[], number]> {
+  getAll(filters: FilterUsersInterface): Observable<[IUser[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IUser[], number] }>('users', { params }).pipe(
@@ -41,7 +41,7 @@ export class UsersService {
     );
   }
 
-  create(dto: UserDto): Observable<IUser> {
+  create(dto: UserInterface): Observable<IUser> {
     return this.http.post<{ data: IUser }>('users', dto).pipe(
       map(({ data }) => {
         this.router.navigate(['/users']);
@@ -56,7 +56,7 @@ export class UsersService {
     );
   }
 
-  update(id: string, dto: UserDto): Observable<IUser> {
+  update(id: string, dto: UserInterface): Observable<IUser> {
     return this.http.patch<{ data: IUser }>(`users/id/${id}`, dto).pipe(
       map(({ data }) => {
         this.router.navigate(['/users']);
@@ -97,7 +97,7 @@ export class UsersService {
     );
   }
 
-  download(filters: FilterUsersDto): Observable<Blob> {
+  download(filters: FilterUsersInterface): Observable<Blob> {
     const params = buildQueryParams(filters);
 
     return this.http.get('users/export/users.csv', { params, responseType: 'blob' }).pipe(

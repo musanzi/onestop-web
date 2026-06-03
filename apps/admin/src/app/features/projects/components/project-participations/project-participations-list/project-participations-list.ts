@@ -17,7 +17,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { PROJECT_PARTICIPATIONS_LIST_ICONS } from '@shared/data';
 import { distinctUntilChanged } from 'rxjs';
 import { ApiImgPipe } from '@shared/pipes';
-import { FilterParticipationsDto } from '@features/projects/dto/phases/filter-participations.dto';
+import { FilterParticipationsInterface } from '@features/projects/interfaces/filter-participations.interface';
 import { ParticipationsStore } from '@features/projects/store/participations.store';
 import { ProjectsStore } from '@features/projects/store/projects.store';
 import { toPageQueryValue } from '@shared/helpers';
@@ -53,7 +53,7 @@ export class ProjectParticipationsList {
   projectStore = inject(ProjectsStore);
   selectParticipation = output<string>();
   csvFileInput = viewChild<ElementRef<HTMLInputElement>>('csvFileInput');
-  queryParams = signal<FilterParticipationsDto>({ page: null, phaseId: null });
+  queryParams = signal<FilterParticipationsInterface>({ page: null, phaseId: null });
   selectedIds = signal<string[]>([]);
   filtersForm = this.fb.group({
     phaseId: ['']

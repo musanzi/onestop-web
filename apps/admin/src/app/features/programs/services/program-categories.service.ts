@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { ICategory } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterProgramCategoriesDto } from '../dto/categories/filter-categories.dto';
-import { ProgramCategoryDto } from '../dto/categories/program-category.dto';
+import { FilterProgramCategoriesInterface } from '../interfaces/filter-program-categories.interface';
+import { ProgramCategoryInterface } from '../interfaces/program-category.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProgramCategoriesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterProgramCategoriesDto): Observable<[ICategory[], number]> {
+  getAll(filters: FilterProgramCategoriesInterface): Observable<[ICategory[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [ICategory[], number] }>('program-categories/paginated', { params }).pipe(
@@ -42,7 +42,7 @@ export class ProgramCategoriesService {
     );
   }
 
-  update(id: string, payload: ProgramCategoryDto): Observable<ICategory> {
+  update(id: string, payload: ProgramCategoryInterface): Observable<ICategory> {
     return this.http.patch<{ data: ICategory }>(`program-categories/id/${id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Catégorie mise à jour');

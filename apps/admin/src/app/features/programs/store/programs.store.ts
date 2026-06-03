@@ -2,25 +2,18 @@ import { patchState, signalStore, withMethods, withProps, withState } from '@ngr
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, exhaustMap, finalize, pipe, switchMap, tap } from 'rxjs';
-import { FilterProgramsDto } from '../dto/programs/filter-programs.dto';
-import { Program } from '@shared/models';
-import { ProgramDto } from '../dto/programs/program.dto';
+import { FilterProgramsInterface } from '../interfaces/filter-programs.interface';
+import { ProgramInterface } from '../interfaces/program.interface';
+import { IProgramsStoreInterface } from '../interfaces/programs-store.interface';
 import { ProgramsService } from '../services/programs.service';
 
-interface IProgramsStore {
-  isLoading: boolean;
-  programs: [Program[], number];
-  program: Program | null;
-  allPrograms: Program[];
-}
-
 export const ProgramsStore = signalStore(
-  withState<IProgramsStore>({ isLoading: false, programs: [[], 0], program: null, allPrograms: [] }),
+  withState<IProgramsStoreInterface>({ isLoading: false, programs: [[], 0], program: null, allPrograms: [] }),
   withProps(() => ({
     _programsService: inject(ProgramsService)
   })),
   withMethods(({ _programsService, ...store }) => ({
-    loadAll: rxMethod<FilterProgramsDto>(
+    loadAll: rxMethod<FilterProgramsInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((filters) =>
@@ -71,7 +64,7 @@ export const ProgramsStore = signalStore(
         )
       )
     ),
-    create: rxMethod<ProgramDto>(
+    create: rxMethod<ProgramInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((payload) =>
@@ -85,7 +78,7 @@ export const ProgramsStore = signalStore(
         )
       )
     ),
-    update: rxMethod<{ programId: string; payload: ProgramDto }>(
+    update: rxMethod<{ programId: string; payload: ProgramInterface }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ programId, payload }) =>

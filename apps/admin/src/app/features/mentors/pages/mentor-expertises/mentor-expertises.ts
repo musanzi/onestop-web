@@ -4,7 +4,7 @@ import { MENTOR_EXPERTISES_ICONS } from '@shared/data';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IExpertise } from '@shared/models';
-import { FilterExpertisesDto } from '../../dto/expertises/filter-expertises.dto';
+import { FilterExpertisesInterface } from '../../interfaces/filter-expertises.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ExpertisesStore } from '../../store/expertises.store';
@@ -36,7 +36,7 @@ export class MentorExpertises {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroyRef = inject(DestroyRef);
   store = inject(ExpertisesStore);
-  queryParams = signal<FilterExpertisesDto>({
+  queryParams = signal<FilterExpertisesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

@@ -1,5 +1,5 @@
 import { INotification, IProject } from '@shared/models';
-import { NotifyParticipantsDto } from '../dto/notifications/notify-participants.dto';
+import { NotifyParticipantsInterface } from '../interfaces/notify-participants.interface';
 import { SelectOption } from '@shared/ui/form';
 
 export enum NotificationStatus {
@@ -8,7 +8,7 @@ export enum NotificationStatus {
 }
 
 export interface SubmitNotification {
-  dto: NotifyParticipantsDto;
+  dto: NotifyParticipantsInterface;
   attachments: File[];
 }
 

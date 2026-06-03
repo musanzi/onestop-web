@@ -3,42 +3,37 @@ import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { ICategory } from '@shared/models';
-import { FilterProjectCategoriesDto } from '../dto/categories/filter-categories.dto';
-import { ProjectCategoryDto } from '../dto/categories/project-category.dto';
+import { FilterProjectCategoriesInterface } from '../interfaces/filter-project-categories.interface';
+import { ProjectCategoryInterface } from '../interfaces/project-category.interface';
+import { ProjectCategoriesStoreInterface } from '../interfaces/project-categories-store.interface';
 import { ProjectCategoriesService } from '../services/project-categories.service';
 
-interface ICategoriesStore {
-  isLoading: boolean;
-  categories: [ICategory[], number];
-  allCategories: ICategory[];
-}
-
 export const CategoriesStore = signalStore(
-  withState<ICategoriesStore>({
+  withState<ProjectCategoriesStoreInterface>({
     isLoading: false,
     categories: [[], 0],
-    allCategories: []
+    allCategories: [],
   }),
   withProps(() => ({
-    _projectCategoriesService: inject(ProjectCategoriesService)
+    _projectCategoriesService: inject(ProjectCategoriesService),
   })),
   withMethods(({ _projectCategoriesService, ...store }) => ({
-    loadAll: rxMethod<FilterProjectCategoriesDto>(
+    loadAll: rxMethod<FilterProjectCategoriesInterface>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((filters) =>
           _projectCategoriesService.getAll(filters).pipe(
             tap({
-              next: (categories) => patchState(store, { isLoading: false, categories })
+              next: (categories) => patchState(store, { isLoading: false, categories }),
             }),
             catchError(() => {
               patchState(store, { categories: [[], 0] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     loadUnpaginated: rxMethod<void>(
       pipe(
@@ -46,18 +41,18 @@ export const CategoriesStore = signalStore(
         switchMap(() =>
           _projectCategoriesService.getAllUnpaginated().pipe(
             tap({
-              next: (allCategories) => patchState(store, { isLoading: false, allCategories })
+              next: (allCategories) => patchState(store, { isLoading: false, allCategories }),
             }),
             catchError(() => {
               patchState(store, { allCategories: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
-    create: rxMethod<{ payload: ProjectCategoryDto; onSuccess: (category: ICategory) => void }>(
+    create: rxMethod<{ payload: ProjectCategoryInterface; onSuccess: (category: ICategory) => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ payload, onSuccess }) =>
@@ -70,16 +65,16 @@ export const CategoriesStore = signalStore(
                 patchState(store, {
                   isLoading: false,
                   categories: [[data, ...list], count + 1],
-                  allCategories: hasCategory ? allCategories : [data, ...allCategories]
+                  allCategories: hasCategory ? allCategories : [data, ...allCategories],
                 });
                 onSuccess(data);
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     update: rxMethod<{ id: string; payload: { name: string }; onSuccess: () => void }>(
       pipe(
@@ -92,13 +87,13 @@ export const CategoriesStore = signalStore(
                 const updated = list.map((c) => (c.id === data.id ? data : c));
                 patchState(store, { isLoading: false, categories: [updated, count] });
                 onSuccess();
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
     ),
     delete: rxMethod<{ id: string }>(
       pipe(
@@ -111,13 +106,13 @@ export const CategoriesStore = signalStore(
                 const filtered = list.filter((c) => c.id !== id);
                 patchState(store, { categories: [filtered, Math.max(0, count - 1)] });
                 patchState(store, { isLoading: false });
-              }
+              },
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false }))
-          )
-        )
-      )
-    )
-  }))
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
 );

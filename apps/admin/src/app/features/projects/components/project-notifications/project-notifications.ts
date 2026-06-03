@@ -5,7 +5,7 @@ import { ConfirmationService } from '@shared/services/confirmation';
 import { INotification, IProject } from '@shared/models';
 import { UiButton, UiConfirmDialog, UiSelect, SelectOption } from '@shared/ui';
 import { PhasesStore } from '../../store/phases.store';
-import { FilterProjectNotificationsDto, NotificationsStore } from '../../store/notifications.store';
+import { FilterProjectNotificationsInterface, NotificationsStore } from '../../store/notifications.store';
 import { NotificationCompose } from './notification-compose/notification-compose';
 import { NotificationsHistoryList } from './notifications-list/notifications-list';
 import { NotificationState, NotificationsState, NotificationStatus, SubmitNotification } from '../../types';
@@ -39,7 +39,7 @@ export class ProjectNotifications {
     { label: 'Brouillons', value: NotificationStatus.DRAFT },
     { label: 'Envoyées', value: NotificationStatus.SENT }
   ];
-  filters = computed<FilterProjectNotificationsDto>(() => ({
+  filters = computed<FilterProjectNotificationsInterface>(() => ({
     phaseId: this.filterPhaseId() || null,
     status: this.filterStatus() || null,
     page: this.currentPage() === 1 ? null : this.currentPage()

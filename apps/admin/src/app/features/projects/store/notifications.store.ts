@@ -4,21 +4,14 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { computed } from '@angular/core';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 import { INotification } from '@shared/models';
-import { NotifyParticipantsDto } from '../dto/notifications/notify-participants.dto';
-import { FilterProjectNotificationsDto, NotificationsService } from '../services/notifications.service';
+import { NotifyParticipantsInterface } from '../interfaces/notify-participants.interface';
+import { NotificationsStoreInterface } from '../interfaces/notifications-store.interface';
+import { FilterProjectNotificationsInterface, NotificationsService } from '../services/notifications.service';
 
-export type { FilterProjectNotificationsDto } from '../services/notifications.service';
-
-interface NotificationsStoreState {
-  isLoading: boolean;
-  isSaving: boolean;
-  notifications: [INotification[], number];
-  activeNotification: INotification | null;
-  error: string | null;
-}
+export type { FilterProjectNotificationsInterface } from '../services/notifications.service';
 
 export const NotificationsStore = signalStore(
-  withState<NotificationsStoreState>({
+  withState<NotificationsStoreInterface>({
     isLoading: false,
     isSaving: false,
     notifications: [[], 0],
@@ -45,7 +38,7 @@ export const NotificationsStore = signalStore(
       });
     };
     return {
-      loadAll: rxMethod<{ projectId: string; filters: FilterProjectNotificationsDto }>(
+      loadAll: rxMethod<{ projectId: string; filters: FilterProjectNotificationsInterface }>(
         pipe(
           tap(() => patchState(store, { isLoading: true })),
           switchMap(({ projectId, filters }) =>
@@ -72,7 +65,7 @@ export const NotificationsStore = signalStore(
       ),
       create: rxMethod<{
         projectId: string;
-        dto: NotifyParticipantsDto;
+        dto: NotifyParticipantsInterface;
         attachments?: File[];
         onSuccess?: (notification: INotification) => void;
       }>(
@@ -98,7 +91,7 @@ export const NotificationsStore = signalStore(
       ),
       update: rxMethod<{
         notificationId: string;
-        dto: NotifyParticipantsDto;
+        dto: NotifyParticipantsInterface;
         attachments?: File[];
         onSuccess?: (notification: INotification) => void;
       }>(

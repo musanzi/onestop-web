@@ -10,7 +10,7 @@ import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { ConfirmationService } from '@shared/services/confirmation';
 import { UiAvatar, UiBadge, UiButton, UiConfirmDialog, UiDatepicker, UiSelect } from '@shared/ui';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
-import { FilterOpportunitiesDto } from '../../dto/filter-opportunities.dto';
+import { FilterOpportunitiesInterface } from '../../interfaces/filter-opportunities.interface';
 import { OpportunitiesStore } from '../../store/opportunities.store';
 
 @Component({
@@ -39,7 +39,7 @@ export class ListOpportunities {
   private readonly confirmationService = inject(ConfirmationService);
   store = inject(OpportunitiesStore);
   icons = LIST_OPPORTUNITIES_ICONS;
-  filters = signal<FilterOpportunitiesDto>({
+  filters = signal<FilterOpportunitiesInterface>({
     from: null,
     to: null,
     language: null

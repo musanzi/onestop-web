@@ -5,13 +5,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EventsStore } from '../../store/events.store';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
-import { FilterEventsDto } from '../../dto/events/filter-events.dto';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { UiAvatar, UiButton, UiConfirmDialog, UiPagination, UiTabs, UiBadge } from '@shared/ui';
 import { ConfirmationService } from '@shared/services/confirmation';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
 import { DatePipe } from '@angular/common';
+import { FilterEventsInterface } from '@features/events/interfaces';
 
 @Component({
   selector: 'app-events-list',
@@ -30,8 +30,8 @@ import { DatePipe } from '@angular/common';
     UiTabs,
     UiPagination,
     UiTableSkeleton,
-    UiBadge
-  ]
+    UiBadge,
+  ],
 })
 export class ListEvents {
   icons = LIST_EVENTS_ICONS;
@@ -41,21 +41,21 @@ export class ListEvents {
   private readonly destroyRef = inject(DestroyRef);
   store = inject(EventsStore);
   itemsPerPage = 20;
-  queryParams = signal<FilterEventsDto>({
+  queryParams = signal<FilterEventsInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
-    filter: this.route.snapshot.queryParamMap.get('filter')
+    filter: this.route.snapshot.queryParamMap.get('filter'),
   });
   activeTab = computed(() => this.queryParams().filter || 'all');
   currentPage = computed(() => Number(this.queryParams().page) || 1);
   searchForm: FormGroup = this.fb.group({
-    q: [this.queryParams().q || '']
+    q: [this.queryParams().q || ''],
   });
   tabsConfig = signal([
     { label: 'Tous', name: 'all' },
     { label: 'Publiés', name: 'published' },
     { label: 'Brouillons', name: 'drafts' },
-    { label: 'En vedette', name: 'highlighted' }
+    { label: 'En vedette', name: 'highlighted' },
   ]);
 
   constructor() {
@@ -77,7 +77,7 @@ export class ListEvents {
   onPageChange(currentPage: number): void {
     this.queryParams.update((qp) => ({
       ...qp,
-      page: currentPage === 1 ? null : currentPage.toString()
+      page: currentPage === 1 ? null : currentPage.toString(),
     }));
   }
 
@@ -94,7 +94,7 @@ export class ListEvents {
       rejectLabel: 'Annuler',
       accept: () => {
         this.store.delete(eventId);
-      }
+      },
     });
   }
 }

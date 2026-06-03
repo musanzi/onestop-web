@@ -5,11 +5,11 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IOpportunity } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { CreateOpportunityDto } from '../dto/create-opportunity.dto';
-import { FilterOpportunitiesDto } from '../dto/filter-opportunities.dto';
-import { UpdateOpportunityDto } from '../dto/update-opportunity.dto';
+import { CreateOpportunityInterface } from '../interfaces/create-opportunity.interface';
+import { FilterOpportunitiesInterface } from '../interfaces/filter-opportunities.interface';
+import { UpdateOpportunityInterface } from '../interfaces/update-opportunity.interface';
 
-export type UpdateOpportunityPayload = UpdateOpportunityDto & { id: string };
+export type UpdateOpportunityPayload = UpdateOpportunityInterface & { id: string };
 
 @Injectable({ providedIn: 'root' })
 export class OpportunitiesService {
@@ -17,7 +17,7 @@ export class OpportunitiesService {
   private readonly router = inject(Router);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterOpportunitiesDto): Observable<IOpportunity[]> {
+  getAll(filters: FilterOpportunitiesInterface): Observable<IOpportunity[]> {
     const params = buildQueryParams(filters);
     return this.http.get<{ data: IOpportunity[] }>('opportunities', { params }).pipe(
       map(({ data }) => data),
@@ -36,7 +36,7 @@ export class OpportunitiesService {
     );
   }
 
-  create(payload: CreateOpportunityDto): Observable<IOpportunity> {
+  create(payload: CreateOpportunityInterface): Observable<IOpportunity> {
     return this.http.post<{ data: IOpportunity }>('opportunities', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess("L'opportunité a été créée avec succès");

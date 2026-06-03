@@ -4,7 +4,7 @@ import { LIST_PROGRAMS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProgramsStore } from '../../store/programs.store';
-import { FilterProgramsDto } from '../../dto/programs/filter-programs.dto';
+import { FilterProgramsInterface } from '../../interfaces/filter-programs.interface';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { UiAvatar, UiButton, UiConfirmDialog, UiTabs, UiPagination, UiBadge } from '@shared/ui';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
@@ -40,7 +40,7 @@ export class ListPrograms {
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
   store = inject(ProgramsStore);
-  queryParams = signal<FilterProgramsDto>({
+  queryParams = signal<FilterProgramsInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
     filter: this.route.snapshot.queryParamMap.get('filter')

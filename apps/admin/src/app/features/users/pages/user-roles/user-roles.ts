@@ -4,7 +4,7 @@ import { USER_ROLES_ICONS } from '@shared/data';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FilterRolesDto } from '../../dto/roles/filter-roles.dto';
+import { FilterRolesInterface } from '../../interfaces/filter-roles.interface';
 import { RolesStore } from '../../store/roles.store';
 import { IRole } from '@shared/models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -37,7 +37,7 @@ export class UserRoles {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroyRef = inject(DestroyRef);
   store = inject(RolesStore);
-  queryParams = signal<FilterRolesDto>({
+  queryParams = signal<FilterRolesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q')
   });

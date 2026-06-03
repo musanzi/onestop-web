@@ -5,8 +5,8 @@ import { AuthStore } from '@core/auth/auth.store';
 import { extractApiErrorMessage } from '@shared/helpers';
 import { IUser } from '@shared/models/user.model';
 import { ToastrService } from '@shared/services/toast';
-import { UpdateInfoDto } from '../dto/update-info.dto';
-import { UpdatePasswordDto } from '../dto/update-password.dto';
+import { UpdateInfoInterface } from '../interfaces/update-info.interface';
+import { UpdatePasswordInterface } from '../interfaces/update-password.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -14,7 +14,7 @@ export class AccountService {
   private readonly authStore = inject(AuthStore);
   private readonly toast = inject(ToastrService);
 
-  updateInfo(payload: UpdateInfoDto): Observable<IUser> {
+  updateInfo(payload: UpdateInfoInterface): Observable<IUser> {
     return this.http.patch<{ data: IUser }>('auth/me', payload).pipe(
       map(({ data }) => {
         this.authStore.setUser(data);
@@ -29,7 +29,7 @@ export class AccountService {
     );
   }
 
-  updatePassword(payload: UpdatePasswordDto): Observable<void> {
+  updatePassword(payload: UpdatePasswordInterface): Observable<void> {
     return this.http.patch<{ data: IUser }>('auth/me/password', payload).pipe(
       map(() => {
         this.toast.showSuccess('Mot de passe mis à jour');

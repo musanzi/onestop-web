@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IExpertise } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { ExpertiseDto } from '../dto/expertises/expertise.dto';
-import { FilterExpertisesDto } from '../dto/expertises/filter-expertises.dto';
+import { ExpertiseInterface } from '../interfaces/expertise.interface';
+import { FilterExpertisesInterface } from '../interfaces/filter-expertises.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExpertisesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterExpertisesDto): Observable<[IExpertise[], number]> {
+  getAll(filters: FilterExpertisesInterface): Observable<[IExpertise[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IExpertise[], number] }>('expertises/paginated', { params }).pipe(
@@ -28,7 +28,7 @@ export class ExpertisesService {
     );
   }
 
-  create(payload: ExpertiseDto): Observable<IExpertise> {
+  create(payload: ExpertiseInterface): Observable<IExpertise> {
     return this.http.post<{ data: IExpertise }>('expertises', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Expertise ajoutée avec succès');
@@ -42,7 +42,7 @@ export class ExpertisesService {
     );
   }
 
-  update(id: string, payload: ExpertiseDto): Observable<IExpertise> {
+  update(id: string, payload: ExpertiseInterface): Observable<IExpertise> {
     return this.http.patch<{ data: IExpertise }>(`expertises/id/${id}`, payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Expertise mise à jour');

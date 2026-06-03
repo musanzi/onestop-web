@@ -4,15 +4,15 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { ITag } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { ArticleTagDto } from '../dto/article-tag.dto';
-import { FilterArticlesTagsDto } from '../dto/filter-tags.dto';
+import { ArticleTagInterface } from '../interfaces/article-tag.interface';
+import { FilterArticlesTagsInterface } from '../interfaces/filter-tags.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TagsService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterArticlesTagsDto): Observable<[ITag[], number]> {
+  getAll(filters: FilterArticlesTagsInterface): Observable<[ITag[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [ITag[], number] }>('tags/paginated', { params }).pipe(
@@ -28,7 +28,7 @@ export class TagsService {
     );
   }
 
-  create(payload: ArticleTagDto): Observable<ITag> {
+  create(payload: ArticleTagInterface): Observable<ITag> {
     return this.http.post<{ data: ITag }>('tags', payload).pipe(
       map(({ data }) => {
         this.toast.showSuccess('Tag ajoutée avec succès');

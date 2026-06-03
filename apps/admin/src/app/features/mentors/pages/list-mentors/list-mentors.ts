@@ -4,7 +4,7 @@ import { LIST_MENTORS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MentorsStore } from '../../store/mentors.store';
-import { FilterMentorsProfileDto } from '../../dto/mentors/filter-mentors-profiles.dto';
+import { FilterMentorsProfileInterface } from '../../interfaces/filter-mentors-profiles.interface';
 import { MentorStatus } from '../../enums/mentor.enum';
 import { UiButton, UiPagination, UiTabs, UiBadge } from '@shared/ui';
 import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
@@ -33,7 +33,7 @@ export class ListMentors {
   private readonly destroyRef = inject(DestroyRef);
   store = inject(MentorsStore);
   itemsPerPage = 20;
-  queryParams = signal<FilterMentorsProfileDto>({
+  queryParams = signal<FilterMentorsProfileInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
     status: (this.route.snapshot.queryParamMap.get('status') as MentorStatus) || null

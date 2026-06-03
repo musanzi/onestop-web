@@ -2,20 +2,12 @@ import { patchState, signalStore, withComputed, withMethods, withProps, withStat
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
-import { IMentorProfile, IPhase } from '@shared/models';
-import { PhaseDto } from '../dto/phases/phase.dto';
+import { PhaseInterface } from '../interfaces/phase.interface';
+import { IPhasesStoreInterface } from '../interfaces/phases-store.interface';
 import { PhasesService } from '../services/phases.service';
 
-interface IPhasesStore {
-  isLoading: boolean;
-  isMentorsLoading: boolean;
-  phases: IPhase[];
-  phase: IPhase | null;
-  mentors: IMentorProfile[];
-}
-
 export const PhasesStore = signalStore(
-  withState<IPhasesStore>({
+  withState<IPhasesStoreInterface>({
     isLoading: false,
     isMentorsLoading: false,
     phases: [],
@@ -65,7 +57,7 @@ export const PhasesStore = signalStore(
         )
       )
     ),
-    create: rxMethod<{ projectId: string; dto: PhaseDto; onSuccess: () => void }>(
+    create: rxMethod<{ projectId: string; dto: PhaseInterface; onSuccess: () => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ dto, projectId, onSuccess }) =>
@@ -83,7 +75,7 @@ export const PhasesStore = signalStore(
         )
       )
     ),
-    update: rxMethod<{ dto: PhaseDto & { id: string }; onSuccess: () => void }>(
+    update: rxMethod<{ dto: PhaseInterface & { id: string }; onSuccess: () => void }>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(({ dto, onSuccess }) =>

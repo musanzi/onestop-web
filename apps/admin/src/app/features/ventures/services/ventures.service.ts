@@ -4,14 +4,14 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { buildQueryParams, extractApiErrorMessage } from '@shared/helpers';
 import { IVenture } from '@shared/models';
 import { ToastrService } from '@shared/services/toast/toastr.service';
-import { FilterVenturesDto } from '../dto/filter-ventures.dto';
+import { FilterVenturesInterface } from '../interfaces/filter-ventures.interface';
 
 @Injectable({ providedIn: 'root' })
 export class VenturesService {
   private readonly http = inject(HttpClient);
   private readonly toast = inject(ToastrService);
 
-  getAll(filters: FilterVenturesDto): Observable<[IVenture[], number]> {
+  getAll(filters: FilterVenturesInterface): Observable<[IVenture[], number]> {
     const params = buildQueryParams(filters);
 
     return this.http.get<{ data: [IVenture[], number] }>('ventures', { params }).pipe(
