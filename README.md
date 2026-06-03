@@ -1,101 +1,119 @@
-# WebApps
+# OneStop Web Apps
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Nx monorepo for the OneStop Cinolu web applications. The workspace currently contains two server-rendered Angular apps:
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+- `client`: public-facing OneStop site with pages for landing, programs, projects, opportunities, events, blog, ambassadors, partners, FAQ, auth, and user dashboard flows.
+- `admin`: internal admin portal for managing dashboard, users, ventures, programs, projects, opportunities, events, mentors, blog, and account flows.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Tech Stack
 
-## Run tasks
+- Nx `22`
+- Angular `21`
+- Angular SSR with Express server output
+- Tailwind CSS `4`
+- ESLint and Prettier
+- NgRx Signals
+- ngx-translate
+- Quill, FilePond, Notyf, and lucide-angular for editor, upload, notification, and icon UI pieces
 
-To run the dev server for your app, use:
+## Requirements
 
-```sh
-npx nx serve admin
-```
+- Node.js compatible with Angular `21`
+- pnpm
 
-To create a production bundle:
-
-```sh
-npx nx build admin
-```
-
-To see all available targets to run for a project, run:
-
-```sh
-npx nx show project admin
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
+Install dependencies:
 
 ```sh
-npx nx g @nx/angular:app demo
+pnpm install
 ```
 
-To generate a new library, use:
+## Development
+
+Run the public client app:
 
 ```sh
-npx nx g @nx/angular:lib mylib
+pnpm dev:client
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
+Run the admin app:
 
 ```sh
-npx nx connect
+pnpm dev:admin
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+The admin dev server is configured on port `4000`. The client app uses the Angular dev server default unless overridden from the command line.
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
+You can also call Nx targets directly:
 
 ```sh
-npx nx g ci-workflow
+pnpm nx serve client
+pnpm nx serve admin
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Build
 
-## Install Nx Console
+Build each app for production:
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+```sh
+pnpm build:client
+pnpm build:admin
+```
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Build outputs are written to:
 
-## Useful links
+- `dist/apps/client`
+- `dist/apps/admin`
 
-Learn more:
+Both apps use Angular's server output mode. After building, run the SSR server entry with:
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```sh
+pnpm ssr:client
+pnpm ssr:admin
+```
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Quality Checks
+
+Run lint for a project:
+
+```sh
+pnpm nx lint client
+pnpm nx lint admin
+```
+
+Inspect all available targets for a project:
+
+```sh
+pnpm nx show project client
+pnpm nx show project admin
+```
+
+View the Nx project graph:
+
+```sh
+pnpm nx graph
+```
+
+## Project Layout
+
+```text
+apps/
+  client/
+    src/app/core/        Shared client infrastructure such as auth, guards, interceptors, providers, services, and strategies
+    src/app/features/    Public site and client dashboard feature areas
+    src/app/layout/      Client shell, layout pages, and navigation data
+    src/app/shared/      Client shared UI, models, services, helpers, pipes, directives, config, and styles
+    src/assets/i18n/     Client translation files
+    public/              Client public assets, robots.txt, sitemap.xml
+  admin/
+    src/app/core/        Shared admin infrastructure such as auth, guards, interceptors, providers, and strategies
+    src/app/features/    Admin feature areas
+    src/app/layout/      Admin shell, layout pages, navigation data, and layout types
+    src/app/shared/      Admin shared UI, models, services, helpers, pipes, and data
+    public/              Admin public assets and robots.txt
+```
+
+## Nx Notes
+
+This workspace uses project-level `project.json` files under `apps/client` and `apps/admin`. Shared Nx defaults live in `nx.json`, including Angular build caching and ESLint target configuration.
+
+New Angular applications and libraries should follow the generator defaults in `nx.json`: CSS styles, ESLint enabled, and no generated test runner unless explicitly added.
