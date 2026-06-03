@@ -58,10 +58,11 @@ jobs:
             set -eu
 
             cd "${{ secrets.PROJECT_PATH }}"
-            git pull origin main
+            git checkout admin
+            git pull origin admin
 
             pnpm install --frozen-lockfile
             pnpm build:admin
 
-            pm2 restart admin 
+            pm2 reload admin 
             pm2 save
