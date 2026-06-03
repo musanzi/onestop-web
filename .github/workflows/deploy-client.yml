@@ -3,7 +3,7 @@ name: Deploy OneStop Client
 on:
   push:
     branches:
-      - client
+      - main
 
 permissions:
   contents: read
