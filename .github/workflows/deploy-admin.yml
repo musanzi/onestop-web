@@ -3,7 +3,7 @@ name: Deploy OneStop Admin
 on:
   push:
     branches:
-      - admin
+      - main
 
 permissions:
   contents: read
