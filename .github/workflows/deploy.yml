@@ -1,15 +1,65 @@
-name: Deploy OneStop Admin
+name: CI and Deploy
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+  NX_DAEMON: false
 
 jobs:
+  ci:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint apps
+        run: pnpm lint
+
+      - name: Build apps
+        run: pnpm build
+
   deploy:
     name: Deploy to VPS
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment: production
+
     steps:
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1
@@ -19,7 +69,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -e
+            set -euo pipefail
 
             cd "${{ secrets.PROJECT_PATH }}"
 
@@ -29,6 +79,6 @@ jobs:
             pnpm install --frozen-lockfile
             pnpm build
 
-            pm2 reload admin --update-env
             pm2 reload client --update-env
+            pm2 reload admin --update-env
             pm2 save
