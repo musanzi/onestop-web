@@ -62,6 +62,10 @@ jobs:
           script: |
             set -eu
 
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
+            nvm use 24
+
             cd "${{ secrets.PROJECT_PATH }}"
 
             git fetch origin main
