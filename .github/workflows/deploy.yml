@@ -13,9 +13,42 @@ env:
   NX_DAEMON: false
 
 jobs:
+  ci:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.5.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint apps
+        run: pnpm lint
+
+      - name: Build apps
+        run: pnpm build
+
   deploy:
     name: Deploy to VPS
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: ci
     environment: production
 
     steps:
@@ -27,7 +60,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -e
+            set -eu
 
             cd "${{ secrets.PROJECT_PATH }}"
 
