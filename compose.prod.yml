@@ -1,6 +1,8 @@
 services:
   client:
     container_name: onestop-client
+    environment:
+      - PORT=4000
     build:
       context: .
       target: production
@@ -11,6 +13,8 @@ services:
 
   admin:
     container_name: onestop-admin
+    environment:
+      - PORT=4100
     build:
       context: .
       target: production

@@ -13,8 +13,8 @@
     "dev:admin": "pnpm nx serve admin --port 4100",
     "build:client": "pnpm nx build client",
     "build:admin": "pnpm nx build admin",
-    "ssr:client": "ENV PORT=4000 node dist/apps/client/server/server.mjs",
-    "ssr:admin": "ENV PORT=4100 node dist/apps/admin/server/server.mjs"
+    "ssr:client": "node dist/apps/client/server/server.mjs",
+    "ssr:admin": "node dist/apps/admin/server/server.mjs"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^21.2.0",
