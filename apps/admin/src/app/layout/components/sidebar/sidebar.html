@@ -32,58 +32,54 @@
   </div>
   <div class="px-6 lg:px-8 pb-6 pt-4 space-y-6">
     @for (group of linkGroups(); track group.title) {
-      <div class="space-y-2.5">
-        <h2 class="text-xs font-semibold text-primary-300/90 uppercase tracking-wider px-3.5 mb-2">
-          {{ group.title }}
-        </h2>
-        <div class="flex flex-col gap-0.5">
-          @for (link of group.links; track link.name) {
-            @if ((link?.children?.length || 0) > 0) {
-              <button
-                class="flex justify-between items-center px-3 py-2 font-semibold rounded-xl text-primary-50 hover:bg-primary-700 transition-all duration-200 active:scale-[0.99]"
-                (click)="onToggleTab(link.name)"
-                [class.bg-primary-700]="isTabOpen(link.name)"
-                [class.text-white]="isTabOpen(link.name)">
-                <div class="inline-flex gap-2.5 items-center">
-                  <i-lucide [name]="link.icon" class="size-4 text-inherit" />
-                  <span>{{ link.name }}</span>
-                </div>
-                <i-lucide
-                  [name]="icons.ChevronDown"
-                  class="size-4 transition-transform duration-300 text-primary-400"
-                  [class.rotate-180]="isTabOpen(link.name)"
-                  [class.text-white]="isTabOpen(link.name)" />
-              </button>
-              <div class="sidebar-submenu" [class.is-open]="isTabOpen(link.name)">
-                <div class="sidebar-submenu__inner ml-5 pl-4 border-l-2 border-primary-700/40 flex flex-col gap-1.5">
-                  <div class="pt-1">
-                    @for (child of link.children; track child.name) {
-                      <a
-                        class="group relative flex items-center gap-1.5 mb-2 last:mb-0 text-primary-200 text-sm rounded-lg hover:text-white transition-all duration-150 group-[.active-link]:bg-primary-700/50 group-[.active-link]:text-white group-[.active-link]:font-medium group-[.active-link]:shadow-sm"
-                        [routerLink]="child.path"
-                        [routerLinkActive]="'active-link text-white'"
-                        [routerLinkActiveOptions]="{ exact: child.exactUrl || false }">
-                        <span
-                          class="shrink-0 w-1.5 h-1.5 rounded-full bg-primary-500/60 group-hover:bg-primary-400 group-[.active-link]:bg-white transition-colors"></span>
-                        {{ child.name }}
-                      </a>
-                    }
-                  </div>
-                </div>
-              </div>
-            } @else {
+    <div class="space-y-2.5">
+      <h2 class="text-xs font-semibold text-primary-300/90 uppercase tracking-wider px-3.5 mb-2">{{ group.title }}</h2>
+      <div class="flex flex-col gap-0.5">
+        @for (link of group.links; track link.name) { @if ((link?.children?.length || 0) > 0) {
+        <button
+          class="flex justify-between items-center px-3 py-2 font-semibold rounded-xl text-primary-50 hover:bg-primary-700 transition-all duration-200 active:scale-[0.99]"
+          (click)="onToggleTab(link.name)"
+          [class.bg-primary-700]="isTabOpen(link.name)"
+          [class.text-white]="isTabOpen(link.name)">
+          <div class="inline-flex gap-2.5 items-center">
+            <i-lucide [name]="link.icon" class="size-4 text-inherit" />
+            <span>{{ link.name }}</span>
+          </div>
+          <i-lucide
+            [name]="icons.ChevronDown"
+            class="size-4 transition-transform duration-300 text-primary-400"
+            [class.rotate-180]="isTabOpen(link.name)"
+            [class.text-white]="isTabOpen(link.name)" />
+        </button>
+        <div class="sidebar-submenu" [class.is-open]="isTabOpen(link.name)">
+          <div class="sidebar-submenu__inner ml-5 pl-4 border-l-2 border-primary-700/40 flex flex-col gap-1.5">
+            <div class="pt-1">
+              @for (child of link.children; track child.name) {
               <a
-                [routerLink]="link.path"
-                class="group inline-flex items-center gap-2.5 px-3 py-2 font-semibold rounded-xl text-primary-50 hover:bg-primary-700/60 transition-all duration-200 active:scale-[0.99]"
-                [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-                [routerLinkActive]="'bg-primary-700 text-white shadow-sm'">
-                <i-lucide [name]="link.icon" class="size-4 text-inherit" />
-                <span>{{ link.name }}</span>
+                class="group relative flex items-center gap-1.5 mb-2 last:mb-0 text-primary-200 text-sm rounded-lg hover:text-white transition-all duration-150 group-[.active-link]:bg-primary-700/50 group-[.active-link]:text-white group-[.active-link]:font-medium group-[.active-link]:shadow-sm"
+                [routerLink]="child.path"
+                [routerLinkActive]="'active-link text-white'"
+                [routerLinkActiveOptions]="{ exact: child.exactUrl || false }">
+                <span
+                  class="shrink-0 w-1.5 h-1.5 rounded-full bg-primary-500/60 group-hover:bg-primary-400 group-[.active-link]:bg-white transition-colors"></span>
+                {{ child.name }}
               </a>
-            }
-          }
+              }
+            </div>
+          </div>
         </div>
+        } @else {
+        <a
+          [routerLink]="link.path"
+          class="group inline-flex items-center gap-2.5 px-3 py-2 font-semibold rounded-xl text-primary-50 hover:bg-primary-700/60 transition-all duration-200 active:scale-[0.99]"
+          [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+          [routerLinkActive]="'bg-primary-700 text-white shadow-sm'">
+          <i-lucide [name]="link.icon" class="size-4 text-inherit" />
+          <span>{{ link.name }}</span>
+        </a>
+        } }
       </div>
+    </div>
     }
   </div>
 </aside>
