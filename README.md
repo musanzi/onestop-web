@@ -41,7 +41,7 @@ Run the admin app:
 pnpm dev:admin
 ```
 
-The admin dev server is configured on port `4000`. The client app uses the Angular dev server default unless overridden from the command line.
+The client dev server runs on port `4000`, the admin dev server on port `4100`.
 
 You can also call Nx targets directly:
 
@@ -49,6 +49,16 @@ You can also call Nx targets directly:
 pnpm nx serve client
 pnpm nx serve admin
 ```
+
+### With Docker
+
+A dev Compose file mounts the repo into containers and runs both apps via the Nx dev servers:
+
+```sh
+docker compose -f compose.dev.yml up
+```
+
+`client` is served on `4000` and `admin` on `4100`.
 
 ## Build
 
@@ -70,6 +80,18 @@ Both apps use Angular's server output mode. After building, run the SSR server e
 pnpm ssr:client
 pnpm ssr:admin
 ```
+
+### With Docker
+
+The `Dockerfile` is a multi-stage build (`base` -> `dependencies` -> `development`/`build` -> `production`) that installs dependencies, runs `pnpm build`, and prunes to production dependencies. `compose.prod.yml` builds the `production` target and serves both apps' SSR output:
+
+```sh
+docker compose -f compose.prod.yml up -d
+```
+
+## CI/CD
+
+`.github/workflows/deploy.yml` runs lint on every push to `main`, then deploys over SSH by pulling the latest `main` and running `docker compose -f compose.prod.yml up -d --remove-orphans` on the target VPS.
 
 ## Quality Checks
 
