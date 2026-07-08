@@ -1,6 +1,6 @@
 services:
-  website:
-    container_name: onestop-admin
+  client:
+    container_name: onestop-client
     build:
       context: .
       target: production
