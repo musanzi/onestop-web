@@ -44,36 +44,36 @@ jobs:
       - name: Build apps
         run: pnpm build
 
-  deploy:
-    name: Deploy to VPS
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    needs: ci
-    environment: production
+  # deploy:
+  #   name: Deploy to VPS
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 20
+  #   needs: ci
+  #   environment: production
 
-    steps:
-      - name: Deploy over SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            set -eu
+  #   steps:
+  #     - name: Deploy over SSH
+  #       uses: appleboy/ssh-action@v1
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USER }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         script: |
+  #           set -eu
 
-            export NVM_DIR="$HOME/.nvm"
-            . "$NVM_DIR/nvm.sh"
-            nvm use 24
+  #           export NVM_DIR="$HOME/.nvm"
+  #           . "$NVM_DIR/nvm.sh"
+  #           nvm use 24
 
-            cd "${{ secrets.PROJECT_PATH }}"
+  #           cd "${{ secrets.PROJECT_PATH }}"
 
-            git fetch origin main
-            git reset --hard origin/main
+  #           git fetch origin main
+  #           git reset --hard origin/main
 
-            pnpm install --frozen-lockfile
-            pnpm build
+  #           pnpm install --frozen-lockfile
+  #           pnpm build
 
-            pm2 reload client --update-env
-            pm2 reload admin --update-env
-            pm2 save
+  #           pm2 reload client --update-env
+  #           pm2 reload admin --update-env
+  #           pm2 save
