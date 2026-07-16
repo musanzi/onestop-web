@@ -2,7 +2,7 @@ import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
   isMainModule,
-  writeResponseToNodeResponse,
+  writeResponseToNodeResponse
 } from '@angular/ssr/node';
 import express from 'express';
 import { dirname, resolve } from 'node:path';
@@ -12,7 +12,9 @@ const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+const angularApp = new AngularNodeAppEngine({
+  allowedHosts: ['*.localhost', 'localhost', 'admin.cinolu.org', '*.cinolu.org']
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -33,8 +35,8 @@ app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
     index: false,
-    redirect: false,
-  }),
+    redirect: false
+  })
 );
 
 /**

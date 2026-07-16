@@ -1,5 +1,5 @@
 export interface SubprogramInterface {
-  id: string;
+  id?: string;
   programId: string;
   name: string;
   description: string;

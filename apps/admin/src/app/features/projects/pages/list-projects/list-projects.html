@@ -1,6 +1,4 @@
-@let isLoading = store.isLoading();
-@let projectCount = store.projects()[1];
-@let projects = store.projects()[0];
+@let isLoading = store.isLoading(); @let projectCount = store.projects()[1]; @let projects = store.projects()[0];
 <div class="dashboard-main-content">
   <div class="flex flex-col md:flex-row gap-4 md:justify-between md:items-center mb-4">
     <app-ui-badge [label]="projectCount.toString() + ' Projets'" />
@@ -35,69 +33,70 @@
   </div>
   <div class="mt-6">
     @if (isLoading && projectCount === 0) {
-      <app-ui-table-skeleton [rows]="10" [columns]="5" />
-    }
-    @if (projectCount > 0) {
-      <div class="ui-table-wrapper">
-        <table class="ui-table">
-          <thead class="ui-table-head">
-            <tr class="ui-table-head-row">
-              <th class="ui-table-header">Projet</th>
-              <th class="ui-table-header">Début</th>
-              <th class="ui-table-header">Fin</th>
-              <th class="ui-table-header">Participants</th>
-              <th class="ui-table-header">Statut</th>
-              <th class="ui-table-header">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="ui-table-body">
-            @for (project of projects; track project.id) {
-              <tr class="ui-table-row">
-                <td class="ui-table-cell">
-                  <div class="flex items-center gap-3">
-                    <div class="relative">
-                      <app-ui-avatar [shape]="'square'" [image]="project | apiIMG: 'project'" [label]="project.name" />
-                    </div>
-                    <p class="font-semibold capitalize text-gray-900 w-32 md:w-48 line-clamp-1 md:line-clamp-2">
-                      {{ project.name }}
-                    </p>
+    <app-ui-table-skeleton [rows]="10" [columns]="5" />
+    } @if (projectCount > 0) {
+    <div class="ui-table-wrapper">
+      <table class="ui-table">
+        <thead class="ui-table-head">
+          <tr class="ui-table-head-row">
+            <th class="ui-table-header">Projet</th>
+            <th class="ui-table-header">Début</th>
+            <th class="ui-table-header">Fin</th>
+            <th class="ui-table-header">Participants</th>
+            <th class="ui-table-header">Statut</th>
+            <th class="ui-table-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="ui-table-body">
+          @for (project of projects; track project.id) {
+          <tr class="ui-table-row">
+            <td class="ui-table-cell">
+              <a class="flex items-center" [routerLink]="['/projects', project.slug]">
+                <div class="flex items-center gap-3">
+                  <div class="relative">
+                    <app-ui-avatar [shape]="'square'" [image]="project | apiIMG: 'project'" [label]="project.name" />
                   </div>
-                </td>
-                <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
-                  {{ project.started_at | date: 'dd MMM yyyy' }}
-                </td>
-                <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
-                  {{ project.ended_at | date: 'dd MMM yyyy' }}
-                </td>
-                <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
-                  <app-ui-badge [variant]="'info'" [label]="project.participantsCount.toString()" />
-                </td>
-                <td class="ui-table-cell">
-                  @if (project.is_published) {
-                    <app-ui-badge [variant]="'success'" [label]="'Publié'" />
-                  } @else {
-                    <app-ui-badge [label]="'Brouillon'" />
-                  }
-                </td>
-                <td class="ui-table-cell">
-                  <div class="flex items-center gap-2">
-                    <button
-                      [routerLink]="['/projects', project.slug]"
-                      class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-transparent bg-transparent px-3.5 py-2 text-sm leading-6 font-medium text-primary-700 shadow-none hover:bg-primary-50">
-                      <i-lucide [name]="icons.Eye" class="size-4" />
-                      Détails
-                    </button>
-                    <app-ui-button (clicked)="onDelete(project.id)" size="small" variant="danger">
-                      <i-lucide [name]="icons.Trash" class="size-4" />
-                      Supprimer
-                    </app-ui-button>
-                  </div>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+                  <p class="font-semibold capitalize text-gray-900 w-32 md:w-48 line-clamp-1 md:line-clamp-2">
+                    {{ project.name }}
+                  </p>
+                </div>
+              </a>
+            </td>
+            <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
+              {{ project.started_at | date: 'dd MMM yyyy' }}
+            </td>
+            <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
+              {{ project.ended_at | date: 'dd MMM yyyy' }}
+            </td>
+            <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">
+              <app-ui-badge [variant]="'info'" [label]="project.participantsCount.toString()" />
+            </td>
+            <td class="ui-table-cell">
+              @if (project.is_published) {
+              <app-ui-badge [variant]="'success'" [label]="'Publié'" />
+              } @else {
+              <app-ui-badge [label]="'Brouillon'" />
+              }
+            </td>
+            <td class="ui-table-cell">
+              <div class="flex items-center gap-2">
+                <a
+                  [routerLink]="['/projects', project.slug]"
+                  class="relative inline-flex items-center justify-center gap-1 overflow-hidden rounded-lg border border-primary-300 bg-transparent px-2 py-1.5 text-sm leading-6 font-medium text-primary-700 shadow-none hover:bg-primary-50">
+                  <i-lucide [name]="icons.Eye" class="size-4" />
+                  Détails
+                </a>
+                <app-ui-button (clicked)="onDelete(project.id)" size="small" variant="danger">
+                  <i-lucide [name]="icons.Trash" class="size-4" />
+                  Supprimer
+                </app-ui-button>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
     }
     <div class="flex flex-col justify-end items-end">
       <app-ui-pagination
@@ -108,25 +107,25 @@
     </div>
   </div>
   @if (projectCount === 0 && !isLoading) {
-    <div class="flex flex-col items-start">
-      <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-50 border border-primary-100">
-        <i-lucide [name]="icons.Search" class="w-10 h-10 stroke-[1.5] text-primary-500" />
-      </div>
-      <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun projet trouvé</h3>
-      <p class="text-gray-500 max-w-lg mb-8 text-base leading-relaxed">
-        Nous n'avons trouvé aucun projet correspondant à vos critères.<br />
-      </p>
-      <app-ui-button
-        (clicked)="onResetFilters()"
-        variant="secondary"
-        [outlined]="true"
-        styleClass="text-base font-medium px-6 py-2.5 rounded-md shadow">
-        <span class="flex items-center gap-2">
-          <i-lucide [name]="icons.Funnel" class="w-5 h-5 text-primary-500" />
-          <span>Réinitialiser les filtres</span>
-        </span>
-      </app-ui-button>
+  <div class="flex flex-col items-start">
+    <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-50 border border-primary-100">
+      <i-lucide [name]="icons.Search" class="w-10 h-10 stroke-[1.5] text-primary-500" />
     </div>
+    <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun projet trouvé</h3>
+    <p class="text-gray-500 max-w-lg mb-8 text-base leading-relaxed">
+      Nous n'avons trouvé aucun projet correspondant à vos critères.<br />
+    </p>
+    <app-ui-button
+      (clicked)="onResetFilters()"
+      variant="secondary"
+      [outlined]="true"
+      styleClass="text-base font-medium px-6 py-2.5 rounded-md shadow">
+      <span class="flex items-center gap-2">
+        <i-lucide [name]="icons.Funnel" class="w-5 h-5 text-primary-500" />
+        <span>Réinitialiser les filtres</span>
+      </span>
+    </app-ui-button>
+  </div>
   }
   <app-ui-confirm-dialog />
 </div>

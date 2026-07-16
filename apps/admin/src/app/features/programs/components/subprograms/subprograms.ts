@@ -139,7 +139,6 @@ export class ListSubprograms implements OnInit {
 
     this.store.create({
       payload: {
-        id: '',
         programId,
         name: values.name,
         description: values.description
