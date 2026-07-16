@@ -47,14 +47,16 @@
           @for (event of events; track event.id) {
           <tr class="ui-table-row">
             <td class="ui-table-cell">
-              <div class="flex items-center gap-3">
-                <div class="relative">
-                  <app-ui-avatar [shape]="'square'" [image]="event | apiIMG: 'event'" [label]="event.name" />
+              <a [routerLink]="['/events', event.slug]">
+                <div class="flex items-center gap-3">
+                  <div class="relative">
+                    <app-ui-avatar [shape]="'square'" [image]="event | apiIMG: 'event'" [label]="event.name" />
+                  </div>
+                  <p class="font-semibold text-gray-900 w-32 md:w-48 line-clamp-1 md:line-clamp-2 capitalize">
+                    {{ event.name }}
+                  </p>
                 </div>
-                <p class="font-semibold text-gray-900 w-32 md:w-48 line-clamp-1 md:line-clamp-2 capitalize">
-                  {{ event.name }}
-                </p>
-              </div>
+              </a>
             </td>
             <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">{{ event.started_at | date }}</td>
             <td class="ui-table-cell text-sm text-gray-600 whitespace-nowrap">{{ event.ended_at | date }}</td>

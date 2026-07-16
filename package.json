@@ -14,7 +14,8 @@
     "build:client": "pnpm nx build client",
     "build:admin": "pnpm nx build admin",
     "ssr:client": "node dist/apps/client/server/server.mjs",
-    "ssr:admin": "node dist/apps/admin/server/server.mjs"
+    "ssr:admin": "node dist/apps/admin/server/server.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^21.2.0",
@@ -35,6 +36,7 @@
     "@tailwindcss/postcss": "^4.1.11",
     "express": "^5.1.0",
     "filepond": "^4.32.10",
+    "husky": "^9.1.7",
     "filepond-plugin-file-validate-size": "^2.2.8",
     "filepond-plugin-file-validate-type": "^1.2.9",
     "filepond-plugin-image-preview": "^4.6.12",
@@ -55,6 +57,8 @@
     "@angular/cli": "~21.2.0",
     "@angular/compiler-cli": "~21.2.0",
     "@angular/language-service": "~21.2.0",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^9.8.0",
     "@nx/angular": "22.7.4",
     "@nx/eslint": "22.7.4",
