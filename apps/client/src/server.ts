@@ -13,7 +13,7 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine({
-  allowedHosts: ['*.localhost', 'localhost', 'admin.cinolu.org', '*.cinolu.org']
+  allowedHosts: ['*.localhost', 'localhost', 'cinolu.org', '*.cinolu.org']
 });
 
 /**
