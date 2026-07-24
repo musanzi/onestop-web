@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://admin.cinolu.org/sitemap.xml
