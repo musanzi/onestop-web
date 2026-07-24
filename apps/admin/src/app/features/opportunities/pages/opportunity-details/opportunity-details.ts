@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { OPPORTUNITY_DETAILS_ICONS } from '@shared/data';
@@ -11,9 +11,8 @@ import { OpportunitiesStore } from '../../store/opportunities.store';
 @Component({
   selector: 'app-opportunity-details',
   templateUrl: './opportunity-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [OpportunitiesStore],
-  imports: [LucideAngularModule, OpportunityCover, OpportunityUpdate, UiButton, UiConfirmDialog, UiTabs],
+  imports: [LucideAngularModule, OpportunityCover, OpportunityUpdate, UiButton, UiConfirmDialog, UiTabs]
 })
 export class OpportunityDetails {
   private readonly route = inject(ActivatedRoute);
@@ -25,7 +24,7 @@ export class OpportunityDetails {
   activeTab = signal('edit');
   tabs = [
     { label: 'Modifier', name: 'edit', icon: this.icons.SquarePen },
-    { label: 'Couverture', name: 'cover', icon: this.icons.Image },
+    { label: 'Couverture', name: 'cover', icon: this.icons.Image }
   ];
   private deleteRequested = signal(false);
 
@@ -53,7 +52,7 @@ export class OpportunityDetails {
       accept: () => {
         this.deleteRequested.set(true);
         this.store.delete(opportunity.id);
-      },
+      }
     });
   }
 

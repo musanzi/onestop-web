@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,13 +18,16 @@ import {
 import { MentorsStore } from '../../store/mentors.store';
 import { ExpertisesStore } from '../../store/expertises.store';
 import { MentorType } from '../../enums/mentor.enum';
-import { CreateExperienceInterface, CreateMentorInterface, MentorRequestInterface } from '../../interfaces/create-mentor.interface';
+import {
+  CreateExperienceInterface,
+  CreateMentorInterface,
+  MentorRequestInterface
+} from '../../interfaces/create-mentor.interface';
 import { UpdateMentorSkeleton } from '../../ui/update-mentor-skeleton/update-mentor-skeleton';
 
 @Component({
   selector: 'app-update-mentor',
   templateUrl: './update-mentor.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MentorsStore, ExpertisesStore],
   imports: [
     UiInput,

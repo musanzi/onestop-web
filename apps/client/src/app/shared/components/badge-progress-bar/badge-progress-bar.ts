@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { BadgeLevel } from '@shared/config/badges.config';
 import { NgClass } from '@angular/common';
 
@@ -6,7 +6,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-badge-progress-bar',
 
   imports: [NgClass],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: './badge-progress-bar.html'
 })
 export class BadgeProgressBarComponent {

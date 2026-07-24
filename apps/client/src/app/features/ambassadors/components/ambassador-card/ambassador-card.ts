@@ -1,4 +1,4 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,8 +11,7 @@ import { getInitials, getAmbassadorLevel } from '@shared/helpers/ambassador.help
   selector: 'app-ambassador-card',
 
   imports: [CommonModule, RouterLink, TranslateModule, LucideAngularModule, ApiImgPipe],
-  templateUrl: './ambassador-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './ambassador-card.html'
 })
 export class AmbassadorCard {
   ambassador = input.required<IUser>();

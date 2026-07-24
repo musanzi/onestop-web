@@ -1,15 +1,4 @@
-import {
-  Component,
-  input,
-  output,
-  forwardRef,
-  signal,
-  computed,
-  effect,
-  ElementRef,
-  inject,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, input, output, forwardRef, signal, computed, effect, ElementRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
@@ -21,7 +10,7 @@ import { UiCheckbox } from '../checkbox/checkbox';
   selector: 'app-ui-multi-select',
   imports: [FormsModule, LucideAngularModule, UiCheckbox],
   templateUrl: './multi-select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     '(document:click)': 'onDocumentClick($event)'
   },

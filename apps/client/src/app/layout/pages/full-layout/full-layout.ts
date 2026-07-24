@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { AppTopbar } from '../../components/app-topbar/app-topbar';
@@ -8,8 +8,7 @@ import { BackButton } from '@shared/components/back-button/back-button';
 @Component({
   selector: 'app-full-layout',
   templateUrl: './full-layout.html',
-  imports: [RouterOutlet, AppTopbar, Footer, BackButton],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [RouterOutlet, AppTopbar, Footer, BackButton]
 })
 export class FullLayout implements OnInit, OnDestroy {
   readonly topbarFixed = signal(false);

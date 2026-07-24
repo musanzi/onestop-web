@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Sidebar } from '../../components/sidebar/sidebar';
 import { BackButton } from '@shared/ui/back-button/back-button';
@@ -15,8 +15,7 @@ import { MobileMenu } from '../../components/mobile-menu/mobile-menu';
   host: {
     '(document:click)': 'onDocumentClick($event)'
   },
-  imports: [RouterModule, LucideAngularModule, Sidebar, BackButton, UiAvatar, ApiImgPipe, MobileMenu],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [RouterModule, LucideAngularModule, Sidebar, BackButton, UiAvatar, ApiImgPipe, MobileMenu]
 })
 export class AdminLayout {
   icons = ADMIN_LAYOUT_ICONS;

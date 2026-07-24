@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input, numberAttribute, output } from '@angular/core';
+import { Component, booleanAttribute, computed, input, numberAttribute, output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChevronLeft, ChevronRight, LucideAngularModule } from 'lucide-angular';
 
@@ -7,8 +7,7 @@ export type PaginationVisibleItem = number | 'ellipsis';
 @Component({
   selector: 'ui-pagination',
   imports: [LucideAngularModule, TranslateModule],
-  templateUrl: './pagination.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './pagination.html'
 })
 export class PaginationComponent {
   readonly page = input(1, { transform: numberAttribute });
@@ -94,13 +93,9 @@ export class PaginationComponent {
 
   protected readonly isInteractionDisabled = computed(() => this.disabled() || this.loading());
 
-  protected readonly isPreviousDisabled = computed(
-    () => this.isInteractionDisabled() || this.page() <= 1
-  );
+  protected readonly isPreviousDisabled = computed(() => this.isInteractionDisabled() || this.page() <= 1);
 
-  protected readonly isNextDisabled = computed(
-    () => this.isInteractionDisabled() || this.page() >= this.totalPages()
-  );
+  protected readonly isNextDisabled = computed(() => this.isInteractionDisabled() || this.page() >= this.totalPages());
 
   protected setPage(nextPage: number): void {
     if (this.isInteractionDisabled()) {

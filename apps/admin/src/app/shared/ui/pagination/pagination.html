@@ -21,7 +21,6 @@
               class="size-10 rounded-full border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98]"
               [class.border-primary-500]="currentPage() === item"
               [class.bg-primary-500]="currentPage() === item"
-              [class.text-white]="currentPage() === item"
               [class.pointer-events-none]="currentPage() === item"
               (click)="goToPage(item)">
               {{ item }}

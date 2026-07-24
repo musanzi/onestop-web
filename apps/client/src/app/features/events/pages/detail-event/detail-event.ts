@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, inject, signal, effect, model, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, effect, model, computed } from '@angular/core';
 import { EventSkeleton } from '../../components/event-detail-skeleton/event-skeleton';
 import {
   LucideAngularModule,
@@ -28,9 +28,16 @@ import { PublicContainer, PublicSection } from '@shared/public';
 @Component({
   selector: 'app-event',
   providers: [EventStore, GalleryEventStore],
-  imports: [CommonModule, EventSkeleton, LucideAngularModule, ApiImgPipe, TranslateModule, PublicSection, PublicContainer],
-  templateUrl: './detail-event.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [
+    CommonModule,
+    EventSkeleton,
+    LucideAngularModule,
+    ApiImgPipe,
+    TranslateModule,
+    PublicSection,
+    PublicContainer
+  ],
+  templateUrl: './detail-event.html'
 })
 export class DetailEvent implements OnInit {
   images = model<IImage[]>([]);

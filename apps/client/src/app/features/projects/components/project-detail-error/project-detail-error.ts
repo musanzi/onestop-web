@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, AlertCircle, Search, Home, ArrowLeft } from 'lucide-angular';
 
 @Component({
   selector: 'app-project-detail-error',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [RouterLink, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-error.html'
 })

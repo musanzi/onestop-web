@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, computed, effect } from '@angular/core';
+import { Component, inject, OnInit, computed, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersStore } from '../../store/users.store';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,7 +13,6 @@ import { UserNotFoundPlaceholder } from '../../ui/user-not-found-placeholder/use
 @Component({
   selector: 'app-user-update',
   templateUrl: './update-user.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersStore, RolesStore],
   imports: [
     UiInput,

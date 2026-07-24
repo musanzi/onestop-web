@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy, effect } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, effect } from '@angular/core';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ParticipationsStore } from '@features/dashboard/shared/store/participations.store';
 import { ProgramCard } from '../../../components/program-card/program-card';
@@ -12,8 +12,7 @@ type LoadingPhase = 'current' | 'upcoming' | 'done';
   selector: 'app-discover-programs',
   imports: [NgClass, NgTemplateOutlet, ProgramCard, LucideAngularModule],
   templateUrl: './discover.html',
-  providers: [ProjectsStore],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [ProjectsStore]
 })
 export class DiscoverPrograms implements OnInit {
   projectsStore = inject(ProjectsStore);

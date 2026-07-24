@@ -1,9 +1,8 @@
-import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-ui-table-skeleton',
-  templateUrl: './table-skeleton.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './table-skeleton.html'
 })
 export class UiTableSkeleton {
   columns = input<number>(10);

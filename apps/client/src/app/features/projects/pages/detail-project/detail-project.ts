@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { ProjectSkeleton } from '../../components/project-skeleton/project-skeleton';
 import { LucideAngularModule, ThumbsUp } from 'lucide-angular';
 import { ProjectStore } from '../../store/project.store';
@@ -45,8 +45,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './detail-project.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './detail-project.html'
 })
 export class DetailProject implements OnInit {
   #route = inject(ActivatedRoute);
@@ -135,9 +134,7 @@ export class DetailProject implements OnInit {
 
   orderedPhases = computed(() => {
     const phases = this.store.project()?.phases ?? [];
-    return [...phases].sort(
-      (a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0)
-    );
+    return [...phases].sort((a, b) => ((a as { order?: number }).order ?? 0) - ((b as { order?: number }).order ?? 0));
   });
 
   icons = { thumbsUp: ThumbsUp };

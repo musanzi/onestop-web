@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
@@ -18,8 +12,7 @@ import type { MenuItem } from '@features/dashboard/shared/config/menu.config';
 @Component({
   selector: 'app-mentor-dashboard-sidebar',
   imports: [AsyncPipe, NgClass, RouterModule, LucideAngularModule],
-  templateUrl: './mentor-dashboard-sidebar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentor-dashboard-sidebar.html'
 })
 export class MentorDashboardSidebar {
   private readonly router = inject(Router);

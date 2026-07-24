@@ -1,19 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { ARTICLE_DETAILS_ICONS } from '@shared/data';
 import { UiTabs, UiButton } from '@shared/ui';
 import { ArticlesStore } from '../../store/articles.store';
-import { ArticleUpdate } from '../../components/article-update/article-update';
-import { ArticleGalleryComponent } from '../../components/article-gallery/article-gallery';
+import { ArticleUpdate, ArticleGalleryComponent } from '@features/blog/ui';
 
 @Component({
   selector: 'app-update-details',
   providers: [ArticlesStore],
   imports: [CommonModule, UiTabs, ArticleUpdate, ArticleGalleryComponent, LucideAngularModule, UiButton],
-  templateUrl: './article-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './article-details.html'
 })
 export class ArticleDetails implements OnInit {
   icons = ARTICLE_DETAILS_ICONS;

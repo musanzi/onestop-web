@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ArrowRight, BriefcaseBusiness } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,8 +24,7 @@ import { PublicButton, PublicContainer, PublicSection } from '@shared/public';
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './recent-opportunities.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './recent-opportunities.html'
 })
 export class RecentOpportunities {
   protected readonly store = inject(OpportunitiesStore);

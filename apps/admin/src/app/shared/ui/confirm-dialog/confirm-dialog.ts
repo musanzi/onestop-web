@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { UI_CONFIRM_DIALOG_ICONS } from '@shared/data';
 import { UiButton } from '../form/button/button';
@@ -7,8 +7,7 @@ import { ConfirmationService } from '@shared/services/confirmation';
 @Component({
   selector: 'app-ui-confirm-dialog',
   imports: [UiButton, LucideAngularModule],
-  templateUrl: './confirm-dialog.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './confirm-dialog.html'
 })
 export class UiConfirmDialog {
   icons = UI_CONFIRM_DIALOG_ICONS;

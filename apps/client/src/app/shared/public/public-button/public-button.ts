@@ -1,12 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output
-} from '@angular/core';
+import { booleanAttribute, Component, computed, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PUBLIC_BUTTON_VARIANTS } from '../public.tokens';
 
@@ -15,8 +8,7 @@ export type PublicButtonVariant = keyof typeof PUBLIC_BUTTON_VARIANTS;
 @Component({
   selector: 'app-public-button',
   imports: [RouterLink, NgTemplateOutlet],
-  templateUrl: './public-button.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './public-button.html'
 })
 export class PublicButton {
   readonly variant = input<PublicButtonVariant>('primary');

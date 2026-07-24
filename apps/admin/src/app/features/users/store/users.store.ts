@@ -15,10 +15,10 @@ export const UsersStore = signalStore(
     isDownloading: false,
     users: [[], 0],
     user: null,
-    staff: [],
+    staff: []
   }),
   withProps(() => ({
-    _usersService: inject(UsersService),
+    _usersService: inject(UsersService)
   })),
   withMethods(({ _usersService, ...store }) => ({
     loadAll: rxMethod<FilterUsersInterface>(
@@ -27,16 +27,16 @@ export const UsersStore = signalStore(
         switchMap((filters) =>
           _usersService.getAll(filters).pipe(
             tap({
-              next: (users) => patchState(store, { isLoading: false, users }),
+              next: (users) => patchState(store, { isLoading: false, users })
             }),
             catchError(() => {
               patchState(store, { users: [[], 0] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isLoading: false }))
+          )
+        )
+      )
     ),
     loadStaff: rxMethod<void>(
       pipe(
@@ -44,16 +44,16 @@ export const UsersStore = signalStore(
         switchMap(() =>
           _usersService.getStaff().pipe(
             tap({
-              next: (staff) => patchState(store, { isLoading: false, staff }),
+              next: (staff) => patchState(store, { isLoading: false, staff })
             }),
             catchError(() => {
               patchState(store, { staff: [] });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isLoading: false }))
+          )
+        )
+      )
     ),
     loadOne: rxMethod<string>(
       pipe(
@@ -61,16 +61,16 @@ export const UsersStore = signalStore(
         switchMap((email) =>
           _usersService.getOne(email).pipe(
             tap({
-              next: (user) => patchState(store, { isLoading: false, user }),
+              next: (user) => patchState(store, { isLoading: false, user })
             }),
             catchError(() => {
               patchState(store, { user: null });
               return EMPTY;
             }),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isLoading: false }))
+          )
+        )
+      )
     ),
     create: rxMethod<UserInterface>(
       pipe(
@@ -78,13 +78,13 @@ export const UsersStore = signalStore(
         switchMap((dto) =>
           _usersService.create(dto).pipe(
             tap({
-              next: (user) => patchState(store, { isLoading: false, user }),
+              next: (user) => patchState(store, { isLoading: false, user })
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isLoading: false }))
+          )
+        )
+      )
     ),
     update: rxMethod<{ id: string; dto: UserInterface }>(
       pipe(
@@ -92,13 +92,13 @@ export const UsersStore = signalStore(
         switchMap((params) =>
           _usersService.update(params.id, params.dto).pipe(
             tap({
-              next: (user) => patchState(store, { isUpdating: false, user }),
+              next: (user) => patchState(store, { isUpdating: false, user })
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isUpdating: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isUpdating: false }))
+          )
+        )
+      )
     ),
     delete: rxMethod<string>(
       pipe(
@@ -110,30 +110,13 @@ export const UsersStore = signalStore(
                 const [list, count] = store.users();
                 const filtered = list.filter((u) => u.id !== userId);
                 patchState(store, { isLoading: false, users: [filtered, Math.max(0, count - 1)] });
-              },
+              }
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
-    ),
-    clear: rxMethod<{ onSuccess: () => void }>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(({ onSuccess }) =>
-          _usersService.clearInvalidUsers().pipe(
-            tap({
-              next: () => {
-                patchState(store, { isLoading: false });
-                onSuccess();
-              },
-            }),
-            catchError(() => EMPTY),
-            finalize(() => patchState(store, { isLoading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isLoading: false }))
+          )
+        )
+      )
     ),
     download: rxMethod<FilterUsersInterface>(
       pipe(
@@ -141,13 +124,13 @@ export const UsersStore = signalStore(
         switchMap((queryParams) =>
           _usersService.download(queryParams).pipe(
             tap({
-              next: () => patchState(store, { isDownloading: false }),
+              next: () => patchState(store, { isDownloading: false })
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isDownloading: false })),
-          ),
-        ),
-      ),
+            finalize(() => patchState(store, { isDownloading: false }))
+          )
+        )
+      )
     ),
     importCsv: rxMethod<{ file: File; onSuccess: () => void }>(
       pipe(
@@ -158,13 +141,13 @@ export const UsersStore = signalStore(
               next: () => {
                 patchState(store, { isImportingCsv: false });
                 onSuccess();
-              },
+              }
             }),
             catchError(() => EMPTY),
-            finalize(() => patchState(store, { isImportingCsv: false })),
-          ),
-        ),
-      ),
-    ),
-  })),
+            finalize(() => patchState(store, { isImportingCsv: false }))
+          )
+        )
+      )
+    )
+  }))
 );

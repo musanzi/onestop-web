@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { PROJECT_DETAILS_ICONS } from '@shared/data';
@@ -9,18 +9,17 @@ import { ProjectDetailsSkeleton } from '../../ui/project-details-skeleton/projec
 import { SubprogramsStore } from '@features/programs/store/subprograms.store';
 import { CategoriesStore } from '@features/projects/store/project-categories.store';
 import { UsersStore } from '@features/users/store/users.store';
-import { ProjectGallery } from '@features/projects/components/project-gallery/project-gallery';
-import { ProjectNotifications } from '@features/projects/components/project-notifications/project-notifications';
-import { ProjectParticipations } from '@features/projects/components/project-participations/project-participations';
-import { Phases } from '@features/projects/components/project-phases/phases';
-import { ProjectResources } from '@features/projects/components/project-resources/project-resources';
-import { ProjectSheet } from '@features/projects/components/project-sheet/project-sheet';
-import { ProjectUpdate } from '@features/projects/components/project-update/project-update';
+import { ProjectGallery } from '@features/projects/ui/project-gallery/project-gallery';
+import { ProjectNotifications } from '@features/projects/ui/project-notifications/project-notifications';
+import { ProjectParticipations } from '@features/projects/ui/project-participations/project-participations';
+import { Phases } from '@features/projects/ui/project-phases/phases';
+import { ProjectResources } from '@features/projects/ui/project-resources/project-resources';
+import { ProjectSheet } from '@features/projects/ui/project-sheet/project-sheet';
+import { ProjectUpdate } from '@features/projects/ui/project-update/project-update';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [GalleryStore, ProjectsStore, CategoriesStore, SubprogramsStore, UsersStore],
   imports: [
     UiTabs,

@@ -1,4 +1,4 @@
-import { Component, effect, input, output, viewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, input, output, viewChild } from '@angular/core';
 import { FilePondComponent, FilePondModule, registerPlugin } from 'ngx-filepond';
 import imagePreview from 'filepond-plugin-image-preview';
 import { environment } from '@env/environment';
@@ -7,8 +7,7 @@ registerPlugin(imagePreview);
 @Component({
   selector: 'app-ui-file-upload',
   imports: [FilePondModule],
-  templateUrl: './file-upload.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './file-upload.html'
 })
 export class FileUpload {
   pond = viewChild<FilePondComponent>('pond');

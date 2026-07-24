@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { STATS } from '../../data/stats.data';
 import { LucideAngularModule, HandCoins, Lightbulb, MoveUpRight, User, UserPlus } from 'lucide-angular';
@@ -19,8 +19,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './why-join-us.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './why-join-us.html'
 })
 export class WhyJoinUs {
   stats = STATS;

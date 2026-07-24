@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy, effect } from '@angular/core';
+import { Component, inject, OnInit, signal, effect } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -30,8 +30,7 @@ import {
 @Component({
   selector: 'app-mentor-apply',
   imports: [ReactiveFormsModule, RouterModule, FormManager, LucideAngularModule],
-  templateUrl: './mentor-apply.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentor-apply.html'
 })
 export class MentorApply implements OnInit {
   authStore = inject(AuthStore);
@@ -200,9 +199,8 @@ export class MentorApply implements OnInit {
     }
 
     const experiences: CreateExperienceDto[] = ((formValue.experiences as ExperienceFormValue[]) || [])
-      .filter(
-        (exp): exp is ExperienceFormValue & { start_date: string } =>
-          Boolean(exp.company_name && exp.job_title && exp.start_date)
+      .filter((exp): exp is ExperienceFormValue & { start_date: string } =>
+        Boolean(exp.company_name && exp.job_title && exp.start_date)
       ) // Filtrer les expériences valides
       .map((exp) => {
         const experience: CreateExperienceDto = {

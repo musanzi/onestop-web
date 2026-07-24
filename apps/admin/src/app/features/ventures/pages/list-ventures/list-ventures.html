@@ -43,18 +43,20 @@
               <tr class="ui-table-row">
                 <td class="ui-table-cell">
                   <div class="flex items-center gap-3">
-                    @if (venture.logo) {
-                      <div class="relative size-10 rounded-lg border border-gray-200">
-                        <img [ngSrc]="venture | apiIMG: 'venture'" [alt]="venture.name" fill class="object-cover" />
-                      </div>
-                    } @else {
-                      <div
-                        class="size-10 rounded-lg bg-primary-100 flex items-center justify-center text-primary-600 font-semibold text-sm">
-                        {{ venture.name.charAt(0).toLocaleUpperCase() }}
-                      </div>
-                    }
+                    <div>
+                      @if (venture.logo) {
+                        <div class="relative size-10 border border-gray-200">
+                          <img [ngSrc]="venture | apiIMG: 'venture'" [alt]="venture.name" fill class="object-cover" />
+                        </div>
+                      } @else {
+                        <div
+                          class="size-10! uppercase bg-primary-100 flex items-center justify-center text-primary-600 font-semibold text-sm">
+                          {{ venture.name.charAt(0) }}
+                        </div>
+                      }
+                    </div>
                     <div class="flex flex-col">
-                      <p class="font-semibold text-gray-900 text-nowrap">{{ venture.name }}</p>
+                      <p class="font-semibold text-gray-900 max-w-80 line-clamp-2">{{ venture.name }}</p>
                       @if (venture.location) {
                         <p class="text-xs text-gray-500">{{ venture.location }}</p>
                       }

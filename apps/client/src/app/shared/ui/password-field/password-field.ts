@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
+import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular';
 import { LabelComponent } from '../label/label';
+
 @Component({
   selector: 'ui-password-field',
   imports: [LabelComponent, LucideAngularModule],
   template: `
     <div class="block">
       @if (label()) {
-      <ui-label [forId]="inputId()">{{ label() }}</ui-label>
+        <ui-label [forId]="inputId()">{{ label() }}</ui-label>
       }
       <div
         class="flex overflow-hidden rounded-lg border shadow-theme-xs focus-within:ring-3 dark:bg-gray-900"
@@ -38,7 +39,7 @@ import { LabelComponent } from '../label/label';
         </button>
       </div>
       @if (error()) {
-      <p class="mt-1.5 text-xs text-error-500">{{ error() }}</p>
+        <p class="mt-1.5 text-xs text-error-500">{{ error() }}</p>
       }
     </div>
   `,
@@ -48,8 +49,7 @@ import { LabelComponent } from '../label/label';
       useExisting: forwardRef(() => PasswordFieldComponent),
       multi: true
     }
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class PasswordFieldComponent implements ControlValueAccessor {
   readonly inputId = input('');

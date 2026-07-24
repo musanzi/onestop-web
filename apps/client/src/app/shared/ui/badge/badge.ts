@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'ui-badge',
@@ -6,8 +6,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     class="inline-flex items-center rounded-full border px-2.5 py-1.5 text-xs font-semibold leading-[1.2]"
     [class]="variantClasses[variant()]"
     ><ng-content
-  /></span>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  /></span>`
 })
 export class BadgeComponent {
   readonly variant = input<'primary' | 'secondary' | 'success' | 'warning' | 'danger'>('primary');

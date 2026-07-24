@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { BadgeLevel } from '@shared/config/badges.config';
 import { LucideAngularModule } from 'lucide-angular';
@@ -6,7 +6,7 @@ import { LucideAngularModule } from 'lucide-angular';
 @Component({
   selector: 'app-user-badge-indicator',
   imports: [NgClass, LucideAngularModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: './user-badge-indicator.html'
 })
 export class UserBadgeIndicatorComponent {

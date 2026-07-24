@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output, viewChild, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, input, OnInit, output, viewChild, inject } from '@angular/core';
 import { FilePondComponent, FilePondModule, registerPlugin } from 'ngx-filepond';
 import validateType from 'filepond-plugin-file-validate-type';
 import validateSize from 'filepond-plugin-file-validate-size';
@@ -10,12 +10,12 @@ registerPlugin(imagePreview, validateType, validateSize);
 /**
  * @deprecated Préférer `app-confirmed-image-upload` (1 image) ou `app-gallery-image-upload` (plusieurs).
  */
+
 @Component({
   selector: 'app-file-upload',
   imports: [FilePondModule],
   templateUrl: './file-upload.html',
-  styleUrl: './file-upload.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './file-upload.css'
 })
 export class FileUpload implements OnInit {
   pond = viewChild<FilePondComponent>('pond');
@@ -80,8 +80,7 @@ export class FileUpload implements OnInit {
               next: (event: HttpEvent<{ cover?: string; logo?: string; image?: string; id?: string }>) => {
                 if (event.type === HttpEventType.Response) {
                   const response = event.body;
-                  const fileId =
-                    response?.cover || response?.logo || response?.image || response?.id || file.name;
+                  const fileId = response?.cover || response?.logo || response?.image || response?.id || file.name;
                   load(fileId);
                   this.clearPondFiles(isMultiple);
                   this.loaded.emit();

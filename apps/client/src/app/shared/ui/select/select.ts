@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output } from '@angular/core';
+import { Component, computed, forwardRef, input, model, output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export interface UiSelectOption {
@@ -12,7 +12,6 @@ export interface UiSelectOption {
   selector: 'ui-select',
   imports: [CommonModule, FormsModule],
   templateUrl: './select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -1,5 +1,5 @@
 import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectCard } from '../../components/project-card/project-card';
 import { ProgramCardSkeletonComponent } from '../../components/project-card-skeleton/project-card-skeleton';
@@ -27,8 +27,7 @@ import { PaginationComponent } from '@shared/ui';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './list-projects.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-projects.html'
 })
 export class ListProjects implements OnInit {
   #router = inject(Router);

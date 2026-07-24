@@ -1,13 +1,13 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { LucideIconData } from 'lucide-angular';
 import { PublicPageHero } from '@shared/public';
 
 /** @deprecated Prefer `app-public-page-hero` directly. Thin wrapper kept for existing pages. */
+
 @Component({
   selector: 'app-hero-card',
   imports: [PublicPageHero],
-  templateUrl: './hero-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './hero-card.html'
 })
 export class HeroCard {
   background = input.required<string>();

@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
   imports: [],
   templateUrl: './loader.html',
-  styleUrl: 'loader.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: 'loader.css'
 })
 export class Loader {}

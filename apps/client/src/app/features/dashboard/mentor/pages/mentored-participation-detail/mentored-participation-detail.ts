@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy, ChangeDetectionStrategy, computed, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, computed, signal } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { MentorshipStore } from '@features/dashboard/shared/store/mentorship.store';
@@ -32,8 +32,7 @@ import { IPhase, IProjectParticipationReview, ParticipationReviewStatus } from '
 @Component({
   selector: 'app-mentored-participation-detail',
   imports: [NgClass, ApiImgPipe, CommonModule, LucideAngularModule, FormsModule],
-  templateUrl: './mentored-participation-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentored-participation-detail.html'
 })
 export class MentoredParticipationDetail implements OnInit, OnDestroy {
   mentorshipStore = inject(MentorshipStore);

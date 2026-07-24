@@ -1,15 +1,7 @@
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {
-  LucideAngularModule,
-  Eye,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Package,
-  MoveRight
-} from 'lucide-angular';
+import { LucideAngularModule, Eye, X, ChevronLeft, ChevronRight, Package, MoveRight } from 'lucide-angular';
 import { PublicProductStore } from '../../store/product.store';
 import { ProductDetailSkeleton } from '../product-detail-skeleton/product-detail-skeleton';
 import { ApiImgPipe, resolveApiImageUrl } from '@shared/pipes';
@@ -61,7 +53,9 @@ export class ProductDetail implements OnInit {
       this.seo.updateEntityPage({
         name: product.name,
         description: product.description,
-        path: ventureSlug ? `/entrepreneurs/venture/${ventureSlug}/${product.slug}` : `/entrepreneurs/venture/${product.slug}`,
+        path: ventureSlug
+          ? `/entrepreneurs/venture/${ventureSlug}/${product.slug}`
+          : `/entrepreneurs/venture/${product.slug}`,
         image: new ApiImgPipe().transform(product.gallery?.[0] ?? product, 'product')
       });
     });

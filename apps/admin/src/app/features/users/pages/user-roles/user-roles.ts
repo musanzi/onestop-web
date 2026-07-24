@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { USER_ROLES_ICONS } from '@shared/data';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,6 @@ import { ConfirmationService } from '@shared/services/confirmation';
 @Component({
   selector: 'app-user-roles',
   templateUrl: './user-roles.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [RolesStore],
   imports: [
     LucideAngularModule,

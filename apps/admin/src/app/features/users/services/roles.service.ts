@@ -14,7 +14,6 @@ export class RolesService {
 
   getAll(filters: FilterRolesInterface): Observable<[IRole[], number]> {
     const params = buildQueryParams(filters);
-
     return this.http.get<{ data: [IRole[], number] }>('roles/paginated', { params }).pipe(
       map(({ data }) => data),
       catchError(() => of())

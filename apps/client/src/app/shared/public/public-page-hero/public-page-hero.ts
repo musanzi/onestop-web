@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { PublicContainer, PublicContainerWidth } from '../public-container/public-container';
@@ -13,7 +13,7 @@ export type PublicPageHeroAlign = 'left' | 'center';
   selector: 'app-public-page-hero',
   imports: [LucideAngularModule, TranslateModule, NgClass, PublicContainer],
   templateUrl: './public-page-hero.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -51,7 +51,5 @@ export class PublicPageHero {
     return `${width} ${PUBLIC_BODY_CLASSES}`;
   });
 
-  protected readonly headerAlignClass = computed(() =>
-    this.align() === 'center' ? 'text-center' : 'text-left'
-  );
+  protected readonly headerAlignClass = computed(() => (this.align() === 'center' ? 'text-center' : 'text-left'));
 }

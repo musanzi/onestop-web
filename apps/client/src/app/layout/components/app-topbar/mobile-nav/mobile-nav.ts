@@ -45,9 +45,7 @@ export class MobileNav {
 
   user = computed(() => this.authStore().user());
   menuButtonClass = computed(() =>
-    this.solid() || this.isOpen()
-      ? 'text-gray-900 hover:bg-black/5'
-      : 'text-white hover:bg-white/10'
+    this.solid() || this.isOpen() ? 'text-gray-900 hover:bg-black/5' : 'text-white hover:bg-white/10'
   );
 
   translateField = computed(() => {

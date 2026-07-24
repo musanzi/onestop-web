@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   ArrowLeft,
@@ -38,8 +38,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicContainer,
     ButtonComponent
   ],
-  templateUrl: './list-sub-programs.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-sub-programs.html'
 })
 export class ListSubPrograms implements OnInit {
   icons = {

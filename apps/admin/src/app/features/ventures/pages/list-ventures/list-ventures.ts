@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_VENTURES_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -16,7 +16,6 @@ import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'app-list-ventures',
   templateUrl: './list-ventures.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [VenturesStore],
   imports: [
     LucideAngularModule,

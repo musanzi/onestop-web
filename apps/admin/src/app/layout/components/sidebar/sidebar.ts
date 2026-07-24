@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { SIDEBAR_ICONS } from '@shared/data';
@@ -13,8 +13,7 @@ import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'app-sidebar',
   imports: [RouterModule, LucideAngularModule, NgOptimizedImage],
-  templateUrl: './sidebar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './sidebar.html'
 })
 export class Sidebar {
   icons = SIDEBAR_ICONS;

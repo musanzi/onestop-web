@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,7 +14,6 @@ import { ProgramSectorsStore } from '../../store/program-sectors.store';
 @Component({
   selector: 'app-program-sectors',
   templateUrl: './program-sectors.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ProgramSectorsStore],
   imports: [
     CommonModule,

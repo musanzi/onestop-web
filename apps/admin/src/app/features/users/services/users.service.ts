@@ -84,19 +84,6 @@ export class UsersService {
     );
   }
 
-  clearInvalidUsers(): Observable<void> {
-    return this.http.delete<void>('users/clear').pipe(
-      map(() => {
-        this.toast.showSuccess('Utilisateurs invalides supprimés avec succès');
-      }),
-      catchError((error) => {
-        const message = extractApiErrorMessage(error, 'Échec de la suppression des utilisateurs invalides');
-        this.toast.showError(message);
-        return throwError(() => message);
-      })
-    );
-  }
-
   download(filters: FilterUsersInterface): Observable<Blob> {
     const params = buildQueryParams(filters);
 

@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveUpRight, ArrowRight } from 'lucide-angular';
 import { EventCardSkeleton } from '../../../events/components/event-card-skeleton/event-card-skeleton';
@@ -26,8 +26,7 @@ import { PublicButton, PublicContainer } from '@shared/public';
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './recent-events.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './recent-events.html'
 })
 export class RecentEvents {
   store = inject(RecentEventsStore);

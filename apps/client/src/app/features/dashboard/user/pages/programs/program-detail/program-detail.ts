@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProjectStore } from '@features/projects/store/project.store';
@@ -35,8 +35,7 @@ import { ButtonComponent, DialogComponent } from '@shared/ui';
   selector: 'app-program-detail',
   imports: [CommonModule, ApiImgPipe, RouterLink, LucideAngularModule, ButtonComponent, DialogComponent],
   providers: [ProjectStore],
-  templateUrl: './program-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './program-detail.html'
 })
 export class ProgramDetail implements OnInit {
   route = inject(ActivatedRoute);

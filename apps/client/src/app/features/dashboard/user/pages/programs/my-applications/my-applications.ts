@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ParticipationsStore } from '@features/dashboard/shared/store/participations.store';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
-import {
-  IParticipation,
-  IProjectParticipationReview,
-  ParticipationReviewStatus
-} from '@shared/models/entities.models';
+import { IParticipation, IProjectParticipationReview, ParticipationReviewStatus } from '@shared/models/entities.models';
 import {
   ArrowRight,
   BadgeCheck,

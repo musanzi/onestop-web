@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -28,8 +27,7 @@ export interface ResourceFormValue {
 @Component({
   selector: 'app-resource-form',
   imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
-  templateUrl: './resource-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './resource-form.html'
 })
 export class ResourceForm implements OnInit, OnChanges {
   @Input() mode: ResourceFormMode = 'create';

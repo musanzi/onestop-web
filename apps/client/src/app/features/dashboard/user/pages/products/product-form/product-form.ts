@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VenturesStore } from '@features/dashboard/shared/store/ventures.store';
@@ -25,8 +25,7 @@ import { Eye, LucideAngularModule } from 'lucide-angular';
     TranslateModule,
     LucideAngularModule
   ],
-  templateUrl: './product-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './product-form.html'
 })
 export class ProductForm implements OnInit {
   fb = inject(FormBuilder);

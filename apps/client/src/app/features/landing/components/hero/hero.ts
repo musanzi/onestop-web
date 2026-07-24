@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ChangeDetectionStrategy, inject, PLATFORM_ID, signal } from '@angular/core';
+import { afterNextRender, Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,8 +28,7 @@ interface Stat {
 @Component({
   selector: 'app-hero',
   imports: [LucideAngularModule, CountUpDirective, FadeInOnScrollDirective, TranslateModule, RouterLink],
-  templateUrl: './hero.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './hero.html'
 })
 export class Hero {
   private readonly platformId = inject(PLATFORM_ID);

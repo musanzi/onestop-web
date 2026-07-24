@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, FileText, FolderOpen } from 'lucide-angular';
@@ -15,8 +15,7 @@ import { type IProject, type IResource, type ResourcesFilter } from '@shared/mod
 @Component({
   selector: 'app-user-resources',
   imports: [CommonModule, FormsModule, ResourceCard, ResourceFilters, LucideAngularModule],
-  templateUrl: './user-resources.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './user-resources.html'
 })
 export class UserResources implements OnInit {
   participationsStore = inject(ParticipationsStore);

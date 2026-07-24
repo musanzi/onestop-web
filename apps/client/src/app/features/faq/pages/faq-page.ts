@@ -1,15 +1,9 @@
-import { Component, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, ChevronDown, Mail, Phone, MessageCircle } from 'lucide-angular';
 import { FAQItem } from '@shared/models';
 import { FaqPageSkeleton } from '../components/faq-page-skeleton/faq-page-skeleton';
-import {
-  PublicButton,
-  PublicCard,
-  PublicContainer,
-  PublicPageHero,
-  PublicSection
-} from '@shared/public';
+import { PublicButton, PublicCard, PublicContainer, PublicPageHero, PublicSection } from '@shared/public';
 
 @Component({
   selector: 'app-faq',
@@ -23,14 +17,18 @@ import {
     PublicCard,
     PublicButton
   ],
-  templateUrl: './faq-page.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './faq-page.html'
 })
 export class FaqPage {
   icons = { chevronDown: ChevronDown, mail: Mail, phone: Phone, messageCircle: MessageCircle };
-  selectedCategory = signal<'all' | 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical' | 'dashboard'>('all');
+  selectedCategory = signal<'all' | 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical' | 'dashboard'>(
+    'all'
+  );
 
-  categories: { key: 'all' | 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical' | 'dashboard'; label: string }[] = [
+  categories: {
+    key: 'all' | 'general' | 'programs' | 'events' | 'entrepreneurs' | 'technical' | 'dashboard';
+    label: string;
+  }[] = [
     { key: 'all', label: 'Toutes' },
     { key: 'general', label: 'Général' },
     { key: 'dashboard', label: 'Dashboard & Mentor' },
@@ -158,75 +156,75 @@ export class FaqPage {
 
     // Dashboard & Mentor
     {
-      question: "Comment accéder au tableau de bord (Dashboard) ?",
+      question: 'Comment accéder au tableau de bord (Dashboard) ?',
       answer:
         "Connectez-vous à votre compte Cinolu, puis cliquez sur « Tableau de bord » ou « Mon espace » dans le menu. Vous accéderez à votre Dashboard : vue d'ensemble, Mes Projets, programmes, parrainage et compte.",
       category: 'dashboard'
     },
     {
-      question: "À quoi sert la page « Accueil » du Dashboard ?",
+      question: 'À quoi sert la page « Accueil » du Dashboard ?',
       answer:
         "La page Accueil (Vue d'ensemble) vous donne un résumé de votre activité : vos projets, vos candidatures aux programmes, et des raccourcis vers les sections principales du tableau de bord.",
       category: 'dashboard'
     },
     {
-      question: "Comment gérer mes projets et mes produits ?",
+      question: 'Comment gérer mes projets et mes produits ?',
       answer:
-        "Allez dans « Mes Projets » dans le menu du Dashboard. Vous pouvez créer un ou plusieurs projets, les modifier, et gérer les produits associés. Un projet est nécessaire pour postuler à un programme.",
+        'Allez dans « Mes Projets » dans le menu du Dashboard. Vous pouvez créer un ou plusieurs projets, les modifier, et gérer les produits associés. Un projet est nécessaire pour postuler à un programme.',
       category: 'dashboard'
     },
     {
-      question: "Où découvrir et postuler aux programmes ?",
+      question: 'Où découvrir et postuler aux programmes ?',
       answer:
-        "Dans le Dashboard, section « Programmes » > « Découvrir ». Vous y voyez les programmes en cours et à venir. Cliquez sur un programme pour voir le détail, puis sur « Postuler » en choisissant le projet avec lequel candidater. Les candidatures en attente sont dans « Mes candidatures ».",
+        'Dans le Dashboard, section « Programmes » > « Découvrir ». Vous y voyez les programmes en cours et à venir. Cliquez sur un programme pour voir le détail, puis sur « Postuler » en choisissant le projet avec lequel candidater. Les candidatures en attente sont dans « Mes candidatures ».',
       category: 'dashboard'
     },
     {
-      question: "Que sont les « Programmes acceptés » et la « Roadmap » ?",
+      question: 'Que sont les « Programmes acceptés » et la « Roadmap » ?',
       answer:
-        "Une fois votre candidature acceptée, le programme apparaît dans « Programmes acceptés ». Vous y voyez votre progression (phases complétées) et des statistiques. La « Roadmap » d’un programme affiche la liste des phases : dates, statut (en cours, terminé, à venir) et, pour les phases actives, le dépôt de livrables (PDF).",
+        'Une fois votre candidature acceptée, le programme apparaît dans « Programmes acceptés ». Vous y voyez votre progression (phases complétées) et des statistiques. La « Roadmap » d’un programme affiche la liste des phases : dates, statut (en cours, terminé, à venir) et, pour les phases actives, le dépôt de livrables (PDF).',
       category: 'dashboard'
     },
     {
-      question: "Comment déposer un livrable pour une phase de programme ?",
+      question: 'Comment déposer un livrable pour une phase de programme ?',
       answer:
-        "Sur la page détail du programme (si vous êtes inscrit) ou sur la Roadmap du programme, ouvrez la phase concernée. Si la phase accepte des livrables et que la date limite n’est pas dépassée, choisissez un fichier PDF (max 10 Mo) et cliquez sur « Envoyer ». Vous pouvez soumettre plusieurs versions ; la dernière est prise en compte.",
+        'Sur la page détail du programme (si vous êtes inscrit) ou sur la Roadmap du programme, ouvrez la phase concernée. Si la phase accepte des livrables et que la date limite n’est pas dépassée, choisissez un fichier PDF (max 10 Mo) et cliquez sur « Envoyer ». Vous pouvez soumettre plusieurs versions ; la dernière est prise en compte.',
       category: 'dashboard'
     },
     {
-      question: "Où modifier mon profil et ma sécurité ?",
+      question: 'Où modifier mon profil et ma sécurité ?',
       answer:
-        "Dans le Dashboard, section « Mon Compte » > « Mon Profil » : « Informations » pour vos données personnelles, « Sécurité » pour changer votre mot de passe et les options de sécurité.",
+        'Dans le Dashboard, section « Mon Compte » > « Mon Profil » : « Informations » pour vos données personnelles, « Sécurité » pour changer votre mot de passe et les options de sécurité.',
       category: 'dashboard'
     },
     {
-      question: "Comment devenir mentor sur Cinolu ?",
+      question: 'Comment devenir mentor sur Cinolu ?',
       answer:
-        "Dans le Dashboard, allez dans « Mon Compte » > « Mon Profil » > « Mentorat ». Vous pouvez y postuler pour devenir mentor : renseignez votre expérience, vos expertises et votre parcours. Une fois votre candidature validée, le rôle « mentor » vous sera attribué et l’« Espace Mentor » apparaîtra dans le menu.",
+        'Dans le Dashboard, allez dans « Mon Compte » > « Mon Profil » > « Mentorat ». Vous pouvez y postuler pour devenir mentor : renseignez votre expérience, vos expertises et votre parcours. Une fois votre candidature validée, le rôle « mentor » vous sera attribué et l’« Espace Mentor » apparaîtra dans le menu.',
       category: 'dashboard'
     },
     {
-      question: "Qu’est-ce que l’Espace Mentor et qui y a accès ?",
+      question: 'Qu’est-ce que l’Espace Mentor et qui y a accès ?',
       answer:
-        "L’Espace Mentor est réservé aux utilisateurs ayant le rôle « mentor » (candidature mentor validée par Cinolu). Il contient le « Dashboard Mentor » (vue d’ensemble de votre activité mentor) et « Mon Profil Mentor » pour gérer votre profil public de mentor (CV, expertises, expériences).",
+        'L’Espace Mentor est réservé aux utilisateurs ayant le rôle « mentor » (candidature mentor validée par Cinolu). Il contient le « Dashboard Mentor » (vue d’ensemble de votre activité mentor) et « Mon Profil Mentor » pour gérer votre profil public de mentor (CV, expertises, expériences).',
       category: 'dashboard'
     },
     {
-      question: "À quoi sert le Dashboard Mentor ?",
+      question: 'À quoi sert le Dashboard Mentor ?',
       answer:
-        "Le Dashboard Mentor vous permet de suivre vos sessions de mentorat, les demandes en attente, vos mentorés actifs et votre activité récente. Vous y gérez vos rendez-vous et le suivi des entrepreneurs que vous accompagnez.",
+        'Le Dashboard Mentor vous permet de suivre vos sessions de mentorat, les demandes en attente, vos mentorés actifs et votre activité récente. Vous y gérez vos rendez-vous et le suivi des entrepreneurs que vous accompagnez.',
       category: 'dashboard'
     },
     {
-      question: "Où gérer mon profil mentor (CV, expertises) ?",
+      question: 'Où gérer mon profil mentor (CV, expertises) ?',
       answer:
-        "Dans le Dashboard, section « Mentorat » > « Mon Profil Mentor ». Vous pouvez mettre à jour vos années d’expérience, votre CV, vos expertises et vos expériences professionnelles. Ces informations sont visibles par les entrepreneurs qui recherchent un mentor.",
+        'Dans le Dashboard, section « Mentorat » > « Mon Profil Mentor ». Vous pouvez mettre à jour vos années d’expérience, votre CV, vos expertises et vos expériences professionnelles. Ces informations sont visibles par les entrepreneurs qui recherchent un mentor.',
       category: 'dashboard'
     },
     {
-      question: "Comment fonctionne le parrainage dans le Dashboard ?",
+      question: 'Comment fonctionne le parrainage dans le Dashboard ?',
       answer:
-        "Sous « Communauté » > « Parrainage », vous trouvez votre lien de parrainage à partager, la liste de vos filleuls, vos badges et votre progression, ainsi que l’historique de votre activité de parrainage.",
+        'Sous « Communauté » > « Parrainage », vous trouvez votre lien de parrainage à partager, la liste de vos filleuls, vos badges et votre progression, ainsi que l’historique de votre activité de parrainage.',
       category: 'dashboard'
     }
   ];

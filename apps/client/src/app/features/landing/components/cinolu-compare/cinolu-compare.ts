@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, ArrowRight, Briefcase, TrendingUp, Check } from 'lucide-angular';
 import { FadeInOnScrollDirective } from '@shared/directives/animations-on-scroll.directive';
@@ -34,8 +34,7 @@ interface CardData {
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './cinolu-compare.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './cinolu-compare.html'
 })
 export class CinoluCompare {
   readonly activeSide = signal<string | null>(null);

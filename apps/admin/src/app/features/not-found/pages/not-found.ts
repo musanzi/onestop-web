@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { NOT_FOUND_PAGE_ICONS } from '@shared/data';
@@ -8,8 +8,7 @@ import { UiButton } from '@ui';
 @Component({
   selector: 'app-not-found',
   imports: [LucideAngularModule, RouterModule, UiButton],
-  templateUrl: './not-found.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './not-found.html'
 })
 export class NotFoundPage {
   icons = NOT_FOUND_PAGE_ICONS;

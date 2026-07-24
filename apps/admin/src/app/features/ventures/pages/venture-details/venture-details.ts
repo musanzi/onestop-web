@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VenturesStore } from '../../store/ventures.store';
 import { LucideAngularModule } from 'lucide-angular';
@@ -14,7 +14,6 @@ import { VentureSkeleton } from '@features/ventures/ui/venture-skeleton/venture-
 @Component({
   selector: 'app-venture-details',
   templateUrl: './venture-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [VenturesStore, ConfirmationService],
   imports: [
     LucideAngularModule,

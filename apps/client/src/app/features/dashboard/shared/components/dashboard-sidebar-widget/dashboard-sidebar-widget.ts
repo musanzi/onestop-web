@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule, Rocket } from 'lucide-angular';
 
@@ -6,8 +6,7 @@ import { LucideAngularModule, Rocket } from 'lucide-angular';
   selector: 'app-dashboard-sidebar-widget',
   imports: [RouterLink, LucideAngularModule],
   template: `
-    <div
-      class="mx-auto mb-10 w-full max-w-60 rounded-2xl bg-gray-50 px-4 py-5 text-center dark:bg-white/[0.03]">
+    <div class="mx-auto mb-10 w-full max-w-60 rounded-2xl bg-gray-50 px-4 py-5 text-center dark:bg-white/[0.03]">
       <h3 class="mb-2 font-semibold text-gray-900 dark:text-white">Parrainage Cinolu</h3>
       <p class="mb-4 text-theme-sm text-gray-500 dark:text-gray-400">
         Invitez des entrepreneurs et développez l'écosystème.
@@ -19,8 +18,7 @@ import { LucideAngularModule, Rocket } from 'lucide-angular';
         Partager mon lien
       </a>
     </div>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class DashboardSidebarWidget {
   readonly icons = { rocket: Rocket };

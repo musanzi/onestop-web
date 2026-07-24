@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_PROJECTS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -15,7 +15,6 @@ import { bindSearchControlToQuery, toPageQueryValue } from '@shared/helpers';
 @Component({
   selector: 'app-list-projects',
   templateUrl: './list-projects.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ProjectsStore],
   imports: [
     LucideAngularModule,

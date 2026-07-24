@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, inject, signal, afterNextRender } from '@angular/core';
+import { Component, inject, signal, afterNextRender } from '@angular/core';
 import { LoadingService } from '@shared/services/loading/loading.service';
 
 @Component({
   selector: 'app-loading',
-  templateUrl: './loading.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './loading.html'
 })
 export class LoadingComponent {
   readonly #loadingService = inject(LoadingService);

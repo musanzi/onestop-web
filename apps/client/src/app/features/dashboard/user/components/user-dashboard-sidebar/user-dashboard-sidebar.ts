@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  effect,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
@@ -20,8 +13,7 @@ import { DashboardSidebarWidget } from '@features/dashboard/shared/components/da
 @Component({
   selector: 'app-user-dashboard-sidebar',
   imports: [AsyncPipe, NgClass, RouterModule, LucideAngularModule, DashboardSidebarWidget],
-  templateUrl: './user-dashboard-sidebar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './user-dashboard-sidebar.html'
 })
 export class UserDashboardSidebar {
   private readonly router = inject(Router);

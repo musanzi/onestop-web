@@ -1,19 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  signal
-} from '@angular/core';
+import { ChangeDetectorRef, Component, computed, forwardRef, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-ui-textarea',
   templateUrl: './textarea.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiTextarea), multi: true }]
 })
 export class UiTextarea implements ControlValueAccessor {
@@ -56,5 +46,4 @@ export class UiTextarea implements ControlValueAccessor {
     this.value = target.value;
     this.onChange(this.value);
   }
-
 }

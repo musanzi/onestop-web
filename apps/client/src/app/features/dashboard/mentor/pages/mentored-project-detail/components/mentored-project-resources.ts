@@ -1,11 +1,14 @@
-import { Component, input, inject, signal, effect, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, inject, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResourceCard } from '@features/dashboard/shared/components/resources/resource-card/resource-card';
 import {
   ResourceFilters,
   type ResourceFilterValue
 } from '@features/dashboard/shared/components/resources/resource-filters/resource-filters';
-import { ResourceForm, type ResourceFormValue } from '@features/dashboard/shared/components/resources/resource-form/resource-form';
+import {
+  ResourceForm,
+  type ResourceFormValue
+} from '@features/dashboard/shared/components/resources/resource-form/resource-form';
 import { ResourcesService } from '@features/dashboard/shared/services/resources.service';
 import { ResourcesStore } from '@features/dashboard/shared/store/resources.store';
 import { type CreateResourceDto, type IResource, type ResourcesFilter } from '@shared/models/entities.models';
@@ -15,7 +18,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-mentored-project-resources',
   imports: [CommonModule, ResourceCard, ResourceFilters, ResourceForm, LucideAngularModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <div class="space-y-6">
       <div class="relative overflow-hidden rounded-2xl border border-gray-200/70 bg-white">

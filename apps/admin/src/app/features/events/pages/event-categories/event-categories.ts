@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { EVENT_CATEGORIES_ICONS } from '@shared/data';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,6 @@ import { UiInput } from '@shared/ui/form/input/input';
 @Component({
   selector: 'app-event-categories',
   templateUrl: './event-categories.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CategoriesStore, ConfirmationService],
   imports: [
     LucideAngularModule,
@@ -26,8 +25,8 @@ import { UiInput } from '@shared/ui/form/input/input';
     UiPagination,
     UiTableSkeleton,
     UiInput,
-    UiBadge,
-  ],
+    UiBadge
+  ]
 })
 export class EventCategories {
   icons = EVENT_CATEGORIES_ICONS;
@@ -38,20 +37,20 @@ export class EventCategories {
   store = inject(CategoriesStore);
   queryParams = signal<FilterEventCategoriesInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
-    q: this.route.snapshot.queryParamMap.get('q'),
+    q: this.route.snapshot.queryParamMap.get('q')
   });
   itemsPerPage = 20;
   isCreating = signal(false);
   editingCategoryId = signal<string | null>(null);
   currentPage = computed(() => Number(this.queryParams().page) || 1);
   searchForm: FormGroup = this.fb.group({
-    q: [this.queryParams().q || ''],
+    q: [this.queryParams().q || '']
   });
   createForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', Validators.required]
   });
   updateForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', Validators.required]
   });
 
   constructor() {
@@ -69,7 +68,7 @@ export class EventCategories {
   onPageChange(currentPage: number): void {
     this.queryParams.update((qp) => ({
       ...qp,
-      page: currentPage === 1 ? null : currentPage.toString(),
+      page: currentPage === 1 ? null : currentPage.toString()
     }));
   }
 
@@ -95,7 +94,7 @@ export class EventCategories {
     const { name } = this.createForm.value;
     this.store.create({
       payload: { name },
-      onSuccess: () => this.onCancelCreation(),
+      onSuccess: () => this.onCancelCreation()
     });
   }
 
@@ -115,7 +114,7 @@ export class EventCategories {
     this.store.update({
       id: this.editingCategoryId() || '',
       payload: { name },
-      onSuccess: () => this.onCancelUpdate(),
+      onSuccess: () => this.onCancelUpdate()
     });
   }
 
@@ -131,7 +130,7 @@ export class EventCategories {
       rejectLabel: 'Annuler',
       accept: () => {
         this.store.delete({ id: categoryId });
-      },
+      }
     });
   }
 }

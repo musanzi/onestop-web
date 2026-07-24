@@ -72,54 +72,54 @@
       <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain">
         <div class="flex flex-col py-3">
           @for (link of links(); track link.path || link.name; let i = $index) {
-          <div>
-            @if (link.children?.length) {
-            <button
-              type="button"
-              class="flex w-full items-center justify-between px-7 py-4 text-base font-semibold leading-[1.2] text-gray-800 transition-colors duration-200 hover:bg-gray-50"
-              (click)="toggleLink(i)"
-              [attr.aria-expanded]="isLinkOpen(i)"
-              [attr.aria-controls]="'mobile-link-menu-' + i">
-              <span>{{ link.translationKey ? (link.translationKey | translate) : link.name }}</span>
-              <i-lucide
-                class="size-4 text-gray-500 transition-transform duration-300 ease-out"
-                [ngClass]="{ 'rotate-180': isLinkOpen(i) }"
-                [name]="icons.chevronDown" />
-            </button>
+            <div>
+              @if (link.children?.length) {
+                <button
+                  type="button"
+                  class="flex w-full items-center justify-between px-7 py-4 text-base font-semibold leading-[1.2] text-gray-800 transition-colors duration-200 hover:bg-gray-50"
+                  (click)="toggleLink(i)"
+                  [attr.aria-expanded]="isLinkOpen(i)"
+                  [attr.aria-controls]="'mobile-link-menu-' + i">
+                  <span>{{ link.translationKey ? (link.translationKey | translate) : link.name }}</span>
+                  <i-lucide
+                    class="size-4 text-gray-500 transition-transform duration-300 ease-out"
+                    [ngClass]="{ 'rotate-180': isLinkOpen(i) }"
+                    [name]="icons.chevronDown" />
+                </button>
 
-            <div
-              [id]="'mobile-link-menu-' + i"
-              class="bg-gray-50/80 transition-all duration-300 ease-in-out"
-              [ngClass]="{
-                'max-h-0 opacity-0': !isLinkOpen(i),
-                'max-h-screen opacity-100': isLinkOpen(i)
-              }"
-              [style.overflow]="isLinkOpen(i) ? 'visible' : 'hidden'">
-              @for (sublink of link.children; track sublink.path || sublink.name) {
-              <a
-                routerLinkActive="bg-primary-50 text-primary-700"
-                [routerLink]="sublink.path"
-                [fragment]="sublink.fragment"
-                (click)="closeNav()"
-                [routerLinkActiveOptions]="{ exact: sublink.exactUrl || false }"
-                class="flex items-center gap-3 px-7 py-3.5 pl-12 text-sm font-medium leading-[1.2] text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
-                <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
-                <span>{{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}</span>
-              </a>
+                <div
+                  [id]="'mobile-link-menu-' + i"
+                  class="bg-gray-50/80 transition-all duration-300 ease-in-out"
+                  [ngClass]="{
+                    'max-h-0 opacity-0': !isLinkOpen(i),
+                    'max-h-screen opacity-100': isLinkOpen(i)
+                  }"
+                  [style.overflow]="isLinkOpen(i) ? 'visible' : 'hidden'">
+                  @for (sublink of link.children; track sublink.path || sublink.name) {
+                    <a
+                      routerLinkActive="bg-primary-50 text-primary-700"
+                      [routerLink]="sublink.path"
+                      [fragment]="sublink.fragment"
+                      (click)="closeNav()"
+                      [routerLinkActiveOptions]="{ exact: sublink.exactUrl || false }"
+                      class="flex items-center gap-3 px-7 py-3.5 pl-12 text-sm font-medium leading-[1.2] text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
+                      <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+                      <span>{{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}</span>
+                    </a>
+                  }
+                </div>
+              } @else {
+                <a
+                  [routerLink]="link.path"
+                  [fragment]="link.fragment"
+                  (click)="closeNav()"
+                  routerLinkActive="bg-primary-50 text-primary-700"
+                  [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+                  class="flex items-center px-7 py-4 text-base font-semibold leading-[1.2] text-gray-800 transition-colors duration-200 hover:bg-gray-50">
+                  {{ link.translationKey ? (link.translationKey | translate) : link.name }}
+                </a>
               }
             </div>
-            } @else {
-            <a
-              [routerLink]="link.path"
-              [fragment]="link.fragment"
-              (click)="closeNav()"
-              routerLinkActive="bg-primary-50 text-primary-700"
-              [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-              class="flex items-center px-7 py-4 text-base font-semibold leading-[1.2] text-gray-800 transition-colors duration-200 hover:bg-gray-50">
-              {{ link.translationKey ? (link.translationKey | translate) : link.name }}
-            </a>
-            }
-          </div>
           }
 
           <div>
@@ -145,23 +145,25 @@
               }"
               [style.overflow]="programsOpen() ? 'visible' : 'hidden'">
               @for (p of programs(); track p.slug) {
-              <a
-                routerLinkActive="bg-primary-50 text-primary-700"
-                [routerLink]="['/our-programs/' + p.slug]"
-                (click)="closeNav()"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="block px-7 py-3.5 pl-12 leading-[1.2] text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
-                <span class="text-sm font-semibold">{{ translateField()(p.name, 'name', p) }}</span>
-                <span class="mt-1 block text-xs text-gray-500">
-                  {{ translateField()(p?.category?.name, 'name', p.category) }}
-                </span>
-                <span class="mt-1 block text-[10px] uppercase text-primary-500">Secteur</span>
-                <span class="block text-xs text-gray-500">
-                  {{ translateField()(p?.sector?.name, 'name', p.sector) }}
-                </span>
-              </a>
+                <a
+                  routerLinkActive="bg-primary-50 text-primary-700"
+                  [routerLink]="['/our-programs/' + p.slug]"
+                  (click)="closeNav()"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="block px-7 py-3.5 pl-12 leading-[1.2] text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
+                  <span class="text-sm font-semibold">{{ translateField()(p.name, 'name', p) }}</span>
+                  <span class="mt-1 block text-xs text-gray-500">
+                    {{ translateField()(p?.category.name, 'name', p.category) }}
+                  </span>
+                  <span class="mt-1 block text-[10px] uppercase text-primary-500">Secteur</span>
+                  <span class="block text-xs text-gray-500">
+                    {{ translateField()(p?.sector.name, 'name', p.sector) }}
+                  </span>
+                </a>
               } @empty {
-              <div class="px-7 py-3.5 pl-12 text-sm font-medium text-gray-500">{{ 'common.loading' | translate }}</div>
+                <div class="px-7 py-3.5 pl-12 text-sm font-medium text-gray-500">
+                  {{ 'common.loading' | translate }}
+                </div>
               }
             </div>
           </div>
@@ -174,58 +176,54 @@
         </div>
 
         @if (currentUser) {
-        <div class="space-y-3">
-          <div class="flex items-center gap-3 rounded-xl bg-white px-3 py-3 shadow-sm">
-            <div class="relative h-10 w-10 min-h-10 min-w-10 shrink-0">
-              @if (currentUser.profile || currentUser.google_image) {
-              <img
-                [ngSrc]="currentUser | apiIMG: 'user'"
-                alt="User Image"
-                class="aspect-square rounded-full bg-gray-200 object-cover ring-2 ring-primary-500"
-                fill />
-              } @else {
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-600 text-sm font-bold text-white">
-                {{ getUserInitials() }}
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 rounded-xl bg-white px-3 py-3 shadow-sm">
+              <div class="relative h-10 w-10 min-h-10 min-w-10 shrink-0">
+                @if (currentUser.profile || currentUser.google_image) {
+                  <img
+                    [ngSrc]="currentUser | apiIMG: 'user'"
+                    alt="User Image"
+                    class="aspect-square rounded-full bg-gray-200 object-cover ring-2 ring-primary-500"
+                    fill />
+                } @else {
+                  <div
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-600 text-sm font-bold text-white">
+                    {{ getUserInitials() }}
+                  </div>
+                }
               </div>
-              }
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-medium text-gray-900">{{ currentUser.name }}</p>
+                <p class="truncate text-xs text-gray-500">{{ currentUser.email }}</p>
+              </div>
             </div>
-            <div class="min-w-0 flex-1">
-              <p class="truncate text-sm font-medium text-gray-900">{{ currentUser.name }}</p>
-              <p class="truncate text-xs text-gray-500">{{ currentUser.email }}</p>
-            </div>
-          </div>
 
-          <div class="flex flex-col gap-2">
-            <a
-              routerLink="/dashboard"
-              (click)="closeNav()"
-              class="flex items-center justify-center gap-2 rounded-lg border border-primary-200 bg-white px-4 py-2.5 text-sm font-medium text-primary-600 transition-colors duration-200 hover:bg-primary-50">
-              <i-lucide [name]="icons.dashboard" class="size-4" />
-              <span>{{ 'auth.myAccount' | translate }}</span>
-            </a>
-            <button
-              type="button"
-              (click)="onSignOut()"
-              class="flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-white px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 hover:bg-red-50">
-              <i-lucide [name]="icons.logOut" class="size-4" />
-              <span>{{ 'auth.signOut' | translate }}</span>
-            </button>
+            <div class="flex flex-col gap-2">
+              <a
+                routerLink="/dashboard"
+                (click)="closeNav()"
+                class="flex items-center justify-center gap-2 rounded-lg border border-primary-200 bg-white px-4 py-2.5 text-sm font-medium text-primary-600 transition-colors duration-200 hover:bg-primary-50">
+                <i-lucide [name]="icons.dashboard" class="size-4" />
+                <span>{{ 'auth.myAccount' | translate }}</span>
+              </a>
+              <button
+                type="button"
+                (click)="onSignOut()"
+                class="flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-white px-4 py-2.5 text-sm font-medium text-red-600 transition-colors duration-200 hover:bg-red-50">
+                <i-lucide [name]="icons.logOut" class="size-4" />
+                <span>{{ 'auth.signOut' | translate }}</span>
+              </button>
+            </div>
           </div>
-        </div>
         } @else {
-        <div class="space-y-3">
-          <app-public-button
-            variant="secondary"
-            routerLink="/sign-in"
-            [fullWidth]="true"
-            (clicked)="closeNav()">
-            {{ 'auth.signIn' | translate }}
-          </app-public-button>
-          <app-public-button variant="primary" routerLink="/sign-up" [fullWidth]="true" (clicked)="closeNav()">
-            {{ 'auth.signUp' | translate }}
-          </app-public-button>
-        </div>
+          <div class="space-y-3">
+            <app-public-button variant="secondary" routerLink="/sign-in" [fullWidth]="true" (clicked)="closeNav()">
+              {{ 'auth.signIn' | translate }}
+            </app-public-button>
+            <app-public-button variant="primary" routerLink="/sign-up" [fullWidth]="true" (clicked)="closeNav()">
+              {{ 'auth.signUp' | translate }}
+            </app-public-button>
+          </div>
         }
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { IPartner, PARTNERS } from '../../landing/data/partners.data';
 import { CommonModule } from '@angular/common';
 import { ArrowRight, Handshake, LucideAngularModule } from 'lucide-angular';
@@ -18,8 +18,7 @@ import { PublicButton, PublicContainer, PublicPageHero, PublicSection } from '@s
     PartnersCard,
     PartnersSkeleton
   ],
-  templateUrl: './partners.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './partners.html'
 })
 export class Partners {
   partners = PARTNERS;

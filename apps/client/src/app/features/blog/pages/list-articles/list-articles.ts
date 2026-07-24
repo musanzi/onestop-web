@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IArticle } from '@shared/models/entities.models';
@@ -26,8 +26,7 @@ import { PaginationComponent } from '@shared/ui';
     PublicContainer,
     TranslateModule
   ],
-  templateUrl: './list-articles.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-articles.html'
 })
 export class ListArticles implements OnInit {
   store = inject(ArticlesStore);
@@ -36,11 +35,12 @@ export class ListArticles implements OnInit {
   tagsStore = inject(TagsStore);
   #analytics = inject(AnalyticsService);
   arrSkeleton = Array.from({ length: 12 }, (_, index) => index);
-  selectedTags: string[] = this.#route.snapshot.queryParamMap
-    .get('tags')
-    ?.split(',')
-    .map((tag) => tag.trim())
-    .filter(Boolean) ?? [];
+  selectedTags: string[] =
+    this.#route.snapshot.queryParamMap
+      .get('tags')
+      ?.split(',')
+      .map((tag) => tag.trim())
+      .filter(Boolean) ?? [];
   queryParams = signal<FilterArticlesDto>({
     page: this.#route.snapshot.queryParamMap.get('page'),
     tags: this.#route.snapshot.queryParamMap.get('tags')

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   BriefcaseBusiness,
@@ -19,8 +19,7 @@ import {
 @Component({
   selector: 'app-onestop-dashboard-preview',
   imports: [TranslateModule, LucideAngularModule],
-  templateUrl: './onestop-dashboard-preview.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './onestop-dashboard-preview.html'
 })
 export class OnestopDashboardPreview {
   readonly icons = {

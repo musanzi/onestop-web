@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { ARTICLE_TAGS_ICONS } from '@shared/data';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -25,8 +25,7 @@ import { UiTableSkeleton } from '@shared/ui/table-skeleton/table-skeleton';
     UiTableSkeleton,
     UiBadge
   ],
-  templateUrl: './article-tags.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './article-tags.html'
 })
 export class ArticleTags {
   icons = ARTICLE_TAGS_ICONS;

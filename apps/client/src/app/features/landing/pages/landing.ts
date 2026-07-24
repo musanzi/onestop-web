@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Partners } from '../components/partners/partners';
 import { Networks } from '../components/networks/networks';
 import { RecentEvents } from '../components/recent-events/recent-events';
@@ -27,7 +27,6 @@ import { RecentOpportunities } from '../components/recent-opportunities/recent-o
     Services,
     Hero
   ],
-  templateUrl: './landing.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './landing.html'
 })
 export class Landing {}

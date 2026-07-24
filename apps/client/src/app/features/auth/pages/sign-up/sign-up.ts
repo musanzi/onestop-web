@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -12,12 +12,7 @@ import { SignUpStore } from '../../store/sign-up.store';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { validateReturnUrl } from '@core/auth/auth-redirect.util';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  AuthPanelComponent,
-  ButtonComponent,
-  PasswordFieldComponent,
-  TextfieldComponent
-} from '@shared/ui';
+import { AuthPanelComponent, ButtonComponent, PasswordFieldComponent, TextfieldComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-sign-up',
@@ -32,8 +27,7 @@ import {
     ReactiveFormsModule,
     AuthCard,
     TranslateModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class SignUp {
   #formBuilder: FormBuilder = inject(FormBuilder);

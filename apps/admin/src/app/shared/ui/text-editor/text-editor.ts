@@ -7,8 +7,7 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  ChangeDetectionStrategy,
-  computed,
+  computed
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
@@ -18,14 +17,13 @@ import { UI_TEXT_EDITOR_ICONS } from '@shared/data';
   selector: 'app-ui-text-editor',
   imports: [LucideAngularModule],
   templateUrl: './text-editor.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => UiTextEditor),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class UiTextEditor implements ControlValueAccessor, AfterViewInit {
   icons = UI_TEXT_EDITOR_ICONS;
@@ -159,5 +157,4 @@ export class UiTextEditor implements ControlValueAccessor, AfterViewInit {
   formatCode(): void {
     this.execCommand('formatBlock', 'pre');
   }
-
 }

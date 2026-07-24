@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PARTNERS, PARTNERS_CATEGORIES, IPartner } from '../../data/partners.data';
 import { UserPlus, LucideAngularModule, Heart, ShoppingCart, MoveUpRight, MoveRight } from 'lucide-angular';
@@ -20,8 +20,7 @@ import { PublicButton, PublicContainer } from '@shared/public';
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './partners.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './partners.html'
 })
 export class Partners {
   partners = PARTNERS;

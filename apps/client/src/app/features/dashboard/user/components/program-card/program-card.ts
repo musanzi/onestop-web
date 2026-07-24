@@ -1,4 +1,4 @@
-import { Component, input, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { IProject } from '@shared/models';
@@ -17,8 +17,7 @@ import {
 @Component({
   selector: 'app-program-card',
   imports: [CommonModule, RouterModule, DatePipe, LucideAngularModule],
-  templateUrl: './program-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './program-card.html'
 })
 export class ProgramCard {
   project = input.required<IProject>();

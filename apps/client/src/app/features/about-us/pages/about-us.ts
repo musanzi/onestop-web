@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  PLATFORM_ID,
-  afterNextRender,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, OnDestroy, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { About } from '../components/about/about';

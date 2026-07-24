@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FilterArticleInterface } from '../../interfaces/filter-article.interface';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -30,8 +30,7 @@ import { bindSearchControlToQuery, toPageQueryValue } from '@shared/helpers';
     UiTableSkeleton,
     UiBadge
   ],
-  templateUrl: './list-articles.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-articles.html'
 })
 export class ListArticles {
   icons = LIST_ARTICLES_ICONS;

@@ -4,6 +4,8 @@ services:
     build:
       context: .
       target: development
+    environment:
+      NX_WORKSPACE_DATA_DIRECTORY: /tmp/nx-workspace-data
     restart: unless-stopped
     command: pnpm dev:client --host=0.0.0
     ports:
@@ -17,6 +19,8 @@ services:
     build:
       context: .
       target: development
+    environment:
+      NX_WORKSPACE_DATA_DIRECTORY: /tmp/nx-workspace-data
     restart: unless-stopped
     command: pnpm dev:admin --host=0.0.0
     ports:

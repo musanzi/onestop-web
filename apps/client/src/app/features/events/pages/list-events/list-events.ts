@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventCard } from '../../components/event-card/event-card';
 import { EventCardSkeleton } from '../../components/event-card-skeleton/event-card-skeleton';
@@ -26,8 +26,7 @@ import { PaginationComponent } from '@shared/ui';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './list-events.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-events.html'
 })
 export class ListEvents implements OnInit {
   #router = inject(Router);

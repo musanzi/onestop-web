@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, ElementRef, inject, input, output, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { MOBILE_MENU_ICONS } from '@shared/data';
@@ -14,7 +14,7 @@ import { ILinkGroup } from '../../types/link.type';
 @Component({
   selector: 'app-mobile-menu',
   templateUrl: './mobile-menu.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [LucideAngularModule, RouterModule, NgOptimizedImage]
 })
 export class MobileMenu {

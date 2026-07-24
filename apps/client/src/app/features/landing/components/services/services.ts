@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SERVICES } from '@features/landing/data/services.data';
 import { ServiceCard } from '../service-card/service-card';
@@ -8,8 +8,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
 @Component({
   selector: 'app-services',
   imports: [ServiceCard, TranslateModule, LandingSectionHeader, PublicSection, PublicContainer],
-  templateUrl: './services.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './services.html'
 })
 export class Services {
   services = SERVICES;

@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_EVENTS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -16,7 +16,6 @@ import { FilterEventsInterface } from '@features/events/interfaces';
 @Component({
   selector: 'app-events-list',
   templateUrl: './list-events.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EventsStore],
   imports: [
     LucideAngularModule,
@@ -30,8 +29,8 @@ import { FilterEventsInterface } from '@features/events/interfaces';
     UiTabs,
     UiPagination,
     UiTableSkeleton,
-    UiBadge,
-  ],
+    UiBadge
+  ]
 })
 export class ListEvents {
   icons = LIST_EVENTS_ICONS;
@@ -44,18 +43,18 @@ export class ListEvents {
   queryParams = signal<FilterEventsInterface>({
     page: this.route.snapshot.queryParamMap.get('page'),
     q: this.route.snapshot.queryParamMap.get('q'),
-    filter: this.route.snapshot.queryParamMap.get('filter'),
+    filter: this.route.snapshot.queryParamMap.get('filter')
   });
   activeTab = computed(() => this.queryParams().filter || 'all');
   currentPage = computed(() => Number(this.queryParams().page) || 1);
   searchForm: FormGroup = this.fb.group({
-    q: [this.queryParams().q || ''],
+    q: [this.queryParams().q || '']
   });
   tabsConfig = signal([
     { label: 'Tous', name: 'all' },
     { label: 'Publiés', name: 'published' },
     { label: 'Brouillons', name: 'drafts' },
-    { label: 'En vedette', name: 'highlighted' },
+    { label: 'En vedette', name: 'highlighted' }
   ]);
 
   constructor() {
@@ -77,7 +76,7 @@ export class ListEvents {
   onPageChange(currentPage: number): void {
     this.queryParams.update((qp) => ({
       ...qp,
-      page: currentPage === 1 ? null : currentPage.toString(),
+      page: currentPage === 1 ? null : currentPage.toString()
     }));
   }
 
@@ -94,7 +93,7 @@ export class ListEvents {
       rejectLabel: 'Annuler',
       accept: () => {
         this.store.delete(eventId);
-      },
+      }
     });
   }
 }

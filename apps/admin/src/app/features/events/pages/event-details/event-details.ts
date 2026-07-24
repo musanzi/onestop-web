@@ -1,18 +1,18 @@
-import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { EVENT_DETAILS_ICONS } from '@shared/data';
 import { UiTabs, UiButton } from '@shared/ui';
 import { EventsStore } from '../../store/events.store';
-import { EventSheet } from '../../components/event-sheet/event-sheet';
-import { EventGalleryComponent } from '../../components/event-gallery/event-gallery';
-import { EventUpdate } from '../../components/event-update/event-update';
+import { EventSheet } from '../../ui/event-sheet/event-sheet';
+import { EventGalleryComponent } from '../../ui/event-gallery/event-gallery';
+import { EventUpdate } from '../../ui/event-update/event-update';
 import { EventDetailsSkeleton } from '../../ui/event-details-skeleton/event-details-skeleton';
 import { GalleryStore } from '../../store/event-gallery.store';
+
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [EventsStore, GalleryStore],
   imports: [UiTabs, EventSheet, EventGalleryComponent, EventUpdate, EventDetailsSkeleton, LucideAngularModule, UiButton]
 })

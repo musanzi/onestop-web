@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, computed, effect, signal } from '@angular/core';
+import { Component, inject, OnInit, computed, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -42,8 +42,7 @@ import { PublicButton, PublicContainer, PublicSection } from '@shared/public';
     PublicButton
   ],
   providers: [AmbassadorStore],
-  templateUrl: './detail-ambassador.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './detail-ambassador.html'
 })
 export class DetailAmbassador implements OnInit {
   private route = inject(ActivatedRoute);

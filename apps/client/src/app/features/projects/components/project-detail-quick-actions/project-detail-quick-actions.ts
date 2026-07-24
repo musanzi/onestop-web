@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, SquaresSubtract, CalendarSync, Share2, UserPlus } from 'lucide-angular';
@@ -6,7 +6,7 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-quick-actions',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [NgClass, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-quick-actions.html'
 })

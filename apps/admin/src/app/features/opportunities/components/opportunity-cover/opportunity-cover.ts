@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { OPPORTUNITY_DETAILS_ICONS } from '@shared/data';
 import { IOpportunity } from '@shared/models';
@@ -8,7 +8,7 @@ import { FileUpload } from '@shared/ui';
 @Component({
   selector: 'app-opportunity-cover',
   templateUrl: './opportunity-cover.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [LucideAngularModule, ApiImgPipe, FileUpload]
 })
 export class OpportunityCover {

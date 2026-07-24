@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { RightsService } from '@core/auth/rights.service';
@@ -29,8 +29,7 @@ import {
   selector: 'app-dashboard-overview',
   imports: [RouterModule, ApiImgPipe, LucideAngularModule],
   providers: [HighlightsStore],
-  templateUrl: './overview.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './overview.html'
 })
 export class DashboardOverview implements OnInit {
   authStore = inject(AuthStore);

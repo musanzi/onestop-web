@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  computed,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, DestroyRef, EventEmitter, Input, OnInit, Output, computed, inject, signal } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@shared/ui';
@@ -28,8 +17,7 @@ export interface StepConfig {
 @Component({
   selector: 'app-form-manager',
   imports: [ReactiveFormsModule, ButtonComponent, LucideAngularModule],
-  templateUrl: './form-manager.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './form-manager.html'
 })
 export class FormManager implements OnInit {
   @Input({ required: true }) form!: FormGroup;

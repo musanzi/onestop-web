@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-user-not-found-placeholder',
-  templateUrl: './user-not-found-placeholder.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './user-not-found-placeholder.html'
 })
 export class UserNotFoundPlaceholder {
   title = input<string>('Utilisateur introuvable');

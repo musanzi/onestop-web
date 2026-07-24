@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_MENTORS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -13,7 +13,6 @@ import { bindSearchControlToQuery, toPageQueryValue } from '@shared/helpers';
 @Component({
   selector: 'app-mentors-list',
   templateUrl: './list-mentors.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MentorsStore],
   imports: [
     LucideAngularModule,

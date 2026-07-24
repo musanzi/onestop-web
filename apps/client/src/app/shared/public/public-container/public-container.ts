@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 export type PublicContainerWidth = 'default' | 'wide' | 'full';
 
 @Component({
   selector: 'app-public-container',
-  template: `<div [class]="classes()"><ng-content /></div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: `<div [class]="classes()"><ng-content /></div>`
 })
 export class PublicContainer {
   readonly width = input<PublicContainerWidth>('default');

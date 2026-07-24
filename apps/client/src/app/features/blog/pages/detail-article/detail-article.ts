@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnDestroy, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ArrowLeft,
@@ -66,8 +66,7 @@ import { SeoService } from '@core/services/seo';
     ArticleDetailNotFoundComponent
   ],
   templateUrl: './detail-article.html',
-  styleUrl: '../../../../shared/styles/quill-view.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: '../../../../shared/styles/quill-view.css'
 })
 export class DetailArticle implements OnInit, OnDestroy {
   #fb = inject(FormBuilder);

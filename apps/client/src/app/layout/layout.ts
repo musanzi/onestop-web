@@ -1,12 +1,4 @@
-import {
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy,
-  signal,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { AppConfigService } from '@core/services/config/config.service';
@@ -18,8 +10,7 @@ import { FullLayout } from './pages/full-layout/full-layout';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
-  imports: [FixedLayout, EmptyLayout, FullLayout],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [FixedLayout, EmptyLayout, FullLayout]
 })
 export class Layout implements OnInit, OnDestroy {
   config = signal<AppConfig>({} as AppConfig);

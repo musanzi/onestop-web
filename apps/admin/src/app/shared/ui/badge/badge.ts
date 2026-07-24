@@ -1,12 +1,11 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 type BadgeVariant = 'success' | 'warning' | 'danger' | 'info' | 'default';
 type BadgeSize = 'small' | 'medium' | 'large';
 
 @Component({
   selector: 'app-ui-badge',
-  templateUrl: './badge.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './badge.html'
 })
 export class UiBadge {
   label = input.required<string>();

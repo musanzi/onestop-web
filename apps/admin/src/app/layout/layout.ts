@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AppConfigService } from '@shared/services/config/config.service';
@@ -10,8 +10,7 @@ import { LoadingComponent } from '@shared/ui/loading/loading';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
-  imports: [AdminLayout, EmptyLayout, LoadingComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [AdminLayout, EmptyLayout, LoadingComponent]
 })
 export class Layout implements OnInit, OnDestroy {
   config: AppConfig = {} as AppConfig;

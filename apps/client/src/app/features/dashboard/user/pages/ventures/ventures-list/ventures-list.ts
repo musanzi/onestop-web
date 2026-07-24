@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { VenturesStore } from '@features/dashboard/shared/store/ventures.store';
@@ -21,8 +21,7 @@ import {
 @Component({
   selector: 'app-ventures-list',
   imports: [RouterModule, ApiImgPipe, DecimalPipe, LucideAngularModule],
-  templateUrl: './ventures-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './ventures-list.html'
 })
 export class VenturesUnified implements OnInit {
   venturesStore = inject(VenturesStore);

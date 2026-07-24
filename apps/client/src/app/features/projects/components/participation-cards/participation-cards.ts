@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule, ThumbsUp, Check, MapPin, Building2, Layers } from 'lucide-angular';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
@@ -15,7 +15,7 @@ import type {
 
 @Component({
   selector: 'app-participation-cards',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [RouterLink, LucideAngularModule, ApiImgPipe, TranslateModule],
   templateUrl: './participation-cards.html'
 })

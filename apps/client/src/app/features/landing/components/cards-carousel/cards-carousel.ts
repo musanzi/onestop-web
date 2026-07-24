@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -27,7 +26,7 @@ type CarouselTrackBy<TItem> = (index: number, item: TItem) => unknown;
   selector: 'app-cards-carousel',
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './cards-carousel.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   styles: [
     `
       :host {

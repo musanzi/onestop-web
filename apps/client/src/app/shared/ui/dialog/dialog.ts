@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostListener, booleanAttribute, input, output } from '@angular/core';
+import { Component, HostListener, booleanAttribute, input, output } from '@angular/core';
 import { LucideAngularModule, X } from 'lucide-angular';
 
 @Component({
   selector: 'ui-dialog',
   imports: [CommonModule, LucideAngularModule],
-  templateUrl: './dialog.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './dialog.html'
 })
 export class DialogComponent {
   readonly open = input(false, { transform: booleanAttribute });

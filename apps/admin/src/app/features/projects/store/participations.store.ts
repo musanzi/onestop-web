@@ -43,11 +43,7 @@ export const ParticipationsStore = signalStore(
               }
             }),
             catchError((error) => {
-              patchState(store, {
-                participations: [],
-                total: 0,
-                error: String(error)
-              });
+              patchState(store, { participations: [], total: 0, error: String(error) });
               return EMPTY;
             }),
             finalize(() => patchState(store, { isLoading: false }))

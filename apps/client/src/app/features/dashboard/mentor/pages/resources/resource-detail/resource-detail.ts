@@ -1,26 +1,20 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourcesStore } from '@features/dashboard/shared/store/resources.store';
 import { ResourcesService } from '@features/dashboard/shared/services/resources.service';
 import { ResourceCategoryBadge } from '@features/dashboard/shared/components/resources/resource-category-badge/resource-category-badge';
-import { ResourceForm, type ResourceFormValue } from '@features/dashboard/shared/components/resources/resource-form/resource-form';
-import { UpdateResourceDto } from '@shared/models/entities.models';
 import {
-  ArrowLeft,
-  Download,
-  Edit,
-  Trash2,
-  Calendar,
-  FolderOpen,
-  LucideAngularModule
-} from 'lucide-angular';
+  ResourceForm,
+  type ResourceFormValue
+} from '@features/dashboard/shared/components/resources/resource-form/resource-form';
+import { UpdateResourceDto } from '@shared/models/entities.models';
+import { ArrowLeft, Download, Edit, Trash2, Calendar, FolderOpen, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-resource-detail',
   imports: [CommonModule, ResourceCategoryBadge, ResourceForm, LucideAngularModule],
-  templateUrl: './resource-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './resource-detail.html'
 })
 export class ResourceDetail implements OnInit {
   private _route = inject(ActivatedRoute);
@@ -47,9 +41,7 @@ export class ResourceDetail implements OnInit {
     }
 
     // Try to find the resource in the store first
-    const existingResource = this.resourcesStore
-      .resources()
-      .find((r) => r.id === resourceId);
+    const existingResource = this.resourcesStore.resources().find((r) => r.id === resourceId);
 
     if (existingResource) {
       this.resourcesStore.selectResource(existingResource);

@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy, effect, computed } from '@angular/core';
+import { Component, inject, signal, effect, computed } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -61,8 +61,7 @@ function toDateInputValue(value: Date | string | null | undefined): string {
     SectionCardComponent
   ],
   providers: [UpdateInfoStore],
-  templateUrl: './profile.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './profile.html'
 })
 export class ProfilePage {
   authStore = inject(AuthStore);
@@ -70,8 +69,7 @@ export class ProfilePage {
   fb = inject(FormBuilder);
   router = inject(Router);
   #route = inject(ActivatedRoute);
-  #shouldCompleteProfile =
-    this.#route.snapshot.queryParamMap.get('completeProfile') === '1';
+  #shouldCompleteProfile = this.#route.snapshot.queryParamMap.get('completeProfile') === '1';
 
   icons = {
     badge: Badge,

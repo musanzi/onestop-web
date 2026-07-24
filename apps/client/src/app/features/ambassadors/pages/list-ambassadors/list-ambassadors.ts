@@ -1,18 +1,8 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  computed,
-  signal,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, inject, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AmbassadorsStore } from '../../store/ambassadors.store';
-import {
-  getAmbassadorLevel,
-  getInitials,
-} from '@shared/helpers/ambassador.helpers';
+import { getAmbassadorLevel, getInitials } from '@shared/helpers/ambassador.helpers';
 import { environment } from '../../../../../environments/environment';
 import { IUser } from '@shared/models';
 import { Edit, LucideAngularModule, MapPin, Star, Users } from 'lucide-angular';
@@ -33,11 +23,10 @@ import { HeroCard } from '../../../../layout/components/hero-card/hero-card';
     AmbassadorSkeleton,
     PublicSection,
     PublicContainer,
-    PaginationComponent,
+    PaginationComponent
   ],
   providers: [AmbassadorsStore],
-  templateUrl: './list-ambassadors.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './list-ambassadors.html'
 })
 export class ListAmbassadors implements OnInit {
   store = inject(AmbassadorsStore);
@@ -46,7 +35,7 @@ export class ListAmbassadors implements OnInit {
     edit: Edit,
     users: Users,
     star: Star,
-    mapPin: MapPin,
+    mapPin: MapPin
   };
 
   currentPage = signal(1);
@@ -69,10 +58,7 @@ export class ListAmbassadors implements OnInit {
   }
 
   goToPage(page: number): void {
-    const totalPages = Math.max(
-      1,
-      Math.ceil(this.totalItems() / this.pageSize),
-    );
+    const totalPages = Math.max(1, Math.ceil(this.totalItems() / this.pageSize));
     if (page < 1 || page > totalPages || page === this.currentPage()) {
       return;
     }

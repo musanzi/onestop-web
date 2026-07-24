@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LabelComponent } from '../label/label';
-import {
-  FORM_CONTROL_BASE,
-  FORM_CONTROL_DISABLED,
-  FORM_CONTROL_ERROR
-} from '../form/form-control.classes';
+import { FORM_CONTROL_BASE, FORM_CONTROL_DISABLED, FORM_CONTROL_ERROR } from '../form/form-control.classes';
 
 @Component({
   selector: 'ui-textfield',
@@ -13,7 +9,7 @@ import {
   template: `
     <div class="block">
       @if (label()) {
-      <ui-label [forId]="inputId()">{{ label() }}</ui-label>
+        <ui-label [forId]="inputId()">{{ label() }}</ui-label>
       }
       <input
         [id]="inputId()"
@@ -25,7 +21,7 @@ import {
         (input)="onInput($event)"
         (blur)="onTouched()" />
       @if (error()) {
-      <p class="mt-1.5 text-xs text-error-500">{{ error() }}</p>
+        <p class="mt-1.5 text-xs text-error-500">{{ error() }}</p>
       }
     </div>
   `,
@@ -35,8 +31,7 @@ import {
       useExisting: forwardRef(() => TextfieldComponent),
       multi: true
     }
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class TextfieldComponent implements ControlValueAccessor {
   readonly inputId = input('');

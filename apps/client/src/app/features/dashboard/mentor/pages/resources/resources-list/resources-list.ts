@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ResourceCard } from '@features/dashboard/shared/components/resources/resource-card/resource-card';
@@ -6,7 +6,10 @@ import {
   ResourceFilters,
   type ResourceFilterValue
 } from '@features/dashboard/shared/components/resources/resource-filters/resource-filters';
-import { ResourceForm, type ResourceFormValue } from '@features/dashboard/shared/components/resources/resource-form/resource-form';
+import {
+  ResourceForm,
+  type ResourceFormValue
+} from '@features/dashboard/shared/components/resources/resource-form/resource-form';
 import { MentorshipService } from '@features/dashboard/shared/services/mentorship.service';
 import { ResourcesService } from '@features/dashboard/shared/services/resources.service';
 import { ResourcesStore } from '@features/dashboard/shared/store/resources.store';
@@ -16,8 +19,7 @@ import { FileText, FolderOpen, LucideAngularModule, Plus } from 'lucide-angular'
 @Component({
   selector: 'app-resources-list',
   imports: [CommonModule, ResourceCard, ResourceFilters, ResourceForm, LucideAngularModule],
-  templateUrl: './resources-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './resources-list.html'
 })
 export class ResourcesList implements OnInit {
   resourcesStore = inject(ResourcesStore);

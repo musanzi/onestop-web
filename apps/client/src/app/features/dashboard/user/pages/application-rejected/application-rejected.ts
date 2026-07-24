@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   CircleCheckBig,
@@ -17,8 +17,7 @@ import {
 @Component({
   selector: 'app-mentor-application-rejected',
   imports: [RouterModule, LucideAngularModule],
-  templateUrl: './application-rejected.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './application-rejected.html'
 })
 export class MentorApplicationRejected {
   readonly icons = {

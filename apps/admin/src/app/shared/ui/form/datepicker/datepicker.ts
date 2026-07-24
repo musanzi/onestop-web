@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
+import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { UI_DATEPICKER_ICONS } from '@shared/data';
@@ -10,7 +10,7 @@ export type DatePickerView = 'date' | 'month' | 'year';
   selector: 'app-ui-datepicker',
   imports: [LucideAngularModule, UiSelect],
   templateUrl: './datepicker.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     '(document:click)': 'onDocumentClick($event)'
   },

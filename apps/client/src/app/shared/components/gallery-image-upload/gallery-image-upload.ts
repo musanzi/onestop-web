@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  OnDestroy,
-  output,
-  signal
-} from '@angular/core';
+import { Component, inject, input, OnDestroy, output, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Eye, ImagePlus, LucideAngularModule, Trash2, Upload } from 'lucide-angular';
@@ -26,8 +18,7 @@ const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
   selector: 'app-gallery-image-upload',
   imports: [LucideAngularModule, TranslateModule, ImageLightboxComponent],
   templateUrl: './gallery-image-upload.html',
-  styleUrl: './gallery-image-upload.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './gallery-image-upload.css'
 })
 export class GalleryImageUpload implements OnDestroy {
   name = input('image');

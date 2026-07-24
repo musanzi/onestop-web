@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { LucideAngularModule, ChevronLeft, ChevronRight } from 'lucide-angular';
 
 @Component({
   selector: 'ui-gallery',
   imports: [CommonModule, LucideAngularModule],
-  templateUrl: './gallery.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './gallery.html'
 })
 export class GalleryComponent<T> {
   readonly items = input<T[]>([]);

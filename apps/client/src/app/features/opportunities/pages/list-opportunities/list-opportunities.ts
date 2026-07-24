@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LucideAngularModule, BriefcaseBusiness, CalendarRange, SearchX } from 'lucide-angular';
@@ -27,8 +27,7 @@ import { PublicContainer, PublicPageHero, PublicSection } from '@shared/public';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './list-opportunities.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './list-opportunities.html'
 })
 export class ListOpportunities {
   #router = inject(Router);

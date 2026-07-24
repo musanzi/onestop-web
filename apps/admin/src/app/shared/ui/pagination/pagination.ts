@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { UI_PAGINATION_ICONS } from '@shared/data';
 
@@ -7,8 +7,7 @@ export type PaginationItem = number | 'ellipsis';
 @Component({
   selector: 'app-ui-pagination',
   imports: [LucideAngularModule],
-  templateUrl: './pagination.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './pagination.html'
 })
 export class UiPagination {
   icons = UI_PAGINATION_ICONS;

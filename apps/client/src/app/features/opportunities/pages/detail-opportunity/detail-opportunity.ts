@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LucideAngularModule, ArrowLeft, CalendarDays, ExternalLink, Globe2, Link2 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -29,8 +29,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicContainer
   ],
   templateUrl: './detail-opportunity.html',
-  styleUrl: '../../../../shared/styles/quill-view.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: '../../../../shared/styles/quill-view.css'
 })
 export class DetailOpportunity {
   #route = inject(ActivatedRoute);

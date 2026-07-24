@@ -1,13 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { TestimonialCard } from './testimonial-card/testimonial-card';
 import { TESTIMONIALS } from '@features/landing/data/testimonials.data';
 
 @Component({
   selector: 'app-testimonials',
   imports: [TestimonialCard],
-  templateUrl: './testimonials-section.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './testimonials-section.html'
 })
 export class TestimonialsSection implements OnInit, OnDestroy {
   readonly #platformId = inject(PLATFORM_ID);

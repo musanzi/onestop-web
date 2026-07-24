@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProgramsStore } from '../../store/programs.store';
 import { NgOptimizedImage } from '@angular/common';
@@ -24,8 +24,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './programs.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './programs.html'
 })
 export class Programs {
   icons = {

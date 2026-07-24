@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,8 +27,7 @@ const DISPLAY_ORDER_INDICES = [0, 1, 2, 3, 4] as const;
     PublicContainer
   ],
   providers: [AmbassadorsStore],
-  templateUrl: './top-ambassadors.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './top-ambassadors.html'
 })
 export class TopAmbassadors {
   private _store = inject(AmbassadorsStore);

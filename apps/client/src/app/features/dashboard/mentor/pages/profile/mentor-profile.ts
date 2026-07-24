@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, effect, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, signal, effect, computed } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorProfileStore } from '@features/dashboard/shared/store/mentor-profile.store';
@@ -32,8 +32,7 @@ import {
 @Component({
   selector: 'app-mentor-profile',
   imports: [ReactiveFormsModule, LucideAngularModule],
-  templateUrl: './mentor-profile.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentor-profile.html'
 })
 export class MentorProfile implements OnInit {
   private fb = inject(FormBuilder);

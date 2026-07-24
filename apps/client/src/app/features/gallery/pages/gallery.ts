@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { GALLERY_IMAGES } from '../data/gallery.data';
 import { Image } from 'lucide-angular';
 import { GalleryCardComponent } from '../component/gallery-card/gallery-card';
@@ -9,8 +9,7 @@ import { PublicPageHero } from '@shared/public';
 @Component({
   selector: 'app-gallery',
   imports: [PublicPageHero, GalleryCardComponent, GallerySkeleton, TranslateModule],
-  templateUrl: './gallery.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './gallery.html'
 })
 export class Gallery implements OnInit {
   galleryImages = GALLERY_IMAGES;

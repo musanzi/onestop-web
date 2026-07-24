@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, ChevronUp, FileText, CheckCircle2, Target, Info } from 'lucide-angular';
@@ -7,7 +7,7 @@ export type CollapsibleTheme = 'primary' | 'primary-check' | 'amber' | 'blue';
 
 @Component({
   selector: 'app-project-detail-collapsible',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [NgClass, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-collapsible.html'
 })

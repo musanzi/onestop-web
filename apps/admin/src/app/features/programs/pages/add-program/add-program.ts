@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { ADD_PROGRAM_PAGE_ICONS } from '@shared/data';
@@ -12,8 +12,7 @@ import { UiButton, UiInput, UiSelect, UiTextarea } from '@shared/ui';
   selector: 'app-add-program',
   providers: [ProgramsStore, CategoriesStore, ProgramSectorsStore],
   imports: [ReactiveFormsModule, UiButton, UiInput, UiSelect, UiTextarea, LucideAngularModule],
-  templateUrl: './add-program.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './add-program.html'
 })
 export class AddProgramPage {
   icons = ADD_PROGRAM_PAGE_ICONS;

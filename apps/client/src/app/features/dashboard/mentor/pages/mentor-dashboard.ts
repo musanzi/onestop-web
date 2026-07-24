@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, effect } from '@angular/core';
+import { Component, inject, OnInit, effect } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorDashboardStore } from '@features/dashboard/shared/store/mentor-dashboard.store';
@@ -26,8 +26,7 @@ import {
 @Component({
   selector: 'app-mentor-dashboard',
   imports: [RouterModule, LucideAngularModule],
-  templateUrl: './mentor-dashboard.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentor-dashboard.html'
 })
 export class MentorDashboard implements OnInit {
   authStore = inject(AuthStore);

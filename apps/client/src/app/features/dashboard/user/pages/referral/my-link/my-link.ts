@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, computed, signal, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnInit, computed, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -43,8 +43,7 @@ import {
 @Component({
   selector: 'app-my-referral-link',
   imports: [CommonModule, RouterModule, LucideAngularModule],
-  templateUrl: './my-link.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './my-link.html'
 })
 export class MyReferralLink implements OnInit {
   referralsStore = inject(ReferralsStore);

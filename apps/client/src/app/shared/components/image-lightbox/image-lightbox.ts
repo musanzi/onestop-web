@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DOCUMENT,
   HostListener,
@@ -19,8 +18,7 @@ import { ImageLightboxItem } from './image-lightbox.model';
   selector: 'app-image-lightbox',
   imports: [LucideAngularModule, TranslateModule],
   templateUrl: './image-lightbox.html',
-  styleUrl: './image-lightbox.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './image-lightbox.css'
 })
 export class ImageLightboxComponent implements OnDestroy {
   private document = inject(DOCUMENT);

@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ElementRef,
-  afterNextRender,
-  inject,
-  viewChildren
-} from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject, viewChildren } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { LucideAngularModule, MoveUpRight } from 'lucide-angular';
 import { SECTORS, SECTOR_SHOWCASE } from '@features/landing/data/sectors.data';
@@ -16,8 +8,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
 @Component({
   selector: 'app-sectors',
   imports: [DecimalPipe, LucideAngularModule, LandingSectionHeader, PublicSection, PublicContainer],
-  templateUrl: './sectors.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './sectors.html'
 })
 export class Sectors {
   private readonly destroyRef = inject(DestroyRef);

@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { PROJECT_CATEGORIES_ICONS } from '@shared/data';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-categories',
   templateUrl: './project-categories.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CategoriesStore],
   imports: [
     LucideAngularModule,

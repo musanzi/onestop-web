@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 export type PublicSectionVariant = 'default' | 'muted' | 'dark' | 'compact';
 
 @Component({
   selector: 'app-public-section',
-  template: `<section [class]="classes()" [attr.aria-label]="ariaLabel() || null"><ng-content /></section>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: `<section [class]="classes()" [attr.aria-label]="ariaLabel() || null"><ng-content /></section>`
 })
 export class PublicSection {
   readonly variant = input<PublicSectionVariant>('default');

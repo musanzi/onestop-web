@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 import { PUBLIC_BODY_CLASSES, PUBLIC_H2_CLASSES } from '../public.tokens';
@@ -9,8 +9,7 @@ export type PublicSectionHeaderLayout = 'stacked' | 'split';
 @Component({
   selector: 'app-public-section-header',
   imports: [TranslateModule, LucideAngularModule],
-  templateUrl: './public-section-header.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './public-section-header.html'
 })
 export class PublicSectionHeader {
   readonly badge = input<string>();
@@ -38,8 +37,7 @@ export class PublicSectionHeader {
   });
 
   protected readonly splitDescriptionClasses = computed(() => {
-    const base =
-      'max-w-sm border-l-2 border-brand-600 pl-6 text-sm italic leading-relaxed text-gray-500 sm:text-base';
+    const base = 'max-w-sm border-l-2 border-brand-600 pl-6 text-sm italic leading-relaxed text-gray-500 sm:text-base';
     return [base, this.descriptionClass()].filter(Boolean).join(' ');
   });
 

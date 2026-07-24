@@ -7,14 +7,7 @@ import { IUser } from '@shared/models/entities.models';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
 import { ReferralCtaCard } from '../../../components/referral-cta-card/referral-cta-card';
 import { PaginationComponent } from '@shared/ui';
-import {
-  Award,
-  CalendarDays,
-  LucideAngularModule,
-  Share2,
-  UserX,
-  Users
-} from 'lucide-angular';
+import { Award, CalendarDays, LucideAngularModule, Share2, UserX, Users } from 'lucide-angular';
 
 @Component({
   selector: 'app-my-referrals',

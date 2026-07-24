@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
+import { Component, booleanAttribute, input } from '@angular/core';
 
 @Component({
   selector: 'ui-input',
   imports: [CommonModule],
-  templateUrl: './input.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './input.html'
 })
 export class InputComponent {
   readonly inputId = input('');

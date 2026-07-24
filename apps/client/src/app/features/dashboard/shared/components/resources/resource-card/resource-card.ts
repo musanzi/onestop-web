@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IResource } from '@shared/models/entities.models';
 import { ResourceCategoryBadge } from '../resource-category-badge/resource-category-badge';
@@ -8,8 +8,7 @@ import { ResourcesService } from '@features/dashboard/shared/services/resources.
 @Component({
   selector: 'app-resource-card',
   imports: [CommonModule, ResourceCategoryBadge, LucideAngularModule],
-  templateUrl: './resource-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './resource-card.html'
 })
 export class ResourceCard {
   @Input({ required: true }) resource!: IResource;

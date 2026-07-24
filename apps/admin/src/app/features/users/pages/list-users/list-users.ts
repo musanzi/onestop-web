@@ -1,14 +1,4 @@
-import {
-  Component,
-  computed,
-  DestroyRef,
-  effect,
-  inject,
-  signal,
-  ChangeDetectionStrategy,
-  viewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal, viewChild, ElementRef } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_USERS_ICONS } from '@shared/data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -25,7 +15,6 @@ import { bindSearchControlToQuery, toPageQueryValue } from '@shared/helpers';
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersStore],
   imports: [
     LucideAngularModule,
@@ -91,20 +80,6 @@ export class ListUsers {
       rejectLabel: 'Annuler',
       accept: () => {
         this.store.delete(userId);
-      }
-    });
-  }
-
-  clear(): void {
-    this.confirmationService.confirm({
-      header: 'Confirmation',
-      message: 'Êtes-vous sûr de vouloir supprimer les utilisateurs invalides ?',
-      acceptLabel: 'Supprimer',
-      rejectLabel: 'Annuler',
-      accept: () => {
-        this.store.clear({
-          onSuccess: () => this.store.loadAll(this.queryParams())
-        });
       }
     });
   }

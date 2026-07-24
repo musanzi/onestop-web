@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LucideAngularModule, MoveUpRight, ArrowRight } from 'lucide-angular';
 import { RecentProjectsStore } from '../../../projects/store/recent-projects.store';
@@ -27,8 +27,7 @@ import { PublicButton, PublicContainer, PublicSection } from '@shared/public';
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './recent-projects.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './recent-projects.html'
 })
 export class RecentProjects {
   store = inject(RecentProjectsStore);

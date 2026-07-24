@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GALLERY_IMAGES, IGalleryImage } from '../../data/gallery.data';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,8 +19,7 @@ import { PublicButton, PublicContainer, PublicSection } from '@shared/public';
     PublicContainer,
     PublicButton
   ],
-  templateUrl: './gallery-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './gallery-card.html'
 })
 export class GalleryCardComponent {
   icons = {

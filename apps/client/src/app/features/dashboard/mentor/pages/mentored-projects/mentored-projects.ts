@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiImgPipe } from '@shared/pipes/api-img.pipe';
@@ -16,8 +16,7 @@ import {
 @Component({
   selector: 'app-mentored-projects',
   imports: [RouterLink, ApiImgPipe, CommonModule, LucideAngularModule],
-  templateUrl: './mentored-projects.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentored-projects.html'
 })
 export class MentoredProjects implements OnInit {
   mentorshipStore = inject(MentorshipStore);

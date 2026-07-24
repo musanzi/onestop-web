@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ResourceCategory } from '@shared/models/entities.models';
@@ -11,8 +11,7 @@ export interface ResourceFilterValue {
 @Component({
   selector: 'app-resource-filters',
   imports: [CommonModule, FormsModule, LucideAngularModule],
-  templateUrl: './resource-filters.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './resource-filters.html'
 })
 export class ResourceFilters {
   @Output() filterChange = new EventEmitter<ResourceFilterValue>();

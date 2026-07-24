@@ -1,13 +1,6 @@
-import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  AlertTriangle,
-  FolderOpenDot,
-  Layers3,
-  LucideAngularModule,
-  MoveRight,
-  Tag
-} from 'lucide-angular';
+import { AlertTriangle, FolderOpenDot, Layers3, LucideAngularModule, MoveRight, Tag } from 'lucide-angular';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProgramStore } from '../../../landing/store/program.store';
 import { Subject, takeUntil } from 'rxjs';
@@ -29,8 +22,7 @@ import { PublicButton, PublicCard, PublicContainer, PublicSection } from '@share
     NgOptimizedImage,
     TranslateModule
   ],
-  templateUrl: './detail-programs.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './detail-programs.html'
 })
 export class DetailPrograms implements OnInit, OnDestroy {
   icons = {

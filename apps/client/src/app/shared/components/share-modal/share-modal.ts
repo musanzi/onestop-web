@@ -1,4 +1,4 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { shareToSocial } from '@shared/helpers/social-share.helper';
 import { LucideAngularModule, X, Copy, MessageCircle, Linkedin, Facebook, ChevronRight } from 'lucide-angular';
 
@@ -6,8 +6,7 @@ import { LucideAngularModule, X, Copy, MessageCircle, Linkedin, Facebook, Chevro
   selector: 'app-share-modal',
 
   imports: [LucideAngularModule],
-  templateUrl: './share-modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './share-modal.html'
 })
 export class ShareModalComponent {
   link = input.required<string>();

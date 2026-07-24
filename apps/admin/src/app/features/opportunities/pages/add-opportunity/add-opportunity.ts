@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formatDate, markAllAsTouched } from '@shared/helpers';
 import { OpportunityLanguage } from '@shared/models';
@@ -8,7 +8,6 @@ import { OpportunitiesStore } from '../../store/opportunities.store';
 @Component({
   selector: 'app-add-opportunity',
   templateUrl: './add-opportunity.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [OpportunitiesStore],
   imports: [ReactiveFormsModule, UiButton, UiDatepicker, UiInput, UiSelect, UiTextarea]
 })

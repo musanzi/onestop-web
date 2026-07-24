@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IEvent } from '@shared/models/entities.models';
 import {
@@ -34,8 +34,7 @@ import { ButtonComponent, TagComponent } from '@shared/ui';
     RouterLink
   ],
   templateUrl: './subprogram-event-card.html',
-  styleUrl: '../../../../shared/styles/quill-view.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: '../../../../shared/styles/quill-view.css'
 })
 export class SubprogramEventCard {
   icons = {

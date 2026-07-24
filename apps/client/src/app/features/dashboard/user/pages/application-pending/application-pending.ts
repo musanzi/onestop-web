@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
 import { MentorApplicationState } from '@core/auth/mentor-application.state';
@@ -21,8 +21,7 @@ import {
 @Component({
   selector: 'app-mentor-application-pending',
   imports: [RouterModule, LucideAngularModule],
-  templateUrl: './application-pending.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './application-pending.html'
 })
 export class MentorApplicationPending implements OnInit {
   readonly authStore = inject(AuthStore);

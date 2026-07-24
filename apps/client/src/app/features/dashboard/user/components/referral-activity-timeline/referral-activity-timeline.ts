@@ -1,4 +1,4 @@
-import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ReferralsStore } from '@features/dashboard/shared/store/referrals.store';
 import { Award, LucideAngularModule, LucideIconData, UserPlus } from 'lucide-angular';
@@ -16,7 +16,7 @@ interface ReferralActivity {
   selector: 'app-referral-activity-timeline',
 
   imports: [DatePipe, LucideAngularModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: './referral-activity-timeline.html'
 })
 export class ReferralActivityTimelineComponent {

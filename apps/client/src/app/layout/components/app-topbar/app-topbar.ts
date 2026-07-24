@@ -8,8 +8,7 @@ import {
   NgZone,
   OnDestroy,
   signal,
-  viewChild,
-  ChangeDetectionStrategy
+  viewChild
 } from '@angular/core';
 import { NgOptimizedImage, NgClass } from '@angular/common';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
@@ -26,8 +25,7 @@ import { TOPBAR_ANIMATION } from './topbar.config';
   selector: 'app-topbar',
   providers: [ProgramsStore],
   imports: [NgOptimizedImage, RouterLink, MobileNav, DesktopNav, NgClass],
-  templateUrl: './app-topbar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './app-topbar.html'
 })
 export class AppTopbar implements OnDestroy {
   readonly #elementRef = inject(ElementRef);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthCard } from '../../components/auth-card/auth-card';
@@ -18,8 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PasswordFieldComponent,
     AuthCard,
     TranslateModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ResetPassword {
   #token = inject(ActivatedRoute).snapshot.queryParams['token'];

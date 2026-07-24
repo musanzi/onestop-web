@@ -1,21 +1,11 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { LoadingService } from '@core/services/loading';
 
 @Component({
   selector: 'app-loading-bar',
-  templateUrl: './loading-bar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './loading-bar.html'
 })
 export class LoadingBar implements OnChanges, OnInit, OnDestroy {
   #loadingService = inject(LoadingService);

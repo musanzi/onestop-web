@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { PARCOURIR_LINKS, MY_CINOLU_LINKS, SOCIAL_LINKS } from '../../data/links.data';
@@ -8,8 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-footer',
   imports: [RouterLink, NgOptimizedImage, LucideAngularModule, TranslateModule],
-  templateUrl: './footer.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './footer.html'
 })
 export class Footer {
   links = [

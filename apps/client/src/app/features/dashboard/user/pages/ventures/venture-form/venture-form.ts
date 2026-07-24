@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenturesStore } from '@features/dashboard/shared/store/ventures.store';
@@ -10,7 +10,16 @@ import { ImageLightboxItem } from '@shared/components/image-lightbox/image-light
 import { ApiImgPipe, resolveApiImageUrl } from '@shared/pipes/api-img.pipe';
 import { VentureGalleryStore } from '@features/dashboard/shared/store/venture-gallery.store';
 import { FormManager, StepConfig } from '@shared/components/form-manager/form-manager';
-import { ArrowLeft, BriefcaseBusiness, CircleAlert, Eye, Info, LucideAngularModule, SquarePen, X } from 'lucide-angular';
+import {
+  ArrowLeft,
+  BriefcaseBusiness,
+  CircleAlert,
+  Eye,
+  Info,
+  LucideAngularModule,
+  SquarePen,
+  X
+} from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -26,8 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     ImageLightboxComponent
   ],
-  templateUrl: './venture-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './venture-form.html'
 })
 export class VentureForm implements OnInit {
   fb = inject(FormBuilder);

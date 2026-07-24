@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, inject, OnInit, computed } from '@angular/core';
 import { LucideAngularModule, UserRound, Users, Sparkles } from 'lucide-angular';
 import { HeroCard } from '../../../layout/components/hero-card/hero-card';
 import { PublicVenturesStore } from '../store/ventures.store';
@@ -21,8 +21,7 @@ import { PublicContainer, PublicSection } from '@shared/public';
     PublicSection,
     PublicContainer
   ],
-  templateUrl: './our-entrepreneurs.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './our-entrepreneurs.html'
 })
 export class OurEntrepreneurs implements OnInit {
   icons = { users: Users, userRound: UserRound, sparkles: Sparkles };

@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-  OnDestroy,
-  output,
-  signal
-} from '@angular/core';
+import { Component, inject, input, OnDestroy, output, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Eye, ImagePlus, LucideAngularModule, Trash2, Upload } from 'lucide-angular';
@@ -22,8 +14,7 @@ export type ConfirmedImagePreviewShape = 'circle' | 'landscape' | 'square';
   selector: 'app-confirmed-image-upload, app-profile-image-upload',
   imports: [LucideAngularModule, TranslateModule, ImageLightboxComponent],
   templateUrl: './confirmed-image-upload.html',
-  styleUrl: './confirmed-image-upload.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './confirmed-image-upload.css'
 })
 export class ConfirmedImageUpload implements OnDestroy {
   name = input('image');

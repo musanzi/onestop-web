@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  PLATFORM_ID,
-  effect,
-  inject
-} from '@angular/core';
+import { Component, PLATFORM_ID, effect, inject } from '@angular/core';
 import { AsyncPipe, NgClass, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -15,8 +9,7 @@ import { BackButton } from '@shared/components';
 @Component({
   selector: 'app-dashboard-shell-layout',
   imports: [AsyncPipe, NgClass, RouterModule, DashboardBackdrop, BackButton],
-  templateUrl: './dashboard-shell-layout.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './dashboard-shell-layout.html'
 })
 export class DashboardShellLayout {
   private readonly platformId = inject(PLATFORM_ID);

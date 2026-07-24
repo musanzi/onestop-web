@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Check, LucideAngularModule } from 'lucide-angular';
@@ -18,8 +18,7 @@ import { OnestopDashboardPreview } from './onestop-dashboard-preview/onestop-das
     LandingSectionHeader,
     OnestopDashboardPreview
   ],
-  templateUrl: './onestop.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './onestop.html'
 })
 export class Onestop {
   readonly icons = { check: Check };

@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import {
   ArrowRight,
   Check,
@@ -29,8 +29,7 @@ import { UpdatePasswordStore } from '@features/dashboard/shared/store/update-pas
 
   imports: [ReactiveFormsModule, LucideAngularModule],
   templateUrl: './profile-security.html',
-  providers: [UpdatePasswordStore],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [UpdatePasswordStore]
 })
 export class ProfileSecurity {
   private formBuilder = inject(FormBuilder);

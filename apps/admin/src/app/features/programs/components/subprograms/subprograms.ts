@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy, computed, input, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, input, OnInit } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { LIST_SUBPROGRAMS_ICONS } from '@shared/data';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -24,7 +24,6 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-list-subprograms',
   templateUrl: './subprograms.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SubprogramsStore],
   imports: [
     LucideAngularModule,

@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UiButton, UiInput, UiTextarea, UiMultiSelect, UiDatepicker, UiTextEditor } from '@shared/ui';
 import { ArticlesStore } from '../../store/articles.store';
@@ -7,7 +7,6 @@ import { TagsStore } from '../../store/tags.store';
 @Component({
   selector: 'app-article-add',
   templateUrl: './add-article.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ArticlesStore, TagsStore],
   imports: [ReactiveFormsModule, UiButton, UiInput, UiTextarea, UiMultiSelect, UiDatepicker, UiTextEditor]
 })

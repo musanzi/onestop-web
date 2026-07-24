@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { markAllAsTouched } from '@shared/helpers';
 import { IExpertise } from '@shared/models';
@@ -11,7 +11,6 @@ import { CreateExperienceInterface, CreateMentorInterface } from '../../interfac
 @Component({
   selector: 'app-add-mentor',
   templateUrl: './add-mentor.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MentorsStore, ExpertisesStore],
   imports: [UiInput, UiDatepicker, UiSelect, UiMultiSelect, UiCheckbox, UiButton, ReactiveFormsModule]
 })

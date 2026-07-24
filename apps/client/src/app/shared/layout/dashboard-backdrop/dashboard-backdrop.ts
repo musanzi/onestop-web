@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { SidebarService } from '@shared/services/sidebar.service';
 
@@ -15,8 +15,7 @@ import { SidebarService } from '@shared/services/sidebar.service';
         tabindex="0"
         aria-label="Fermer le menu"></div>
     }
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class DashboardBackdrop {
   private readonly sidebarService = inject(SidebarService);

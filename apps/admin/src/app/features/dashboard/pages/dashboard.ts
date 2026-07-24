@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, signal, computed, effect, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, effect, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
@@ -7,7 +7,7 @@ import { UiSelect } from '@ui';
 import type { SelectOption } from '@shared/ui';
 import { StatsStore } from '../store/stats.store';
 import { IProgramParticipations } from '../types';
-import { StatsOverview, YearSummary, ProgramTabs, ProgramDetails } from '../components';
+import { StatsOverview, YearSummary, ProgramTabs, ProgramDetails } from '../ui';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +22,7 @@ import { StatsOverview, YearSummary, ProgramTabs, ProgramDetails } from '../comp
     ProgramTabs,
     ProgramDetails
   ],
-  providers: [StatsStore],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [StatsStore]
 })
 export class Dashboard implements OnInit {
   icons = DASHBOARD_ICONS;

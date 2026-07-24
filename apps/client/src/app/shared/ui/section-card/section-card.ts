@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'ui-section-card',
@@ -7,12 +7,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
       [class]="className()">
       @if (title()) {
-      <div class="px-6 py-5">
-        <h3 class="text-base font-medium text-gray-800 dark:text-white/90">{{ title() }}</h3>
-        @if (description()) {
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ description() }}</p>
-        }
-      </div>
+        <div class="px-6 py-5">
+          <h3 class="text-base font-medium text-gray-800 dark:text-white/90">{{ title() }}</h3>
+          @if (description()) {
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ description() }}</p>
+          }
+        </div>
       }
       <div
         [class]="bodyClass()"
@@ -24,8 +24,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         </div>
       </div>
     </section>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class SectionCardComponent {
   readonly title = input('');

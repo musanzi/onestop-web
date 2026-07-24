@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-landing',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: ''
 })
 export class DashboardLanding {}

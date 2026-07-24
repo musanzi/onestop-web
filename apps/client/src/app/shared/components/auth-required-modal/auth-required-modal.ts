@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { validateReturnUrl } from '@core/auth/auth-redirect.util';
 import { LucideAngularModule, Lock, LogIn, UserPlus, X } from 'lucide-angular';
 
 @Component({
   selector: 'app-auth-required-modal',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [LucideAngularModule],
   templateUrl: './auth-required-modal.html'
 })

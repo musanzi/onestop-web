@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, signal } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { MENTOR_EXPERTISES_ICONS } from '@shared/data';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,6 @@ import { UiInput } from '@shared/ui/form/input/input';
 @Component({
   selector: 'app-mentor-expertises',
   templateUrl: './mentor-expertises.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ExpertisesStore, ConfirmationService],
   imports: [
     LucideAngularModule,

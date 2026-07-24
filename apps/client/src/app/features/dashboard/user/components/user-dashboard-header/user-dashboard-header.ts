@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  OnDestroy,
-  signal,
-  HostListener
-} from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal, HostListener } from '@angular/core';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -33,8 +25,7 @@ import {
 @Component({
   selector: 'app-user-dashboard-header',
   imports: [AsyncPipe, NgClass, ApiImgPipe, RouterLink, LucideAngularModule],
-  templateUrl: './user-dashboard-header.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './user-dashboard-header.html'
 })
 export class UserDashboardHeader implements OnDestroy {
   private readonly authStore = inject(AuthStore);

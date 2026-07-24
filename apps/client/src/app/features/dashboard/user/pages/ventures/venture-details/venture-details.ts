@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NgOptimizedImage, DecimalPipe, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VenturesStore } from '@features/dashboard/shared/store/ventures.store';
@@ -40,8 +40,7 @@ import type { IImage } from '@shared/models';
     LucideAngularModule,
     ImageLightboxComponent
   ],
-  templateUrl: './venture-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './venture-details.html'
 })
 export class VentureDetails implements OnInit {
   route = inject(ActivatedRoute);

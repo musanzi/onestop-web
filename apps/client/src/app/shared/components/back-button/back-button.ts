@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -12,8 +12,7 @@ const HIDE_FIXED_BACK_URL = /\/ventures\/(create|edit\/)/;
 @Component({
   selector: 'app-back-button',
   imports: [LucideAngularModule, TranslateModule],
-  templateUrl: './back-button.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './back-button.html'
 })
 export class BackButton {
   icons = {

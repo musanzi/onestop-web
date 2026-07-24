@@ -1,4 +1,4 @@
-import { Component, input, forwardRef, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, forwardRef, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { UI_PASSWORD_ICONS } from '@shared/data';
@@ -7,7 +7,6 @@ import { UI_PASSWORD_ICONS } from '@shared/data';
   selector: 'app-ui-password',
   imports: [LucideAngularModule],
   templateUrl: './password.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => UiPassword), multi: true }]
 })
 export class UiPassword implements ControlValueAccessor {
@@ -50,5 +49,4 @@ export class UiPassword implements ControlValueAccessor {
   toggleMask(): void {
     this.isMasked.update((masked) => !masked);
   }
-
 }

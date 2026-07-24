@@ -1,15 +1,4 @@
-import {
-  Component,
-  input,
-  output,
-  forwardRef,
-  computed,
-  signal,
-  ElementRef,
-  inject,
-  ChangeDetectionStrategy,
-  effect
-} from '@angular/core';
+import { Component, input, output, forwardRef, computed, signal, ElementRef, inject, effect } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { UI_SELECT_ICONS } from '@shared/data';
@@ -24,7 +13,6 @@ export interface SelectOption {
   selector: 'app-ui-select',
   imports: [LucideAngularModule],
   templateUrl: './select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:click)': 'onDocumentClick($event)'
   },

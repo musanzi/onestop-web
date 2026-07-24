@@ -1,4 +1,4 @@
-import { Component, inject, computed, output, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed, output, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ReferralsStore } from '@features/dashboard/shared/store/referrals.store';
 import { calculateBadgeInfo } from '@shared/helpers/badges.helper';
@@ -23,8 +23,7 @@ import {
   selector: 'app-referral-badge-card',
 
   imports: [NgClass, BadgeProgressBarComponent, ShareModalComponent, LucideAngularModule],
-  templateUrl: './referral-badge-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './referral-badge-card.html'
 })
 export class ReferralBadgeCardComponent {
   private referralsStore = inject(ReferralsStore);

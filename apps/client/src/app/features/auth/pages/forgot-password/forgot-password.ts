@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthCard } from '../../components/auth-card/auth-card';
@@ -18,8 +18,7 @@ import { AuthPanelComponent, ButtonComponent, TextfieldComponent } from '@shared
     TextfieldComponent,
     AuthCard,
     TranslateModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ForgotPassword {
   #formBuilder = inject(FormBuilder);

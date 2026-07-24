@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule, CalendarDays, CalendarCheck } from 'lucide-angular';
@@ -6,7 +6,7 @@ import type { IProject } from '@shared/models/entities.models';
 
 @Component({
   selector: 'app-project-detail-dates',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [DatePipe, TranslateModule, LucideAngularModule],
   templateUrl: './project-detail-dates.html'
 })

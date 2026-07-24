@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
@@ -16,7 +16,6 @@ import { OpportunitiesStore } from '../../store/opportunities.store';
 @Component({
   selector: 'app-list-opportunities',
   templateUrl: './list-opportunities.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [OpportunitiesStore],
   imports: [
     DatePipe,

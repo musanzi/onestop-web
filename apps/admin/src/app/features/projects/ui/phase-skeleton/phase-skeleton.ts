@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: './phase-skeleton.html',
-  selector: 'app-phase-skeleton',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-phase-skeleton'
 })
 export class PhaseSkeleton {}

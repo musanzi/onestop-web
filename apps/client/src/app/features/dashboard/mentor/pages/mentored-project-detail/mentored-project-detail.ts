@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy, ChangeDetectionStrategy, signal, computed, effect } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal, computed, effect } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,14 +26,13 @@ import {
   Users
 } from 'lucide-angular';
 import { ProjectStore } from '@features/projects/store/project.store';
-import { MentoredProjectResources } from "./components/mentored-project-resources";
+import { MentoredProjectResources } from './components/mentored-project-resources';
 
 @Component({
   selector: 'app-mentored-project-detail',
   providers: [ProjectStore],
   imports: [RouterLink, NgClass, FormsModule, ApiImgPipe, CommonModule, LucideAngularModule, MentoredProjectResources],
-  templateUrl: './mentored-project-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentored-project-detail.html'
 })
 export class MentoredProjectDetail implements OnInit, OnDestroy {
   mentorshipStore = inject(MentorshipStore);

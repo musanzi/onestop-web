@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { BACK_BUTTON_ICONS } from '@shared/data';
@@ -6,8 +6,7 @@ import { BACK_BUTTON_ICONS } from '@shared/data';
 @Component({
   selector: 'app-ui-back-button',
   imports: [LucideAngularModule],
-  templateUrl: './back-button.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './back-button.html'
 })
 export class BackButton {
   icons = BACK_BUTTON_ICONS;

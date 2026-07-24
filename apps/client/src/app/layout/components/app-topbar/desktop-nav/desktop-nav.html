@@ -2,65 +2,67 @@
   <div
     class="flex h-12 items-center gap-1.5 rounded-full border px-2 backdrop-blur-xl transition-all duration-300 lg:gap-2 lg:px-2.5"
     [ngClass]="navShellClass()">
-    @for (link of links(); track link.path || link.name) { @if (link.children?.length) {
-    <div class="topbar-dropdown-group relative">
-      <button
-        type="button"
-        (click)="toggleDropdown('link-' + $index, $event)"
-        class="inline-flex h-10 items-center rounded-full px-4 leading-[1.2] transition-colors duration-200"
-        [ngClass]="navItemClass()"
-        [attr.aria-expanded]="isDropdownOpen('link-' + $index)"
-        aria-haspopup="menu"
-        [attr.aria-controls]="'topbar-link-menu-' + $index">
-        {{ link.translationKey ? (link.translationKey | translate) : link.name }}
-        <i-lucide
-          class="ml-0.5 size-5 transition-transform duration-300 ease-out"
-          [ngClass]="{'rotate-90': isDropdownOpen('link-' + $index)}"
-          [name]="icons.chevronRight" />
-      </button>
+    @for (link of links(); track link.path || link.name) {
+      @if (link.children?.length) {
+        <div class="topbar-dropdown-group relative">
+          <button
+            type="button"
+            (click)="toggleDropdown('link-' + $index, $event)"
+            class="inline-flex h-10 items-center rounded-full px-4 leading-[1.2] transition-colors duration-200"
+            [ngClass]="navItemClass()"
+            [attr.aria-expanded]="isDropdownOpen('link-' + $index)"
+            aria-haspopup="menu"
+            [attr.aria-controls]="'topbar-link-menu-' + $index">
+            {{ link.translationKey ? (link.translationKey | translate) : link.name }}
+            <i-lucide
+              class="ml-0.5 size-5 transition-transform duration-300 ease-out"
+              [ngClass]="{ 'rotate-90': isDropdownOpen('link-' + $index) }"
+              [name]="icons.chevronRight" />
+          </button>
 
-      <div
-        [id]="'topbar-link-menu-' + $index"
-        role="menu"
-        [attr.aria-hidden]="!isDropdownOpen('link-' + $index)"
-        class="absolute left-0 top-full z-50 w-96 origin-top pt-4 transition-all duration-300"
-        [ngClass]="{
-          'opacity-100 visible translate-y-0 scale-100': isDropdownOpen('link-' + $index),
-          'opacity-0 invisible -translate-y-2 scale-95': !isDropdownOpen('link-' + $index)
-        }">
-        <div
-          class="flex flex-col gap-1 rounded-xl border border-gray-200 bg-white px-3 py-3 text-left text-gray-800 backdrop-blur-md">
-          @for (sublink of link.children; track sublink.path || sublink.name) {
-          <a
-            role="menuitem"
-            routerLinkActive="bg-primary-50 text-primary-700"
-            [routerLink]="sublink.path"
-            [fragment]="sublink.fragment"
-            [routerLinkActiveOptions]="{ exact: sublink.exactUrl || false }"
-            (click)="closeDropdown()"
-            class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
-            @if (sublink.icon) {
-            <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-50 text-primary-600">
-              <i-lucide [name]="sublink.icon" class="size-4" />
-            </span>
-            }
-            <span>{{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}</span>
-          </a>
-          }
+          <div
+            [id]="'topbar-link-menu-' + $index"
+            role="menu"
+            [attr.aria-hidden]="!isDropdownOpen('link-' + $index)"
+            class="absolute left-0 top-full z-50 w-96 origin-top pt-4 transition-all duration-300"
+            [ngClass]="{
+              'opacity-100 visible translate-y-0 scale-100': isDropdownOpen('link-' + $index),
+              'opacity-0 invisible -translate-y-2 scale-95': !isDropdownOpen('link-' + $index)
+            }">
+            <div
+              class="flex flex-col gap-1 rounded-xl border border-gray-200 bg-white px-3 py-3 text-left text-gray-800 backdrop-blur-md">
+              @for (sublink of link.children; track sublink.path || sublink.name) {
+                <a
+                  role="menuitem"
+                  routerLinkActive="bg-primary-50 text-primary-700"
+                  [routerLink]="sublink.path"
+                  [fragment]="sublink.fragment"
+                  [routerLinkActiveOptions]="{ exact: sublink.exactUrl || false }"
+                  (click)="closeDropdown()"
+                  class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
+                  @if (sublink.icon) {
+                    <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-50 text-primary-600">
+                      <i-lucide [name]="sublink.icon" class="size-4" />
+                    </span>
+                  }
+                  <span>{{ sublink.translationKey ? (sublink.translationKey | translate) : sublink.name }}</span>
+                </a>
+              }
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    } @else {
-    <a
-      [routerLink]="link.path"
-      [fragment]="link.fragment"
-      [routerLinkActive]="navItemActiveClass()"
-      [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
-      class="inline-flex h-10 items-center rounded-full px-4 leading-[1.2] transition-colors duration-200"
-      [ngClass]="navItemClass()">
-      {{ link.translationKey ? (link.translationKey | translate) : link.name }}
-    </a>
-    } }
+      } @else {
+        <a
+          [routerLink]="link.path"
+          [fragment]="link.fragment"
+          [routerLinkActive]="navItemActiveClass()"
+          [routerLinkActiveOptions]="{ exact: link.exactUrl || false }"
+          class="inline-flex h-10 items-center rounded-full px-4 leading-[1.2] transition-colors duration-200"
+          [ngClass]="navItemClass()">
+          {{ link.translationKey ? (link.translationKey | translate) : link.name }}
+        </a>
+      }
+    }
 
     <div class="topbar-dropdown-group relative">
       <button
@@ -74,47 +76,49 @@
         {{ 'nav.programs' | translate }}
         <i-lucide
           class="ml-0.5 size-5 transition-transform duration-300 ease-out"
-          [ngClass]="{'rotate-90': isDropdownOpen('programs')}"
+          [ngClass]="{ 'rotate-90': isDropdownOpen('programs') }"
           [name]="icons.chevronRight" />
       </button>
 
       @if (programs()) {
-      <div
-        id="topbar-programs-menu"
-        role="menu"
-        [attr.aria-hidden]="!isDropdownOpen('programs')"
-        class="absolute right-0 top-full z-50 w-96 origin-top pt-4 transition-all duration-300"
-        [ngClass]="{
-          'opacity-100 visible translate-y-0 scale-100': isDropdownOpen('programs'),
-          'opacity-0 invisible -translate-y-2 scale-95': !isDropdownOpen('programs')
-        }">
         <div
-          class="flex max-h-[70vh] flex-col gap-1 overflow-y-auto rounded-xl border border-gray-200 bg-white px-3 py-3 text-left text-gray-800">
-          @for (p of programs(); track p.slug) {
-          <a
-            role="menuitem"
-            routerLinkActive="bg-primary-50 text-primary-700"
-            [routerLink]="['/our-programs/' + p.slug]"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="closeDropdown()"
-            class="block rounded-lg px-4 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
-            <div class="flex items-start justify-between gap-3">
-              <span class="text-gray-900">{{ translateField()(p.name, 'name', p) }}</span>
-              <span
-                class="shrink-0 rounded-full bg-primary-50 px-2 py-1 text-[10px] font-semibold uppercase leading-none text-primary-600">
-                {{ translateField()(p?.category?.name, 'name', p.category) }}
-              </span>
-            </div>
-            <span class="mt-1 block text-[11px] uppercase text-primary-500">Secteur</span>
-            <span class="block text-sm font-normal text-gray-500">
-              {{ translateField()(p?.sector?.name, 'name', p.sector) }}
-            </span>
-          </a>
-          } @empty {
-          <div class="rounded-lg px-4 py-3 text-sm font-medium text-gray-500">{{ 'common.loading' | translate }}</div>
-          }
+          id="topbar-programs-menu"
+          role="menu"
+          [attr.aria-hidden]="!isDropdownOpen('programs')"
+          class="absolute right-0 top-full z-50 w-96 origin-top pt-4 transition-all duration-300"
+          [ngClass]="{
+            'opacity-100 visible translate-y-0 scale-100': isDropdownOpen('programs'),
+            'opacity-0 invisible -translate-y-2 scale-95': !isDropdownOpen('programs')
+          }">
+          <div
+            class="flex max-h-[70vh] flex-col gap-1 overflow-y-auto rounded-xl border border-gray-200 bg-white px-3 py-3 text-left text-gray-800">
+            @for (p of programs(); track p.slug) {
+              <a
+                role="menuitem"
+                routerLinkActive="bg-primary-50 text-primary-700"
+                [routerLink]="['/our-programs/' + p.slug]"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="closeDropdown()"
+                class="block rounded-lg px-4 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
+                <div class="flex items-start justify-between gap-3">
+                  <span class="text-gray-900">{{ translateField()(p.name, 'name', p) }}</span>
+                  <span
+                    class="shrink-0 rounded-full bg-primary-50 px-2 py-1 text-[10px] font-semibold uppercase leading-none text-primary-600">
+                    {{ translateField()(p?.category.name, 'name', p.category) }}
+                  </span>
+                </div>
+                <span class="mt-1 block text-[11px] uppercase text-primary-500">Secteur</span>
+                <span class="block text-sm font-normal text-gray-500">
+                  {{ translateField()(p?.sector.name, 'name', p.sector) }}
+                </span>
+              </a>
+            } @empty {
+              <div class="rounded-lg px-4 py-3 text-sm font-medium text-gray-500">
+                {{ 'common.loading' | translate }}
+              </div>
+            }
+          </div>
         </div>
-      </div>
       }
     </div>
   </div>
@@ -124,84 +128,80 @@
     <app-language-switcher [inverted]="!solid()" />
 
     @if (currentUser) {
-    <div class="topbar-dropdown-group relative">
-      <button
-        type="button"
-        (click)="toggleDropdown('account', $event)"
-        class="inline-flex h-10 items-center gap-2 rounded-xl px-1.5 transition-colors duration-200"
-        [ngClass]="
-          solid()
-            ? 'text-gray-900 hover:bg-black/5'
-            : 'text-white hover:bg-white/10'
-        "
-        [attr.aria-expanded]="isDropdownOpen('account')"
-        aria-haspopup="menu"
-        aria-controls="topbar-account-menu">
-        <div class="relative h-9 w-9 min-h-9 min-w-9">
-          @if (currentUser.profile || currentUser.google_image) {
-          <img
-            [ngSrc]="currentUser | apiIMG: 'user'"
-            alt="User Image"
-            class="aspect-square rounded-full bg-gray-200 object-cover ring-2 ring-primary-500"
-            fill />
-          } @else {
-          <div
-            class="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-xs font-bold text-white ring-2 ring-white/30">
-            {{ getUserInitials() }}
+      <div class="topbar-dropdown-group relative">
+        <button
+          type="button"
+          (click)="toggleDropdown('account', $event)"
+          class="inline-flex h-10 items-center gap-2 rounded-xl px-1.5 transition-colors duration-200"
+          [ngClass]="solid() ? 'text-gray-900 hover:bg-black/5' : 'text-white hover:bg-white/10'"
+          [attr.aria-expanded]="isDropdownOpen('account')"
+          aria-haspopup="menu"
+          aria-controls="topbar-account-menu">
+          <div class="relative h-9 w-9 min-h-9 min-w-9">
+            @if (currentUser.profile || currentUser.google_image) {
+              <img
+                [ngSrc]="currentUser | apiIMG: 'user'"
+                alt="User Image"
+                class="aspect-square rounded-full bg-gray-200 object-cover ring-2 ring-primary-500"
+                fill />
+            } @else {
+              <div
+                class="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-xs font-bold text-white ring-2 ring-white/30">
+                {{ getUserInitials() }}
+              </div>
+            }
           </div>
-          }
-        </div>
-        <i-lucide
-          [name]="icons.chevronRight"
-          class="size-5 transition-transform duration-300 ease-out"
-          [ngClass]="{'rotate-90': isDropdownOpen('account')}" />
-      </button>
+          <i-lucide
+            [name]="icons.chevronRight"
+            class="size-5 transition-transform duration-300 ease-out"
+            [ngClass]="{ 'rotate-90': isDropdownOpen('account') }" />
+        </button>
 
-      <div
-        id="topbar-account-menu"
-        role="menu"
-        [attr.aria-hidden]="!isDropdownOpen('account')"
-        class="absolute right-0 top-full z-50 mt-3 w-64 origin-top-right rounded-xl border border-gray-200 bg-white p-2 text-gray-800 transition-all duration-300"
-        [ngClass]="{
-          'visible opacity-100 translate-y-0 scale-100': isDropdownOpen('account'),
-          'invisible opacity-0 -translate-y-2 scale-95': !isDropdownOpen('account')
-        }">
-        <div class="border-b border-slate-100 px-3 py-3 text-left">
-          <p class="text-sm font-bold text-slate-950">{{ currentUser.name }}</p>
-          <p class="mt-1 truncate text-xs text-slate-500">{{ currentUser.email }}</p>
-        </div>
+        <div
+          id="topbar-account-menu"
+          role="menu"
+          [attr.aria-hidden]="!isDropdownOpen('account')"
+          class="absolute right-0 top-full z-50 mt-3 w-64 origin-top-right rounded-xl border border-gray-200 bg-white p-2 text-gray-800 transition-all duration-300"
+          [ngClass]="{
+            'visible opacity-100 translate-y-0 scale-100': isDropdownOpen('account'),
+            'invisible opacity-0 -translate-y-2 scale-95': !isDropdownOpen('account')
+          }">
+          <div class="border-b border-slate-100 px-3 py-3 text-left">
+            <p class="text-sm font-bold text-slate-950">{{ currentUser.name }}</p>
+            <p class="mt-1 truncate text-xs text-slate-500">{{ currentUser.email }}</p>
+          </div>
 
-        <div class="flex flex-col gap-1 py-2 text-left">
-          <a
-            role="menuitem"
-            routerLink="/dashboard"
-            (click)="closeDropdown()"
-            class="flex items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
-            <i-lucide [name]="icons.dashboard" class="size-4" />
-            <span>{{ 'auth.myAccount' | translate }}</span>
-          </a>
-          <button
-            type="button"
-            role="menuitem"
-            class="flex w-full items-center gap-3 rounded-lg px-3 py-3 font-medium text-red-600 transition-all duration-200 hover:bg-red-50"
-            (click)="onSignOut()">
-            <i-lucide [name]="icons.logOut" class="size-4" />
-            <span>{{ 'auth.signOut' | translate }}</span>
-          </button>
+          <div class="flex flex-col gap-1 py-2 text-left">
+            <a
+              role="menuitem"
+              routerLink="/dashboard"
+              (click)="closeDropdown()"
+              class="flex items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 transition-all duration-200 hover:bg-primary-50 hover:text-primary-700">
+              <i-lucide [name]="icons.dashboard" class="size-4" />
+              <span>{{ 'auth.myAccount' | translate }}</span>
+            </a>
+            <button
+              type="button"
+              role="menuitem"
+              class="flex w-full items-center gap-3 rounded-lg px-3 py-3 font-medium text-red-600 transition-all duration-200 hover:bg-red-50"
+              (click)="onSignOut()">
+              <i-lucide [name]="icons.logOut" class="size-4" />
+              <span>{{ 'auth.signOut' | translate }}</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     } @else {
-    <app-public-button
-      variant="secondary"
-      routerLink="/sign-in"
-      className="min-h-10 border-primary-300 text-primary-600 hover:border-primary-400 hover:bg-brand-50">
-      {{ 'auth.signIn' | translate }}
-    </app-public-button>
+      <app-public-button
+        variant="secondary"
+        routerLink="/sign-in"
+        className="min-h-10 border-primary-300 text-primary-600 hover:border-primary-400 hover:bg-brand-50">
+        {{ 'auth.signIn' | translate }}
+      </app-public-button>
 
-    <app-public-button variant="primary" routerLink="/sign-up" className="min-h-10">
-      {{ 'auth.signUp' | translate }}
-    </app-public-button>
+      <app-public-button variant="primary" routerLink="/sign-up" className="min-h-10">
+        {{ 'auth.signUp' | translate }}
+      </app-public-button>
     }
   </div>
 </div>

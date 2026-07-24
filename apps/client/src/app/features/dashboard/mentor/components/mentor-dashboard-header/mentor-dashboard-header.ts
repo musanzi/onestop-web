@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  OnDestroy,
-  signal,
-  HostListener
-} from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal, HostListener } from '@angular/core';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@core/auth/auth.store';
@@ -30,8 +22,7 @@ import {
 @Component({
   selector: 'app-mentor-dashboard-header',
   imports: [AsyncPipe, NgClass, ApiImgPipe, RouterLink, LucideAngularModule],
-  templateUrl: './mentor-dashboard-header.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './mentor-dashboard-header.html'
 })
 export class MentorDashboardHeader implements OnDestroy {
   private readonly authStore = inject(AuthStore);
